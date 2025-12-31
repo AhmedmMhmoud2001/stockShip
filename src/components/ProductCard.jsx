@@ -51,7 +51,7 @@ export default function ProductCard({
         <div className="mt-6 flex items-center justify-between gap-2">
           <Link to={`/ProductDetails/:id`} className="w-full">
             <div className=" w-[60%] rounded-xl border border-slate-300 bg-white py-2.5 px-1 text-sm font-semibold text-slate-800 hover:bg-slate-50">
-              {" "}
+              
               عرض التفاصيل
             </div>
           </Link>
