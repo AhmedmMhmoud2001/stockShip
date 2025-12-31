@@ -7,7 +7,7 @@ export default function Banner() {
       <div
         className="
           relative isolate w-full overflow-hidden inline-block
-          h-[320px] sm:h-[480px] md:h-[640px] lg:h-[720px]
+          h-105 sm:h-120 md:h-160 lg:h-180
 
           after:content-[''] after:absolute after:inset-y-0 after:left-0 after:w-[30%]
           after:bg-blue-900/40 after:blur-2xl after:pointer-events-none after:z-10

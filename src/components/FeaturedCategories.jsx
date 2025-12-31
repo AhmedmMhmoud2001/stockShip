@@ -37,7 +37,10 @@ export default function FeaturedCategories() {
   };
 
   return (
-    <section dir="rtl" className="w-full bg-slate-50 py-8 px-2 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-25">
+    <section
+      dir="rtl"
+      className="w-full bg-slate-50 py-8 px-2 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-25"
+    >
       <div className="w-full m-auto ">
         {/* Top features */}
         <div className="w-full flex flex-col md:flex-row justify-around items-start md:items-center gap-6 md:gap-7">
@@ -62,18 +65,18 @@ export default function FeaturedCategories() {
         </div>
 
         {/* Cards */}
-        <div className="mt-8 flex flex-col gap-6 lg:flex-row h-auto lg:h-[450px]">
+        <div className="mt-8 flex flex-col gap-6 lg:flex-row h-auto lg:h-112.5">
           {/* right card */}
-          <div className="w-full lg:w-[70%] h-auto lg:h-[450px] overflow-hidden mb-6">
+          <div className="w-full lg:w-[70%] h-auto lg:h-112.5 overflow-hidden mb-6">
             <div className="flex flex-col gap-6 lg:flex-row overflow-hidden mb-6 h-auto lg:h-[48%]">
               {/* one */}
-              <div className="w-full lg:w-[40%] bg-[#373737] min-h-[200px] lg:min-h-0 lg:h-full group relative overflow-hidden rounded-2xl">
+              <div className="w-full lg:w-[40%] bg-[#373737] min-h-50 lg:min-h-0 lg:h-full group relative overflow-hidden rounded-2xl">
                 <div className="absolute inset-0 p-6 text-white w-[80%]">
                   <h3 className="text-2xl font-bold">أجهزة منزلية</h3>
                   <p>
                     {" "}
-                    لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم دولار سيت أميت نو
-                    لوريم ايبسوم دولار سيت أميت نت أميت نوو
+                    لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم دولار سيت أميت
+                    نو لوريم ايبسوم دولار سيت أميت نت أميت نوو
                   </p>
                 </div>
                 <div className="absolute inset-0 p-6 left-0 pr-40">
@@ -86,7 +89,7 @@ export default function FeaturedCategories() {
               </div>
 
               {/* two */}
-              <div className="w-full lg:w-[60%] bg-[#202731] min-h-[200px] lg:min-h-0 lg:h-full group relative overflow-hidden rounded-2xl">
+              <div className="w-full lg:w-[60%] bg-[#202731] min-h-50 lg:min-h-0 lg:h-full group relative overflow-hidden rounded-2xl">
                 <div className="absolute inset-0 p-6 pt-12 text-white w-[80%]">
                   <h3 className="text-2xl font-bold">هواتف ذكية </h3>
                   <p className="w-[250px]">
@@ -107,10 +110,10 @@ export default function FeaturedCategories() {
 
             <div className="flex flex-col gap-6 lg:flex-row overflow-hidden mb-6 h-auto lg:h-[48%]">
               {/* tree */}
-              <div className="w-full lg:w-[60%] bg-[#0A0710] min-h-[200px] lg:min-h-0 lg:h-full group relative overflow-hidden rounded-2xl">
+              <div className="w-full lg:w-[60%] bg-[#0A0710] min-h-50 lg:min-h-0 lg:h-full group relative overflow-hidden rounded-2xl">
                 <div className="absolute inset-0 p-6 pt-12 text-white w-[80%]">
                   <h3 className="text-2xl font-bold">شاشات إلكترونية</h3>
-                  <p className="w-[250px]">
+                  <p className="w-62.5">
                     {" "}
                     لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم دولارت أميت نو
                     سيت أميت نو لوريم ايبسوم دولار سيت أميت نو
@@ -126,15 +129,15 @@ export default function FeaturedCategories() {
               </div>
 
               {/* four */}
-              <div className="w-full lg:w-[40%] bg-[#1A181D] min-h-[200px] lg:min-h-0 lg:h-full group relative overflow-hidden rounded-2xl">
+              <div className="w-full lg:w-[40%] bg-[#1A181D] min-h-50 lg:min-h-0 lg:h-full group relative overflow-hidden rounded-2xl">
                 <div className="absolute inset-0 p-6 text-white w-full">
                   <h3 className="text-2xl font-bold">
                     حقائب و كل المنتجات النسائية
                   </h3>
                   <p className="w-[70%]">
                     {" "}
-                    لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم دولار سيت أميت نو
-                    لوريم ايبسوم
+                    لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم دولار سيت أميت
+                    نو لوريم ايبسوم
                   </p>
                 </div>
                 <div className="absolute inset-0 pr-45 pt-15 bottom-0">
@@ -145,12 +148,12 @@ export default function FeaturedCategories() {
           </div>
 
           {/* lift grid of big cards */}
-          <div className="w-full lg:w-[30%] h-auto lg:h-[450px]">
-            <div className="h-auto lg:h-[450px] min-h-[320px] group relative overflow-hidden rounded-2xl bg-[#504343] text-white shadow-sm">
+          <div className="w-full lg:w-[30%] h-auto lg:h-112.5">
+            <div className="h-auto lg:h-112.5 min-h-80 group relative overflow-hidden rounded-2xl bg-[#504343] text-white shadow-sm">
               <img
                 src={bigCard.image}
                 alt={bigCard.title}
-                className="h-[260px] sm:h-[320px] lg:h-[360px] w-full object-cover opacity-90 transition duration-300 group-hover:scale-[1.02] mt-0 lg:mt-[100px]"
+                className="h-65 sm:h-80 lg:h-90 w-full object-cover opacity-90 transition duration-300 group-hover:scale-[1.02] mt-0 lg:mt-25"
               />
 
               {/* content */}
@@ -167,7 +170,7 @@ export default function FeaturedCategories() {
         {/* Bottom promos */}
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           {/* Promo 1 */}
-          <div className="relative overflow-hidden rounded-2xl bg-[var(--nav-bg)] text-white shadow-sm h-auto md:h-[168px]">
+          <div className="relative overflow-hidden rounded-2xl bg-(--nav-bg) text-white shadow-sm h-auto md:h-42">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 relative overflow-hidden">
               <div className="text-right">
                 <div className="text-2xl font-extrabold pb-4">
@@ -179,8 +182,12 @@ export default function FeaturedCategories() {
               </div>
 
               <div className="flex items-center gap-4 self-end sm:self-auto">
-                <div className="text-4xl w-[120px] sm:w-[150px]">
-                  <img src={unsplash} alt="hugeicons" className="w-full h-auto" />
+                <div className="text-4xl w-30 sm:w-37.5">
+                  <img
+                    src={unsplash}
+                    alt="hugeicons"
+                    className="w-full h-auto"
+                  />
                 </div>
               </div>
 
@@ -190,7 +197,7 @@ export default function FeaturedCategories() {
           </div>
 
           {/* Promo 2 */}
-          <div className="relative overflow-hidden rounded-2xl bg-[var(--nav-bg)] text-white shadow-sm h-auto md:h-[168px]">
+          <div className="relative overflow-hidden rounded-2xl bg-(--nav-bg) text-white shadow-sm h-auto md:h-42">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 relative overflow-hidden">
               <div className="text-right">
                 <div className="text-2xl font-extrabold pb-4">
@@ -202,7 +209,7 @@ export default function FeaturedCategories() {
               </div>
 
               <div className="flex items-center gap-4 self-end sm:self-auto">
-                <div className="text-4xl w-[120px] sm:w-[150px]">
+                <div className="text-4xl w-30 sm:w-37.5">
                   <img src={Group22} alt="Group22" className="w-full h-auto" />
                 </div>
               </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
 export default function ProductCard({
   category = "هواتف ذكية",
   title = "هاتف iPhone",
@@ -7,7 +7,6 @@ export default function ProductCard({
   rating = 5,
   reviews = 65,
   subtitle = "لوريم إيبسوم دولور سيت أم",
-  onDetails,
 }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -31,8 +30,6 @@ export default function ProductCard({
             {badgeText}
           </span>
         ) : null} */}
-
-        
       </div>
 
       {/* Content */}
@@ -45,7 +42,6 @@ export default function ProductCard({
         <div className="mt-2 flex items-center  gap-2">
           <Stars value={rating} />
           <span className="text-sm text-slate-500">({reviews})</span>
-          
         </div>
 
         <div className="mt-2 text-sm text-slate-600 line-clamp-1">
@@ -53,25 +49,24 @@ export default function ProductCard({
         </div>
         {/* Buttons */}
         <div className="mt-6 flex items-center justify-between gap-2">
-            <button
-          type="button"
-          onClick={() => onDetails?.()}
-          className=" w-[60%] rounded-xl border border-slate-300 bg-white py-2.5 text-sm font-semibold text-slate-800 hover:bg-slate-50"
-        >
-          عرض التفاصيل
-        </button>
-            {/* Favorite */}
-        <button
-          type="button"
-          onClick={() => setIsFavorite((v) => !v)}
-          className=" grid h-10 w-10  place-items-center rounded-full bg-white/90 shadow hover:bg-white"
-          aria-label="مفضلة"
-          title="مفضلة"
-        >
-          <HeartIcon filled={isFavorite} />
-        </button>
+          <Link to={`/ProductDetails/:id`} className="w-full">
+            <div className=" w-[60%] rounded-xl border border-slate-300 bg-white py-2.5 px-1 text-sm font-semibold text-slate-800 hover:bg-slate-50">
+              {" "}
+              عرض التفاصيل
+            </div>
+          </Link>
+
+          {/* Favorite */}
+          <button
+            type="button"
+            onClick={() => setIsFavorite((v) => !v)}
+            className=" grid h-10 w-10  place-items-center rounded-full bg-white/90 shadow hover:bg-white"
+            aria-label="مفضلة"
+            title="مفضلة"
+          >
+            <HeartIcon filled={isFavorite} />
+          </button>
         </div>
-        
       </div>
     </div>
   );
@@ -79,7 +74,10 @@ export default function ProductCard({
 
 function Stars({ value = 0, max = 5 }) {
   return (
-    <div className="flex items-center gap-1" aria-label={`التقييم ${value} من ${max}`}>
+    <div
+      className="flex items-center gap-1"
+      aria-label={`التقييم ${value} من ${max}`}
+    >
       {Array.from({ length: max }).map((_, i) => (
         <StarIcon key={i} filled={i < value} />
       ))}
@@ -89,7 +87,12 @@ function Stars({ value = 0, max = 5 }) {
 
 function StarIcon({ filled }) {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" className={filled ? "fill-yellow-400" : "fill-slate-200"}>
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      className={filled ? "fill-yellow-400" : "fill-slate-200"}
+    >
       <path d="M12 17.27l-5.18 3.05 1.39-5.81-4.5-3.89 5.92-.5L12 4.5l2.37 5.62 5.92.5-4.5 3.89 1.39 5.81z" />
     </svg>
   );
@@ -97,7 +100,12 @@ function StarIcon({ filled }) {
 
 function HeartIcon({ filled }) {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" className={filled ? "fill-rose-500" : "fill-slate-300"}>
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      className={filled ? "fill-rose-500" : "fill-slate-300"}
+    >
       <path d="M12 21s-7.1-4.4-9.3-8.7C.7 8.4 3.1 5.5 6.4 5.5c1.7 0 3.3.8 4.3 2 1-1.2 2.6-2 4.3-2 3.3 0 5.7 2.9 3.7 6.8C19.1 16.6 12 21 12 21z" />
     </svg>
   );

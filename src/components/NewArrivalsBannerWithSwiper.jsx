@@ -1,4 +1,3 @@
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 
@@ -70,7 +69,7 @@ export default function NewArrivalsBannerWithSwiper() {
 function BannerSlide({ slide }) {
   return (
     <div
-      className={`relative overflow-hidden rounded-3xl bg-gradient-to-r ${slide.gradient}`}
+      className={`relative overflow-hidden rounded-3xl bg-linear-to-r ${slide.gradient}`}
     >
       {/* ديكور */}
       <div className="relative flex flex-row-reverse items-center justify-between gap-6 p-6 md:flex-row-reverse md:p-10">
@@ -79,7 +78,7 @@ function BannerSlide({ slide }) {
           <img
             src={slide.image}
             alt="banner"
-            className="h-[180px] w-full rounded-2xl object-cover md:h-[240px]"
+            className="h-45 w-full rounded-2xl object-cover md:h-60"
             draggable="false"
           />
         </div>
@@ -133,7 +132,6 @@ function BannerSlide({ slide }) {
             </button>
           </div>
         </div>
-        
       </div>
     </div>
   );

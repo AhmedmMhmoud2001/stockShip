@@ -108,13 +108,14 @@ export default function NavbarBottom() {
       <div className=" bottom-4  z-30 ">
         <div
           className="
-            w-full
+            w-full 
             flex items-center justify-between
             rounded-t-lg rounded-b-[50px]
             shadow-[0_-8px_24px_rgba(0,0,0,0.10)]
             overflow-x-auto
             bg-transparent py-0
             lg:bg-(--bottom-bg) lg:py-4
+            px-20
           "
         >
           {/* Left group (Desktop only) */}

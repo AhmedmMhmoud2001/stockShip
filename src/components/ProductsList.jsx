@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 
 import ProductCard from "./ProductCard";
 
-export default function ProductsCarousel() {
+export default function ProductsCarousel({title}) {
   const products = [
     { id: 1, category: "هواتف ذكية", title: "iPhone 14 Pro", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=1200&q=80&auto=format&fit=crop", rating: 5, reviews: 65, subtitle: "لوريم إيبسوم دولور سيت أم", badgeText: "FOR SALE" },
     { id: 2, category: "هواتف ذكية", title: "iPhone 14 Pro", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=1200&q=80&auto=format&fit=crop", rating: 5, reviews: 65, subtitle: "لوريم إيبسوم دولور سيت أم", badgeText: "FOR SALE" },
@@ -23,7 +23,7 @@ export default function ProductsCarousel() {
       {/* Title */}
       <div className="mb-4 flex items-center justify-between ">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">الهواتف الذكيه</h2>
+          <h2 className="text-2xl font-bold text-slate-900">{title}</h2>
         </div>
 
        
