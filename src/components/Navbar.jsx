@@ -2,6 +2,7 @@
 import React from "react";
 import logo from "../assets/imgs/Group20.png";
 import camera from "../assets/imgs/camera.png";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -62,7 +63,7 @@ export default function Navbar() {
             كن بائعاً
           </span>
         </button>
-
+      <Link to="/login">
         <button
           className="
             h-10 sm:h-11 md:h-13
@@ -77,6 +78,7 @@ export default function Navbar() {
             تسجيل دخول
           </span>
         </button>
+        </Link>
       </div>
     </nav>
   );

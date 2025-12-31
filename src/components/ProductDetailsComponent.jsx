@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import Rectangle1 from "../assets/imgs/Rectangle1.png";
 import {
   Heart,
   Share2,
@@ -164,33 +165,8 @@ export default function ProductDetailsComponent() {
               })}
             </div>
 
-            {/* Tabs */}
-            <div className="pt-2">
-              <div className="flex items-center justify-start gap-6 border-b border-slate-200">
-                <button
-                  onClick={() => setTab("company")}
-                  className={`py-3 text-sm font-semibold ${
-                    tab === "company"
-                      ? "text-slate-900"
-                      : "text-slate-500 hover:text-slate-700"
-                  }`}
-                >
-                  ملف تعريف الشركة
-                </button>
-                <button
-                  onClick={() => setTab("desc")}
-                  className={`py-3 text-sm font-semibold ${
-                    tab === "desc"
-                      ? "text-slate-900"
-                      : "text-slate-500 hover:text-slate-700"
-                  }`}
-                >
-                  وصف البضائع
-                </button>
-              </div>
+       
 
-             
-            </div>
           </div>
             {/* LEFT: Info */}
           <div className="space-y-6">
@@ -262,6 +238,97 @@ export default function ProductDetailsComponent() {
             </div>
           </div>
         </div>
+             {/* Tabs */}
+            {/* Tabs */}
+<div className="pt-2">
+  <div className="flex items-center justify-start gap-6 border-b border-slate-200">
+    <button
+      onClick={() => setTab("company")}
+      className={`py-3 text-sm font-semibold border-b-2 ${
+        tab === "company"
+          ? "text-slate-900 border-amber-400"
+          : "text-slate-500 border-transparent hover:text-slate-700"
+      }`}
+    >
+      ملف تعريف الشركة
+    </button>
+
+    <button
+      onClick={() => setTab("desc")}
+      className={`py-3 text-sm font-semibold border-b-2 ${
+        tab === "desc"
+          ? "text-slate-900 border-amber-400"
+          : "text-slate-500 border-transparent hover:text-slate-700"
+      }`}
+    >
+      وصف البضائع
+    </button>
+  </div>
+
+  {/* Content */}
+  <div className="mt-3 rounded-md border border-slate-200 bg-white overflow-hidden">
+    {tab === "company" ? (
+      <div className="flex flex-col md:flex-row">
+        {/* Logo block (يمين على الشاشات الكبيرة) */}
+        <div className="md:w-44  flex items-center justify-center p-6 border-b md:border-b-0 md:border-l border-slate-200">
+          <div className="h-35 w-35 ">
+            <img src={Rectangle1} alt="Rectangle1" />
+          </div>
+        </div>
+
+        {/* Table */}
+        <div className="flex-1 divide-y divide-slate-200">
+          <div className="grid grid-cols-[1fr_80%]">
+            
+            <div className="px-4 py-3 text-sm font-semibold bg-slate-50 border-l border-slate-200">
+              رقم التحقق
+            </div>
+            <div className="px-4 py-3 text-sm text-slate-700">54364#</div>
+          </div>
+
+          <div className="grid grid-cols-[1fr_80%]">
+            
+            <div className="px-4 py-3 text-sm font-semibold bg-slate-50 border-l border-slate-200">
+              شروط الدفع
+            </div>
+            <div className="px-4 py-3 text-sm text-slate-700">
+              LC, T/T, D/P, PayPal, Western Union
+            </div>
+          </div>
+
+          <div className="grid grid-cols-[1fr_80%]">
+            
+            <div className="px-4 py-3 text-sm font-semibold bg-slate-50 border-l border-slate-200">
+              تقييم الشركة
+            </div>
+            <div className="px-4 py-3 text-sm text-slate-700">
+              <div className="flex items-center justify-start gap-2 text-amber-500">
+                <Star className="h-4 w-4 fill-current" />
+                <span className="text-slate-700 text-sm">5.0</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-[1fr_80%]">
+            
+            <div className="px-4 py-3 text-sm font-semibold bg-slate-50 border-l border-slate-200">
+              البضائع الرئيسية
+            </div>
+            <div className="px-4 py-3 text-sm text-slate-700">
+              هواتف والإلكترونيات
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : (
+      <div className="p-4">
+        <p className="text-sm leading-7 text-slate-700">
+          اكتب هنا وصف البضائع… (نفس فكرة الباراجراف الطويل اللي عندك).
+        </p>
+      </div>
+    )}
+  </div>
+</div>
       </div>
 
       {/* Subtle footer spacing */}
