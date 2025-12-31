@@ -6,6 +6,8 @@ import Home from './pages/Home'
 import ProductDetails from './pages/ProductDetails'
 import LogIn from './pages/Login'
 import SignUp from "./pages/SignUp";
+import TermsPoliciesPage from "./pages/TermsPoliciesPage";
+import Notification from "./pages/Notification";
 function App() {
   
   return (
@@ -15,6 +17,8 @@ function App() {
       <Route path="/ProductDetails/:id" element={<ProductDetails/>}/>
       <Route path="/login" element={<LogIn/>}/>
       <Route path="/signup" element={<SignUp/>}/>
+      <Route path="/TermsAndPolicies" element={<TermsPoliciesPage/>}/>
+      <Route path="/Notification" element={<Notification/>}/>
     </Routes>
   )
 }

@@ -6,6 +6,8 @@ import {
   Twitter,
   Linkedin,
 } from "lucide-react";
+import { Link } from "react-router-dom";
+
 import logo from "../assets/imgs/Group25.png";
 import paymentMethod from "../assets/imgs/payment-method.png";
 
@@ -16,13 +18,12 @@ function FooterLinks({ title, links }) {
       <ul className="space-y-3 text-sm text-slate-600">
         {links.map((l, i) => (
           <li key={i}>
-            <a
-              href={l.href}
+            <Link to={l.href}
               className="inline-flex items-center gap-2 transition hover:text-slate-900"
             >
               <ChevronLeft className="h-4 w-4 text-slate-400" />
               <span>{l.label}</span>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
@@ -43,25 +44,25 @@ export default function FooterArabic({
     account: {
       title: "حسابي",
       links: [
-        { label: "حسابي", href: "#" },
-        { label: "مركز الإرجاع", href: "#" },
-        { label: "مركز الشحن", href: "#" },
-        { label: "تذاكر الدعم", href: "#" },
-        { label: "تتبع الطلب", href: "#" },
-        { label: "مركز الدعم", href: "#" },
-        { label: "طريقة الدفع", href: "#" },
+        { label: "حسابي", href: "/" },
+        { label: "مركز الإرجاع", href: "/" },
+        { label: "مركز الشحن", href: "/" },
+        { label: "تذاكر الدعم", href: "/" },
+        { label: "تتبع الطلب", href: "/" },
+        { label: "مركز الدعم", href: "/" },
+        { label: "طريقة الدفع", href: "/" },
       ],
     },
     categories: {
       title: "الفئات",
       links: [
         { label: "عنا", href: "#" },
-        { label: "معلومات التوصيل", href: "#" },
-        { label: "سياسة الخصوصية", href: "#" },
-        { label: "الشروط والأحكام", href: "#" },
-        { label: "اتصل بنا", href: "#" },
-        { label: "مركز الدعم", href: "#" },
-        { label: "الوظائف", href: "#" },
+        { label: "معلومات التوصيل", href: "/" },
+        { label: "سياسة الخصوصية", href: "/" },
+        { label: "الشروط والأحكام", href: "/TermsAndPolicies" },
+        { label: "اتصل بنا", href: "/" },
+        { label: "مركز الدعم", href: "/" },
+        { label: "الوظائف", href: "/" },
       ],
     },
     company: {

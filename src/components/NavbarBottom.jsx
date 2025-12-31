@@ -9,14 +9,14 @@ import shoes from "../assets/imgs/running-shoes.png";
 import shirt from "../assets/imgs/shirt-01.png";
 import textalign from "../assets/imgs/textalign-left.png";
 import dropdown from "../assets/imgs/arrow-down.png";
-
+import { Link } from "react-router-dom";
 export default function NavbarBottom() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const menuItems = [
     { label: "اللغة", icon: translate },
-    { label: "الإشعارات", icon: hugeicons },
-    { label: "طلباتي", icon: lucide_box },
+    { label: "الإشعارات", icon: hugeicons ,link:"/Notification"},
+    { label: "طلباتي", icon: lucide_box  },
   ];
 
   const rightItems = [
@@ -121,7 +121,9 @@ export default function NavbarBottom() {
           {/* Left group (Desktop only) */}
           <div className="hidden lg:flex items-center gap-2.5 shrink-0">
             {menuItems.map((item, index) => (
-              <div
+              <Link to={item.link}>
+                <img src={item.icon} alt={item.label} className="w-6 h-6 object-contain" />
+               <div
                 key={index}
                 className="
                   flex items-center gap-3
@@ -130,11 +132,11 @@ export default function NavbarBottom() {
                   px-1
                 "
               >
-                <img src={item.icon} alt={item.label} className="w-6 h-6 object-contain" />
                 <span className="font-['Almarai'] font-bold text-[16px] leading-5.25 whitespace-nowrap">
                   {item.label}
                 </span>
               </div>
+              </Link>
             ))}
           </div>
 
