@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import logo from "../assets/imgs/Group20.png";
-
+import { Link } from "react-router-dom";
 export default function LoginCard() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div  className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
+    <div  className="min-h-screen bg-white flex items-center justify-center p-4">
       {/* Card */}
       <div className="w-full max-w-5xl overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-slate-200">
         <div className="grid grid-cols-1 md:grid-cols-2">
@@ -89,17 +89,21 @@ export default function LoginCard() {
 
                 {/* Links */}
                 <div className="pt-2 text-center text-sm">
-                  <span className="text-slate-500">ليس لديك حساب؟</span>{" "}
+                    <Link to="/signup">
+                     <span className="text-slate-500">ليس لديك حساب؟</span>
+                 
                   <button type="button" className="font-semibold text-amber-600 hover:text-amber-700">
                     سجل الآن
                   </button>
+                   </Link>
                 </div>
-
+                <Link to="/">
                 <div className="text-center">
                   <button type="button" className="text-sm font-semibold text-amber-600 hover:text-amber-700">
-                    الدخول كأدمن
+                        الدخول كزائر
                   </button>
                 </div>
+                </Link>
               </form>
 
               <div className="mt-10 text-center text-xs text-slate-400">
