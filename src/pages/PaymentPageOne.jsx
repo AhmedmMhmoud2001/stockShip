@@ -1,10 +1,14 @@
 import React from 'react'
 import PaymentCardForm from '../components/PaymentCardOne'
+import Header from '../components/Header'
+import FooterArabic from '../components/FooterArabic'
 
 export default function PaymentPageOne() {
   return (
     <div>
-      <PaymentCardForm/>
+        <Header/>
+        <PaymentCardForm/>
+        <FooterArabic/>
     </div>
   )
 }

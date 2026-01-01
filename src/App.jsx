@@ -15,6 +15,8 @@ import ProductsListPage from "./pages/ProductsListPage";
 import OrderCheckoutPageTwo from "./pages/OrderCheckoutPageTwo";
 import PaymentPageOne from "./pages/PaymentPageOne";
 import PaymentPageTwo from "./pages/PaymentPageTwo";
+import OrderTrackingCardPage from "./pages/OrderTrackingCardPage";
+import SignupBankInfoFormPage from "./pages/SignupBankInfoFormPage";
 function App() {
   
   return (
@@ -33,7 +35,10 @@ function App() {
       <Route path="/OrderCheckoutPageTwo" element={<OrderCheckoutPageTwo/>}/>
       <Route path="/PaymentPageOne" element={<PaymentPageOne/>}/>
       <Route path="/PaymentPageTwo" element={<PaymentPageTwo/>}/>
+      <Route path="/OrderTrackingCardPage" element={<OrderTrackingCardPage/>}/>
+      <Route path="/SignupBankInfoFormPage" element={<SignupBankInfoFormPage/>}/>
 
+      
 
 
 

@@ -1,13 +1,13 @@
 import React from 'react'
-import PaymentTwo from '../components/PaymentTwo'
+import OrderTrackingCard from '../components/OrderTrackingCard'
 import Header from '../components/Header'
 import FooterArabic from '../components/FooterArabic'
 
-export default function PaymentPageTwo() {
+export default function OrderTrackingCardPage() {
   return (
     <div>
-        <Header/>
-      <PaymentTwo/>
+      <Header/>
+      <OrderTrackingCard/>
       <FooterArabic/>
     </div>
   )

@@ -13,7 +13,6 @@ export default function CompanyProfilePage() {
       <CompanyAdsComponent/>
       <RecommendedProducts/>
       <ProductsList title={title}/>
-      <Orders/>
       <FooterArabic/>
     </div>
   )

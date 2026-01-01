@@ -24,7 +24,7 @@ export default function PaymentTwo() {
   );
 
   return (
-    <div dir="rtl" className="min-h-screen bg-white">
+    <div dir="rtl" className="min-h-screen bg-white pt-40">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-8 py-8">
         <div className="rounded-xl border border-slate-100 bg-white shadow-sm p-6 sm:p-8">
           <div className="flex justify-between items-center gap-10">

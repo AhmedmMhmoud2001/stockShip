@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function PaymentCardForm() {
   const summary = useMemo(
@@ -28,7 +29,7 @@ export default function PaymentCardForm() {
   const [postal, setPostal] = useState("90210");
 
   return (
-    <div dir="rtl" className="min-h-screen bg-white">
+    <div dir="rtl" className="min-h-screen bg-white pt-40">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-8 py-10">
         <div className="flex justify-between items-center gap-10">
             {/* Right: summary */}
@@ -189,13 +190,15 @@ export default function PaymentCardForm() {
                   />
                 </div>
               </div>
-
-              <button
+               <Link to ="/PaymentPageTwo">
+                <button
                 type="button"
                 className="mt-4 w-full rounded-md bg-amber-500 px-4 py-3 text-sm font-bold text-blue-900 hover:bg-amber-600"
               >
                 دفع
               </button>
+               </Link>
+              
             </div>
           </div>
 
