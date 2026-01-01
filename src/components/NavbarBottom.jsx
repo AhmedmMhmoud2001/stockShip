@@ -14,15 +14,15 @@ export default function NavbarBottom() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const menuItems = [
-    { label: "اللغة", icon: translate },
+    { label: "اللغة", icon: translate ,arrow: dropdown },
     { label: "الإشعارات", icon: hugeicons ,link:"/Notification"},
-    { label: "طلباتي", icon: lucide_box  },
+    { label: "طلباتي", icon: lucide_box ,link:"/OrdersPage" },
   ];
 
   const rightItems = [
     { label: "المفروشات", icon: Vector, arrow: dropdown },
     { label: "الديكورات", icon: lamp, arrow: dropdown },
-    { label: "إلكترونيات", icon: smartphone, arrow: dropdown },
+    { label: "إلكترونيات", icon: smartphone, arrow: dropdown ,link:"/ProductsListPage" },
     { label: "احذيه", icon: shoes, arrow: dropdown },
     { label: "ملابس", icon: shirt, arrow: dropdown },
     { label: "جميع الملفات", icon: textalign, arrow: dropdown },
@@ -161,6 +161,7 @@ export default function NavbarBottom() {
           {/* Right group (Desktop only) */}
           <div className="hidden lg:flex items-center gap-2.5 shrink-0">
             {rightItems.map((item, index) => (
+              <Link to={item.link}>
               <div
                 key={index}
                 className="
@@ -176,6 +177,7 @@ export default function NavbarBottom() {
                 </span>
                 <img src={item.icon} alt={item.label} className="w-6 h-6 object-contain" />
               </div>
+              </Link>
             ))}
           </div>
         </div>

@@ -9,6 +9,9 @@ import SignUp from "./pages/SignUp";
 import TermsPoliciesPage from "./pages/TermsPoliciesPage";
 import Notification from "./pages/Notification";
 import CompanyProfilePage from "./pages/CompanyProfilePage";
+import OrderCheckout from "./pages/OrderCheckout";
+import OrdersPage from "./pages/OrdersPage";
+import ProductsListPage from "./pages/ProductsListPage";
 function App() {
   
   return (
@@ -21,6 +24,11 @@ function App() {
       <Route path="/TermsAndPolicies" element={<TermsPoliciesPage/>}/>
       <Route path="/Notification" element={<Notification/>}/>
       <Route path="/CompanyProfilePage" element={<CompanyProfilePage/>}/>
+      <Route path="/OrderCheckout" element={<OrderCheckout/>}/>
+      <Route path="/OrdersPage" element={<OrdersPage/>}/>
+      <Route path="/ProductsListPage" element={<ProductsListPage/>}/>
+
+
     </Routes>
   )
 }
