@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function OrderCheckoutComponent() {
   const products = useMemo(
@@ -54,13 +55,13 @@ export default function OrderCheckoutComponent() {
     setSelectedImages((prev) => ({ ...prev, [productId]: img }));
   };
 
-  // جدول الطلب (قيم افتراضية)
   const [rows, setRows] = useState([
-    { serial: 1, orderNo: 1, qty: 1, price: 1, cbm: 1 },
-    { serial: 2, orderNo: 2, qty: 2, price: 2, cbm: 2 },
-    { serial: 3, orderNo: 8, qty: 3, price: 3, cbm: 3 },
-    { serial: 5, orderNo: 5, qty: 6, price: 6, cbm: 6 },
-  ]);
+      { serial: 1, itemNo: 1, qty: 1, price: 1, cbm: 1 },
+      { serial: 2, itemNo: 2, qty: 2, price: 2, cbm: 2 },
+      { serial: 3, itemNo: 8, qty: 3, price: 3, cbm: 3 },
+      { serial: 5, itemNo: 5, qty: 6, price: 6, cbm: 6 },
+    ]);
+  
 
   const totals = useMemo(() => {
     const sumQty = rows.reduce((a, r) => a + Number(r.qty || 0), 0);
@@ -74,12 +75,12 @@ export default function OrderCheckoutComponent() {
       prev.map((r, i) => (i === idx ? { ...r, [key]: value } : r))
     );
   };
+   
+const [coupon, setCoupon] = useState("");
 
-  // ملخص الدفع (قيم مثال)
-  const subtotal = 5650;
-  const discount = 0;
-  const tax = 0;
-  const grandTotal = subtotal - discount + tax;
+  const subtotal = 4589;
+  const shipping = 45.0;
+  const total = 4589;
 
   return (
     <div dir="rtl" className="min-h-screen bg-white mt-40 w-full">
@@ -197,92 +198,116 @@ export default function OrderCheckoutComponent() {
           })}
         </div>
 
-        {/* ✅ جدول الطلب */}
-        <div className="mt-6 overflow-hidden rounded-md border border-slate-200">
-          <div className="grid grid-cols-5 bg-slate-100 text-xs font-semibold text-slate-700">
-            <div className="px-3 py-2 text-center border-l border-slate-200">المسلسل</div>
-            <div className="px-3 py-2 text-center border-l border-slate-200">رقم الطلب</div>
-            <div className="px-3 py-2 text-center border-l border-slate-200">الكمية</div>
-            <div className="px-3 py-2 text-center border-l border-slate-200">السعر</div>
-            <div className="px-3 py-2 text-center">CBM</div>
+        {/* Order summary */}
+        <section className="w-full">
+          <div className="text-right text-sm font-bold text-blue-900 mb-2">
+            ملخص الطلب
           </div>
 
-          {rows.map((r, idx) => (
-            <div key={idx} className="grid grid-cols-5 items-center border-t border-slate-200 bg-white">
-              <div className="px-3 py-2 text-center text-sm text-slate-700 border-l border-slate-200">
-                {r.serial}
-              </div>
-
-              <div className="px-3 py-2 text-center border-l border-slate-200">
-                <input
-                  value={r.orderNo}
-                  onChange={(e) => updateRow(idx, "orderNo", e.target.value)}
-                  className="w-full rounded bg-slate-100 px-2 py-1 text-sm text-center outline-none focus:ring-2 focus:ring-blue-200"
-                />
-              </div>
-
-              <div className="px-3 py-2 text-center border-l border-slate-200">
-                <input
-                  value={r.qty}
-                  onChange={(e) => updateRow(idx, "qty", e.target.value)}
-                  className="w-full rounded bg-slate-100 px-2 py-1 text-sm text-center outline-none focus:ring-2 focus:ring-blue-200"
-                />
-              </div>
-
-              <div className="px-3 py-2 text-center border-l border-slate-200">
-                <input
-                  value={r.price}
-                  onChange={(e) => updateRow(idx, "price", e.target.value)}
-                  className="w-full rounded bg-slate-100 px-2 py-1 text-sm text-center outline-none focus:ring-2 focus:ring-blue-200"
-                />
-              </div>
-
-              <div className="px-3 py-2 text-center">
-                <input
-                  value={r.cbm}
-                  onChange={(e) => updateRow(idx, "cbm", e.target.value)}
-                  className="w-full rounded bg-slate-100 px-2 py-1 text-sm text-center outline-none focus:ring-2 focus:ring-blue-200"
-                />
-              </div>
+          <div className="overflow-hidden rounded-md border border-slate-100">
+            <div className="grid grid-cols-5 bg-blue-50 text-sm font-semibold text-slate-800">
+              <div className="px-3 py-3 text-center">المسلسل</div>
+              <div className="px-3 py-3 text-center">رقم الصنف</div>
+              <div className="px-3 py-3 text-center">الكمية</div>
+              <div className="px-3 py-3 text-center">السعر</div>
+              <div className="px-3 py-3 text-center">CBM</div>
             </div>
-          ))}
 
-          <div className="grid grid-cols-5 bg-blue-900 text-white text-xs font-semibold">
-            <div className="px-3 py-2 text-center border-l border-blue-800">2222</div>
-            <div className="px-3 py-2 text-center border-l border-blue-800">الإجمالي</div>
-            <div className="px-3 py-2 text-center border-l border-blue-800">{totals.sumQty}</div>
-            <div className="px-3 py-2 text-center border-l border-blue-800">{totals.sumPrice}</div>
-            <div className="px-3 py-2 text-center">{totals.sumCbm}</div>
-          </div>
-        </div>
+            <div className="bg-white">
+              {rows.map((r, idx) => (
+                <div
+                  key={idx}
+                  className="grid grid-cols-5 items-center border-t border-slate-100 min-h-[74px]"
+                >
+                  <div className="text-center text-sm text-slate-700">
+                    <input
+                      value={r.serial}
+                      onChange={(e) => updateRow(idx, "serial", e.target.value)}
+                      className="mx-auto w-4/5 rounded-md bg-blue-50 px-2 py-2 text-center text-sm outline-none focus:ring-2 focus:ring-blue-200"
+                    />
+                  </div>
 
-        {/* ✅ ملخص */}
-        <div className="mt-6 space-y-3 text-sm text-slate-700">
-          <div className="flex items-center justify-between border-b border-slate-200 pb-2">
-            <span>المجموع</span>
-            <span className="font-semibold">{subtotal.toLocaleString()}</span>
-          </div>
-          <div className="flex items-center justify-between border-b border-slate-200 pb-2">
-            <span>الخصم</span>
-            <span className="font-semibold">{discount.toLocaleString()}</span>
-          </div>
-          <div className="flex items-center justify-between border-b border-slate-200 pb-2">
-            <span>الضريبة</span>
-            <span className="font-semibold">{tax.toLocaleString()}</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="font-semibold">الإجمالي</span>
-            <span className="font-bold text-slate-900">{grandTotal.toLocaleString()}</span>
-          </div>
-        </div>
+                  <div className="text-center text-sm text-slate-700">
+                    <input
+                      value={r.itemNo}
+                      onChange={(e) => updateRow(idx, "itemNo", e.target.value)}
+                      className="mx-auto w-4/5 rounded-md bg-blue-50 px-2 py-2 text-center text-sm outline-none focus:ring-2 focus:ring-blue-200"
+                    />
+                  </div>
 
-        {/* ✅ زر الإنهاء */}
-        <button
-          type="button"
-          className="mt-6 w-full rounded-md bg-amber-500 px-4 py-3 text-sm font-bold text-white shadow-sm hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-200"
-        >
-          إتمام الشراء
-        </button>
+                  <div className="text-center text-sm text-slate-700 border-l border-slate-200">
+                    {r.qty}
+                  </div>
+
+                  <div className="text-center text-sm text-slate-700 border-l border-slate-200">
+                    {r.price}
+                  </div>
+
+                  <div className="text-center text-sm text-slate-700 border-l border-slate-200">
+                    {r.cbm}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-5 bg-blue-900 text-white text-sm font-semibold">
+              <div className="px-3 py-3 text-center">الإجمالي</div>
+              <div className="px-3 py-3 text-center">........</div>
+              <div className="px-3 py-3 text-center">{totals.sumQty}</div>
+              <div className="px-3 py-3 text-center">
+                {totals.sumPrice} ر.س
+              </div>
+              <div className="px-3 py-3 text-center">2222</div>
+            </div>
+          </div>
+
+          <div className="mt-2 text-right text-sm font-semibold text-blue-900">
+            نسبة الموقع %4 من الصفقة.
+          </div>
+        </section>
+        {/* Cart summary */}
+        <section className="w-full">
+          <div className="text-right text-lg font-bold text-slate-900 mb-3">
+            السلة
+          </div>
+
+          <div className="w-full rounded-md border border-slate-200 overflow-hidden">
+            <div className="flex items-stretch">
+              <input
+                value={coupon}
+                onChange={(e) => setCoupon(e.target.value)}
+                placeholder="ادخل كود الخصم"
+                className="flex-1 px-4 py-3 text-sm outline-none"
+              />
+              <button
+                type="button"
+                className="w-20 border-r border-slate-200 text-sm text-blue-700 hover:bg-slate-50"
+              >
+                حفظ
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-4 grid grid-cols-2 gap-y-3 text-sm text-slate-700">
+            <div className="text-right font-semibold">الإجمالي الفرعي</div>
+            <div className="text-left">${subtotal}</div>
+
+            <div className="text-right font-semibold">التوصيل</div>
+            <div className="text-left">${shipping.toFixed(2)}</div>
+
+            <div className="text-right font-semibold">الإجمالي الفرعي</div>
+            <div className="text-left">${total}</div>
+          </div>
+          <Link to="/OrderCheckoutPageTwo">
+            <button
+            type="button"
+            className="mt-6 w-full rounded-md bg-amber-500 px-4 py-4 text-sm font-bold text-blue-900 hover:bg-amber-600"
+          >
+            إتمام الشراء
+          </button>
+          </Link>
+          
+        </section>
 
         <div className="h-10" />
       </div>

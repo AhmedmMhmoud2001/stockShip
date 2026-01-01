@@ -12,6 +12,9 @@ import CompanyProfilePage from "./pages/CompanyProfilePage";
 import OrderCheckout from "./pages/OrderCheckout";
 import OrdersPage from "./pages/OrdersPage";
 import ProductsListPage from "./pages/ProductsListPage";
+import OrderCheckoutPageTwo from "./pages/OrderCheckoutPageTwo";
+import PaymentPageOne from "./pages/PaymentPageOne";
+import PaymentPageTwo from "./pages/PaymentPageTwo";
 function App() {
   
   return (
@@ -27,6 +30,11 @@ function App() {
       <Route path="/OrderCheckout" element={<OrderCheckout/>}/>
       <Route path="/OrdersPage" element={<OrdersPage/>}/>
       <Route path="/ProductsListPage" element={<ProductsListPage/>}/>
+      <Route path="/OrderCheckoutPageTwo" element={<OrderCheckoutPageTwo/>}/>
+      <Route path="/PaymentPageOne" element={<PaymentPageOne/>}/>
+      <Route path="/PaymentPageTwo" element={<PaymentPageTwo/>}/>
+
+
 
 
     </Routes>
