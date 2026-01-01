@@ -10,6 +10,7 @@ import {
   BadgeCheck,
   Star,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const StarRating = ({ value = 5 }) => {
   const stars = Array.from({ length: 5 }, (_, i) => i + 1);
@@ -221,6 +222,7 @@ export default function ProductDetailsComponent() {
             </div>
 
             {/* Company card */}
+            <Link to ="/CompanyProfilePage">
             <div className="w-full  rounded-md border border-slate-200 bg-slate-50 p-4">
               <div className="flex items-start justify-between">
                 <div className="h-10 w-10 rounded-full bg-slate-200" aria-hidden />
@@ -236,6 +238,7 @@ export default function ProductDetailsComponent() {
                 </div>
               </div>
             </div>
+            </Link>
           </div>
         </div>
              {/* Tabs */}

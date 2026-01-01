@@ -8,6 +8,7 @@ import LogIn from './pages/Login'
 import SignUp from "./pages/SignUp";
 import TermsPoliciesPage from "./pages/TermsPoliciesPage";
 import Notification from "./pages/Notification";
+import CompanyProfilePage from "./pages/CompanyProfilePage";
 function App() {
   
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/signup" element={<SignUp/>}/>
       <Route path="/TermsAndPolicies" element={<TermsPoliciesPage/>}/>
       <Route path="/Notification" element={<Notification/>}/>
+      <Route path="/CompanyProfilePage" element={<CompanyProfilePage/>}/>
     </Routes>
   )
 }
