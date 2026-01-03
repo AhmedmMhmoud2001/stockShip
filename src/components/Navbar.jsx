@@ -8,6 +8,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import hugeicons from "../assets/imgs/hugeicons_notification-01.png";
 import lucide_box from "../assets/imgs/lucide_box.png";
+import LanguageSwitcher from "./LanguageSwitcher";
+import translate from "../assets/imgs/translate.png";
 
 import Vector from "../assets/imgs/Vector.png";
 import lamp from "../assets/imgs/lamp.png";
@@ -36,6 +38,12 @@ export default function Navbar() {
 
   const menuItems = useMemo(
     () => [
+      {
+        key: "lang",
+        label: t("nav.language"),
+        icon: translate,
+        isLanguage: true,
+      },
       { key: "noti", label: t("nav.notifications"), icon: hugeicons, to: ROUTES.NOTIFICATION },
       { key: "orders", label: t("nav.orders"), icon: lucide_box, to: ROUTES.ORDERS },
     ],
@@ -151,47 +159,52 @@ export default function Navbar() {
     <header dir={currentDir} className="w-full" ref={rootRef}>
       <nav
         className="
-          w-full font-[Cairo] bg-(--nav-bg)
+          w-full bg-(--nav-bg)
           flex items-center justify-between
-          px-3 sm:px-4 md:px-10 lg:px-20
+          px-3 sm:px-4 md:px-6 lg:px-10 xl:px-20
           py-2 sm:py-3 md:py-4
-          gap-3
+          gap-2 sm:gap-3
         "
       >
         <Link to={ROUTES.HOME} className="flex items-center justify-end shrink-0">
-          <img src={logo} alt="logo" className="h-8 sm:h-9 md:h-10 w-auto" />
+          <img src={logo} alt="logo" className="h-7 sm:h-8 md:h-9 lg:h-10 w-auto" />
         </Link>
 
         <form
           onSubmit={handleSearch}
-          className="hidden lg:flex w-130 lg:w-180.5 h-11 md:h-13 items-center justify-between gap-3 bg-(--white) rounded-[5px] px-3 md:px-4"
+          className="hidden lg:flex flex-1 max-w-md lg:max-w-lg xl:max-w-xl mx-2 lg:mx-4 h-10 sm:h-11 md:h-12 lg:h-13 items-center justify-between gap-2 sm:gap-3 bg-(--white) rounded-[5px] px-2 sm:px-3 md:px-4"
         >
-          <img src={camera} alt="camera" className="h-5 w-5 md:h-6 md:w-6 shrink-0" />
+          <img src={camera} alt="camera" className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 shrink-0" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t("nav.search")}
-            className="w-full h-8 direction-rtl text-right outline-none border-0 bg-transparent"
+            className="w-full h-8 direction-rtl text-right outline-none border-0 bg-transparent text-sm sm:text-base"
           />
         </form>
 
         <div className="hidden lg:flex items-center gap-2 sm:gap-3 shrink-0">
           <Link to={ROUTES.SIGNUP_BANK_INFO}>
-            <button className="h-10 sm:h-11 md:h-13 px-3 sm:px-5 md:px-6 rounded-[5px] bg-(--accent) flex items-center justify-center">
-              <span className="text-(--primary) font-bold text-[12px] sm:text-[13px] md:text-[14px] leading-[150%]">
+            <button className="h-9 sm:h-10 md:h-11 lg:h-13 px-2 sm:px-3 md:px-4 lg:px-5 xl:px-6 rounded-[5px] bg-(--accent) flex items-center justify-center">
+              <span className="text-(--primary) font-bold text-[10px] sm:text-[11px] md:text-[12px] lg:text-[13px] xl:text-[14px] leading-[150%] whitespace-nowrap">
                 {t("nav.beSeller")}
               </span>
             </button>
           </Link>
 
           <Link to={ROUTES.LOGIN}>
-            <button className="h-10 sm:h-11 md:h-13 px-3 sm:px-5 md:px-6 rounded-[5px] bg-(--white) border border-(--primary) flex items-center justify-center">
-              <span className="text-(--primary) font-bold text-[12px] sm:text-[13px] md:text-[14px] leading-[150%]">
+            <button className="h-9 sm:h-10 md:h-11 lg:h-13 px-2 sm:px-3 md:px-4 lg:px-5 xl:px-6 rounded-[5px] bg-(--white) border border-(--primary) flex items-center justify-center">
+              <span className="text-(--primary) font-bold text-[10px] sm:text-[11px] md:text-[12px] lg:text-[13px] xl:text-[14px] leading-[150%] whitespace-nowrap">
                 {t("nav.login")}
               </span>
             </button>
           </Link>
+        </div>
+
+        {/* Language switcher for mobile/tablet */}
+        <div className="md:hidden">
+          <LanguageSwitcher className="h-8 sm:h-9 px-2 sm:px-3" />
         </div>
 
         <button
@@ -223,7 +236,7 @@ export default function Navbar() {
             `}
           >
             <div className="flex items-center justify-between px-4 py-4 border-b shrink-0 bg-blue-900">
-              <div className="font-['Almarai'] font-bold text-lg">{t("nav.menu")}</div>
+              <div className="font-['Tajawal'] font-bold text-lg">{t("nav.menu")}</div>
 
               <button
                 onClick={closeSidebar}
@@ -239,7 +252,7 @@ export default function Navbar() {
                 <Link
                   to={ROUTES.SIGNUP_BANK_INFO}
                   onClick={closeSidebar}
-                  className="w-full rounded-xl bg-(--accent) px-4 py-3 text-center font-['Almarai'] font-bold text-(--primary) block"
+                  className="w-full rounded-xl bg-(--accent) px-4 py-3 text-center font-['Tajawal'] font-bold text-(--primary) block"
                 >
                   {t("nav.beSeller")}
                 </Link>
@@ -247,7 +260,7 @@ export default function Navbar() {
                 <Link
                   to={ROUTES.LOGIN}
                   onClick={closeSidebar}
-                  className="w-full rounded-xl border border-(--primary) bg-white px-4 py-3 text-center font-['Almarai'] font-bold text-(--primary) block"
+                  className="w-full rounded-xl border border-(--primary) bg-white px-4 py-3 text-center font-['Tajawal'] font-bold text-(--primary) block"
                 >
                   {t("nav.login")}
                 </Link>
@@ -268,24 +281,51 @@ export default function Navbar() {
               </div>
 
               <div className="space-y-2">
-                <div className="font-['Almarai'] font-bold text-sm opacity-70">{t("categories.shortcuts")}</div>
+                <div className="font-['Tajawal'] font-bold text-sm opacity-70">{t("categories.shortcuts")}</div>
 
                 <div className="grid gap-2">
                   {menuItems.map((item) => (
                     <div key={item.key} className="w-full">
-                      <Link to={item.to || "#"} className="block" onClick={closeSidebar}>
-                        <div className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-black/5">
-                          <img src={item.icon} alt={item.label} className="w-6 h-6 object-contain" />
-                          <span className="font-['Almarai'] font-bold">{item.label}</span>
-                        </div>
-                      </Link>
+                      {item.isLanguage ? (
+                        <>
+                          <button
+                            type="button"
+                            onClick={() => toggleDropdown(item.key)}
+                            className="w-full flex items-center justify-between gap-3 p-3 rounded-xl hover:bg-black/5"
+                          >
+                            <div className="flex items-center gap-3">
+                              <img src={item.icon} alt={item.label} className="w-6 h-6 object-contain" />
+                              <span className="font-['Tajawal'] font-bold">{item.label}</span>
+                            </div>
+                            <img
+                              src={dropdown}
+                              alt="arrow"
+                              className={`w-5 h-5 object-contain opacity-70 transition ${
+                                openDropdown === item.key ? "rotate-180" : ""
+                              }`}
+                            />
+                          </button>
+                          {openDropdown === item.key && (
+                            <div className="mt-1 ms-3 rounded-xl border border-slate-100 bg-slate-50 overflow-hidden">
+                              <LanguageSwitcher variant="dropdown" />
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <Link to={item.to || "#"} className="block" onClick={closeSidebar}>
+                          <div className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-black/5">
+                            <img src={item.icon} alt={item.label} className="w-6 h-6 object-contain" />
+                            <span className="font-['Tajawal'] font-bold">{item.label}</span>
+                          </div>
+                        </Link>
+                      )}
                     </div>
                   ))}
                 </div>
               </div>
 
               <div className="space-y-2">
-                <div className="font-['Almarai'] font-bold text-sm opacity-70">{t("categories.sections")}</div>
+                <div className="font-['Tajawal'] font-bold text-sm opacity-70">{t("categories.sections")}</div>
 
                 <div className="grid gap-2">
                   {categories.map((item) => (
@@ -297,7 +337,7 @@ export default function Navbar() {
                       >
                         <div className="flex items-center gap-3">
                           <img src={item.icon} alt={item.label} className="w-6 h-6 object-contain" />
-                          <span className="font-['Almarai'] font-bold">{item.label}</span>
+                          <span className="font-['Tajawal'] font-bold">{item.label}</span>
                         </div>
                         <img
                           src={dropdown}

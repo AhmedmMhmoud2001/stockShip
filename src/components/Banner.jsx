@@ -66,11 +66,11 @@ export default function Banner() {
               flex flex-col ${currentDir === 'rtl' ? 'items-end' : 'items-start'}
             `}
           >
-            <h1 className="font-['Almarai'] font-bold text-[20px] sm:text-[25px] md:text-[30px] leading-tight w-full">
+            <h1 className="font-['Tajawal'] font-bold text-[20px] sm:text-[25px] md:text-[30px] leading-tight w-full">
               {t("hero.title")}
             </h1>
 
-            <p className="mt-4 font-['Almarai'] text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-white/90 max-w-full">
+            <p className="mt-4 font-['Tajawal'] text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-white/90 max-w-full">
               {t("hero.description")}
             </p>
           </div>
