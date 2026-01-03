@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 
 const TABS = [
   { key: "all", label: "الكل" },
@@ -90,7 +91,7 @@ export default function Orders() {
   }, [orders, activeTab]);
 
   return (
-    <div  className="min-h-screen bg-white mt-55">
+    <div  className="min-h-screen bg-white mt-40">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-8 py-8 ">
         <div className="flex items-center justify-start flex-row-reverse gap-3">
           {TABS.map((t) => {
@@ -127,13 +128,14 @@ export default function Orders() {
                       <span className={`inline-flex rounded-md px-3 py-1 text-xs font-semibold ${badge.className}`}>
                         {badge.label}
                       </span>
-
+                       <Link to ="/SignupBankInfoFormPage">
                       <button
                         type="button"
                         className="rounded-md bg-blue-900 px-5 py-2 text-sm font-semibold text-white hover:bg-blue-800"
                       >
                         التفاصيل
                       </button>
+                      </Link>
                     </div>
 
                     <div className="hidden sm:block text-sm text-slate-600">

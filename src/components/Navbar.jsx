@@ -212,7 +212,7 @@ export default function Navbar() {
               flex flex-col
             "
           >
-            <div className="flex items-center justify-between px-4 py-4 border-b shrink-0">
+            <div className="flex items-center justify-between px-4 py-4 border-b shrink-0 bg-blue-900">
               <div className="font-['Almarai'] font-bold text-lg">القائمة</div>
 
               <button
