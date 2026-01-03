@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../routes";
 
 export default function PaymentCardForm() {
   const summary = useMemo(
@@ -190,7 +191,7 @@ export default function PaymentCardForm() {
                   />
                 </div>
               </div>
-               <Link to ="/PaymentPageTwo">
+               <Link to={ROUTES.PAYMENT_TWO}>
                 <button
                 type="button"
                 className="mt-4 w-full rounded-md bg-amber-500 px-4 py-3 text-sm font-bold text-blue-900 hover:bg-amber-600"

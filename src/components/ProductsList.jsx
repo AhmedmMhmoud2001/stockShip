@@ -1,6 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, Navigation, Keyboard } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -19,38 +19,51 @@ export default function ProductsCarousel({title}) {
   ];
 
   return (
-    <section className=" my-10 mx-2 sm:mx-6 md:mx-10 lg:mx-16 xl:mx-24 2xl:mx-25" dir="rtl">
-      {/* Title */}
-      <div className="mb-4 flex items-center justify-between ">
-        <div>
-          <h2 className="text-2xl font-bold text-slate-900">{title}</h2>
+    <section className="my-10" dir="rtl">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
+        {/* Title */}
+        <div className="mb-4 flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900">{title}</h2>
+          </div>
         </div>
-
-       
-      </div>
 
       {/* Swiper */}
       <Swiper
-        modules={[Autoplay, Pagination]}
+        modules={[Autoplay, Pagination, Navigation, Keyboard]}
         autoplay={{
-          delay: 1000, 
+          delay: 3000, 
           disableOnInteraction: false, 
           pauseOnMouseEnter: true, 
         }}
         loop={true}
         speed={700}
-        pagination={{ clickable: true }}
-        spaceBetween={16}
-        slidesPerView={1.1}
-        breakpoints={{
-          640: { slidesPerView: 2, spaceBetween: 16 },
-          1024: { slidesPerView: 3, spaceBetween: 16 },
-          1280: { slidesPerView: 5, spaceBetween: 16 }, 
+        pagination={{ 
+          clickable: true,
+          dynamicBullets: true,
         }}
+        navigation={{
+          enabled: true,
+          prevEl: '.swiper-button-prev',
+          nextEl: '.swiper-button-next',
+        }}
+        spaceBetween={12}
+        slidesPerView={1.2}
+        breakpoints={{
+          375: { slidesPerView: 1.3, spaceBetween: 12 },
+          640: { slidesPerView: 2, spaceBetween: 16 },
+          768: { slidesPerView: 2.5, spaceBetween: 16 },
+          1024: { slidesPerView: 3, spaceBetween: 20 },
+          1280: { slidesPerView: 4, spaceBetween: 24 },
+          1536: { slidesPerView: 4, spaceBetween: 24 },
+        }}
+        grabCursor={true}
+        keyboard={{ enabled: true }}
       >
         {products.map((p) => (
           <SwiperSlide key={p.id}>
             <ProductCard
+              id={p.id}
               category={p.category}
               title={p.title}
               image={p.image}
@@ -63,6 +76,7 @@ export default function ProductsCarousel({title}) {
           </SwiperSlide>
         ))}
       </Swiper>
+      </div>
     </section>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../routes";
 
 export default function OrderCheckoutComponent() {
   const products = useMemo(
@@ -84,7 +85,33 @@ const [coupon, setCoupon] = useState("");
 
   return (
     <div dir="rtl" className="min-h-screen bg-white mt-40 w-full">
-      <div className="px-4 sm:px-8 md:px-12 lg:px-24 pt-25">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-25">
+        
+        {/* Navigation Links */}
+        <div className="mb-6 flex flex-wrap items-center gap-4 text-sm">
+          <Link
+            to={ROUTES.HOME}
+            className="text-blue-900 hover:text-blue-700 hover:underline"
+          >
+            الصفحة الرئيسية
+          </Link>
+          <span className="text-slate-400">/</span>
+          <Link
+            to={ROUTES.PRODUCTS_LIST}
+            className="text-blue-900 hover:text-blue-700 hover:underline"
+          >
+            المنتجات
+          </Link>
+          <span className="text-slate-400">/</span>
+          <Link
+            to={ROUTES.ORDERS}
+            className="text-blue-900 hover:text-blue-700 hover:underline"
+          >
+            طلباتي
+          </Link>
+          <span className="text-slate-400">/</span>
+          <span className="text-slate-600 font-semibold">إتمام الشراء</span>
+        </div>
         
         <div className="space-y-6">
           {products.map((p) => {
@@ -298,7 +325,7 @@ const [coupon, setCoupon] = useState("");
             <div className="text-right font-semibold">الإجمالي الفرعي</div>
             <div className="text-left">${total}</div>
           </div>
-          <Link to="/OrderCheckoutPageTwo">
+          <Link to={ROUTES.ORDER_CHECKOUT_TWO}>
             <button
             type="button"
             className="mt-6 w-full rounded-md bg-amber-500 px-4 py-4 text-sm font-bold text-blue-900 hover:bg-amber-600"
@@ -308,6 +335,28 @@ const [coupon, setCoupon] = useState("");
           </Link>
           
         </section>
+
+        {/* Additional Navigation Links */}
+        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Link
+            to={ROUTES.HOME}
+            className="px-6 py-2 text-sm font-semibold text-blue-900 border border-blue-900 rounded-md hover:bg-blue-50 transition-colors"
+          >
+            العودة للصفحة الرئيسية
+          </Link>
+          <Link
+            to={ROUTES.PRODUCTS_LIST}
+            className="px-6 py-2 text-sm font-semibold text-blue-900 border border-blue-900 rounded-md hover:bg-blue-50 transition-colors"
+          >
+            تصفح المزيد من المنتجات
+          </Link>
+          <Link
+            to={ROUTES.ORDERS}
+            className="px-6 py-2 text-sm font-semibold text-blue-900 border border-blue-900 rounded-md hover:bg-blue-50 transition-colors"
+          >
+            عرض طلباتي
+          </Link>
+        </div>
 
         <div className="h-10" />
       </div>

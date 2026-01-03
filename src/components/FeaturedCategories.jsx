@@ -1,4 +1,6 @@
-// import React from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../routes";
 import contact from "../assets/imgs/contact.png";
 import Frame4 from "../assets/imgs/Frame4.png";
 import Clippathgroup from "../assets/imgs/Clippathgroup.png";
@@ -12,36 +14,39 @@ import unsplash from "../assets/imgs/unsplash_fzc23K1F_b0.png";
 import group18 from "../assets/imgs/Group18.png";
 
 export default function FeaturedCategories() {
+  const { t, i18n } = useTranslation();
+  const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+
   const features = [
     {
-      title: "التواصل",
-      desc: "سرعة التواصل ومراقبة المفاوضات",
+      title: t("featured.communication"),
+      desc: t("featured.communicationDesc"),
       icon: contact,
     },
     {
-      title: "خدماتنا التجارية",
-      desc: "عرض مختلف البضائع في جميع الفئات",
+      title: t("featured.commercialServices"),
+      desc: t("featured.commercialServicesDesc"),
       icon: Frame4,
     },
     {
-      title: "الأمان",
-      desc: "التأكد من هوية المورد والمستخدم",
+      title: t("featured.security"),
+      desc: t("featured.securityDesc"),
       icon: Clippathgroup,
     },
   ];
 
   const bigCard = {
-    title: "أثاث منزلي ومكتبي",
-    desc: "نوفر لك تصميم وطلب أثاث منزلي ومكتبي بأفضل جودة وبأسعار مناسبة للجميع.",
+    title: t("featured.homeOfficeFurniture"),
+    desc: t("featured.homeOfficeFurnitureDesc"),
     image: chairs,
   };
 
   return (
     <section
-      dir="rtl"
-      className="w-full bg-slate-50 py-8 px-2 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-25"
+      dir={currentDir}
+      className="w-full bg-slate-50 py-8 sm:py-10 md:py-12"
     >
-      <div className="w-full m-auto ">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
         {/* Top features */}
         <div className="w-full flex flex-col md:flex-row justify-around items-start md:items-center gap-6 md:gap-7">
           {features.map((f) => (
@@ -54,7 +59,7 @@ export default function FeaturedCategories() {
                 src={f.icon}
                 alt={f.title}
               />
-              <div className="text-right w-full md:w-[291.33px]">
+              <div className={`${currentDir === 'rtl' ? 'text-right' : 'text-left'} w-full md:w-[291.33px]`}>
                 <div className="text-lg font-bold text-slate-800 w-full text-[24px]">
                   {f.title}
                 </div>
@@ -65,83 +70,75 @@ export default function FeaturedCategories() {
         </div>
 
         {/* Cards */}
-        <div className="mt-8 flex flex-col gap-6 lg:flex-row h-auto lg:h-112.5">
+        <div className="mt-8 flex flex-col gap-4 sm:gap-6 lg:flex-row h-auto lg:h-[450px]">
           {/* right card */}
-          <div className="w-full lg:w-[70%] h-auto lg:h-112.5 overflow-hidden mb-6">
-            <div className="flex flex-col gap-6 lg:flex-row overflow-hidden mb-6 h-auto lg:h-[48%]">
+          <div className="w-full lg:w-[70%] h-auto lg:h-[450px] overflow-hidden flex flex-col gap-5">
+            <div className="flex flex-col gap-4 sm:gap-6 lg:flex-row overflow-hidden h-auto lg:h-[48%]">
               {/* one */}
               <div className="w-full lg:w-[40%] bg-[#373737] min-h-50 lg:min-h-0 lg:h-full group relative overflow-hidden rounded-2xl">
-                <div className="absolute inset-0 p-6 text-white w-[80%]">
-                  <h3 className="text-2xl font-bold">أجهزة منزلية</h3>
-                  <p>
-                    {" "}
-                    لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم دولار سيت أميت
-                    نو لوريم ايبسوم دولار سيت أميت نت أميت نوو
+                <div className={`absolute inset-0 p-6 text-white z-10 ${currentDir === 'rtl' ? 'w-[80%]' : 'w-[80%]'}`}>
+                  <h3 className="text-2xl font-bold">{t("featured.homeAppliances")}</h3>
+                  <p className="text-sm leading-relaxed">
+                    {t("featured.homeAppliancesDesc")}
                   </p>
                 </div>
-                <div className="absolute inset-0 p-6 left-0 pr-40">
+                <div className={`absolute inset-0 ${currentDir === 'rtl' ? 'left-0 pr-40' : 'right-0 pl-40'} flex items-end justify-${currentDir === 'rtl' ? 'start' : 'end'} p-6`}>
                   <img
                     src={cleaner}
                     alt="cleaner"
-                    className="max-w-full h-auto"
+                    className="max-w-full h-auto object-contain"
                   />
                 </div>
               </div>
 
               {/* two */}
               <div className="w-full lg:w-[60%] bg-[#202731] min-h-50 lg:min-h-0 lg:h-full group relative overflow-hidden rounded-2xl">
-                <div className="absolute inset-0 p-6 pt-12 text-white w-[80%]">
-                  <h3 className="text-2xl font-bold">هواتف ذكية </h3>
-                  <p className="w-[250px]">
-                    {" "}
-                    لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم دولارت أميت نو
-                    سيت أميت نو لوريم ايبسوم دولار سيت أميت نو
+                <div className={`absolute inset-0 p-6 pt-12 text-white z-10 ${currentDir === 'rtl' ? 'w-[80%]' : 'w-[80%]'}`}>
+                  <h3 className="text-2xl font-bold">{t("featured.smartphones")}</h3>
+                  <p className={`text-sm leading-relaxed ${currentDir === 'rtl' ? 'w-[250px]' : 'w-[250px]'}`}>
+                    {t("featured.smartphonesDesc")}
                   </p>
                 </div>
-                <div className="absolute inset-0 p-6 left-0 pr-70">
+                <div className={`absolute inset-0 ${currentDir === 'rtl' ? 'left-0 pr-70' : 'right-0 pl-70'} flex items-center justify-${currentDir === 'rtl' ? 'start' : 'end'} p-6`}>
                   <img
                     src={phones}
                     alt="phones"
-                    className="max-w-full h-auto"
+                    className="max-w-full h-auto object-contain"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col gap-6 lg:flex-row overflow-hidden mb-6 h-auto lg:h-[48%]">
+            <div className="flex flex-col gap-4 sm:gap-6 lg:flex-row overflow-hidden h-auto lg:h-[48%]">
               {/* tree */}
               <div className="w-full lg:w-[60%] bg-[#0A0710] min-h-50 lg:min-h-0 lg:h-full group relative overflow-hidden rounded-2xl">
-                <div className="absolute inset-0 p-6 pt-12 text-white w-[80%]">
-                  <h3 className="text-2xl font-bold">شاشات إلكترونية</h3>
-                  <p className="w-62.5">
-                    {" "}
-                    لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم دولارت أميت نو
-                    سيت أميت نو لوريم ايبسوم دولار سيت أميت نو
+                <div className={`absolute inset-0 p-6 pt-12 text-white z-10 ${currentDir === 'rtl' ? 'w-[80%]' : 'w-[80%]'}`}>
+                  <h3 className="text-2xl font-bold">{t("featured.electronicScreens")}</h3>
+                  <p className={`text-sm leading-relaxed ${currentDir === 'rtl' ? 'w-[250px]' : 'w-[250px]'}`}>
+                    {t("featured.electronicScreensDesc")}
                   </p>
                 </div>
-                <div className="absolute inset-0 p-6 left-0 pr-70">
+                <div className={`absolute inset-0 ${currentDir === 'rtl' ? 'left-0 pr-70' : 'right-0 pl-70'} flex items-center justify-${currentDir === 'rtl' ? 'start' : 'end'} p-6`}>
                   <img
                     src={screans}
                     alt="screans"
-                    className="max-w-full h-auto"
+                    className="max-w-full h-auto object-contain"
                   />
                 </div>
               </div>
 
               {/* four */}
               <div className="w-full lg:w-[40%] bg-[#1A181D] min-h-50 lg:min-h-0 lg:h-full group relative overflow-hidden rounded-2xl">
-                <div className="absolute inset-0 p-6 text-white w-full">
+                <div className={`absolute inset-0 p-6 text-white z-10 ${currentDir === 'rtl' ? 'w-[70%]' : 'w-[70%]'}`}>
                   <h3 className="text-2xl font-bold">
-                    حقائب و كل المنتجات النسائية
+                    {t("featured.bagsWomenProducts")}
                   </h3>
-                  <p className="w-[70%]">
-                    {" "}
-                    لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم دولار سيت أميت
-                    نو لوريم ايبسوم
+                  <p className="text-sm leading-relaxed mt-2">
+                    {t("featured.bagsWomenProductsDesc")}
                   </p>
                 </div>
-                <div className="absolute inset-0 pr-45 pt-15 bottom-0">
-                  <img src={bags} alt="bags" className="max-w-full h-auto" />
+                <div className={`absolute inset-0 ${currentDir === 'rtl' ? 'left-0 pr-45' : 'right-0 pl-45'} bottom-0 flex items-end justify-${currentDir === 'rtl' ? 'end' : 'start'} pt-15 pb-6`}>
+                  <img src={bags} alt="bags" className="max-w-full h-auto object-contain" />
                 </div>
               </div>
             </div>
@@ -172,12 +169,12 @@ export default function FeaturedCategories() {
           {/* Promo 1 */}
           <div className="relative overflow-hidden rounded-2xl bg-(--nav-bg) text-white shadow-sm h-auto md:h-42">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 relative overflow-hidden">
-              <div className="text-right">
+              <div className={currentDir === 'rtl' ? 'text-right' : 'text-left'}>
                 <div className="text-2xl font-extrabold pb-4">
-                  أعلى مرتبة بضائع
+                  {t("featured.topRated")}
                 </div>
                 <button className="rounded-md bg-white px-5 py-2 text-sm font-bold text-blue-700 hover:bg-white">
-                  تصفح ←
+                  {t("featured.browse")} {currentDir === 'rtl' ? '←' : '→'}
                 </button>
               </div>
 
@@ -197,15 +194,18 @@ export default function FeaturedCategories() {
           </div>
 
           {/* Promo 2 */}
-          <div className="relative overflow-hidden rounded-2xl bg-(--nav-bg) text-white shadow-sm h-auto md:h-42">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 relative overflow-hidden">
-              <div className="text-right">
-                <div className="text-2xl font-extrabold pb-4">
-                  أفضل البائعيين
+          <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-(--nav-bg) text-white shadow-sm h-auto md:h-[168px]">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 sm:p-6 relative overflow-hidden">
+              <div className={currentDir === 'rtl' ? 'text-right' : 'text-left'}>
+                <div className="text-xl sm:text-2xl font-extrabold pb-3 sm:pb-4">
+                  {t("featured.bestSellers")}
                 </div>
-                <button className="rounded-md bg-white px-5 py-2 text-sm font-bold text-blue-700 hover:bg-white">
-                  تصفح ←
-                </button>
+                <Link
+                  to={ROUTES.PRODUCTS_LIST}
+                  className="inline-block rounded-md bg-white px-4 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-bold text-blue-700 hover:bg-blue-50 transition-colors"
+                >
+                  {t("featured.browse")} {currentDir === 'rtl' ? '←' : '→'}
+                </Link>
               </div>
 
               <div className="flex items-center gap-4 self-end sm:self-auto">

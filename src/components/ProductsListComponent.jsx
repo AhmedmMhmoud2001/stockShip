@@ -1,5 +1,9 @@
 import React, { useMemo, useState } from "react";
-import { Star, Heart, LayoutGrid, List } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { Star, Heart, LayoutGrid, List, ChevronDown, X } from "lucide-react";
+import { Link } from "react-router-dom";
+import { getProductDetailsUrl } from "../routes";
+import { useFilters } from "../hooks/useFilters";
 
 const StarRating = ({ value = 5 }) => {
   const stars = Array.from({ length: 5 }, (_, i) => i + 1);
@@ -17,6 +21,9 @@ const StarRating = ({ value = 5 }) => {
 };
 
 export default function ProductsListComponent() {
+  const { t, i18n } = useTranslation();
+  const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+
   const products = useMemo(
     () => [
       {
@@ -25,6 +32,8 @@ export default function ProductsListComponent() {
         seller: "شركة أبو أيوب",
         rating: 5,
         reviews: 65,
+        price: 5000,
+        category: "هواتف ذكية",
         desc:
           "لوريم إيبسوم نص تجريبي يمكن استبداله بوصف المنتج الحقيقي. تفاصيل مختصرة عن المنتج ومواصفاته. لوريم إيبسوم نص تجريبي يمكن استبداله بوصف المنتج الحقيقي.",
         mainImg:
@@ -42,6 +51,8 @@ export default function ProductsListComponent() {
         seller: "شركة أبو أيوب",
         rating: 5,
         reviews: 65,
+        price: 4500,
+        category: "هواتف ذكية",
         desc:
           "لوريم إيبسوم نص تجريبي يمكن استبداله بوصف المنتج الحقيقي. تفاصيل مختصرة عن المنتج ومواصفاته. لوريم إيبسوم نص تجريبي يمكن استبداله بوصف المنتج الحقيقي.",
         mainImg:
@@ -57,12 +68,17 @@ export default function ProductsListComponent() {
     []
   );
 
+  const { filters, filteredItems, updateFilter, resetFilters, activeFilterCount } = useFilters({
+    items: products,
+  });
+
   const [liked, setLiked] = useState(() =>
     Object.fromEntries(products.map((p) => [p.id, false]))
   );
   const [selectedImages, setSelectedImages] = useState(() =>
     Object.fromEntries(products.map((p) => [p.id, p.mainImg]))
   );
+  const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
 
   const toggleLike = (id) =>
     setLiked((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -72,19 +88,71 @@ export default function ProductsListComponent() {
 
   const [view, setView] = useState("list");
 
-  return (
-    <div  className="min-h-screen bg-white pt-50">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-8 py-6">
-        <div className="flex items-center  gap-3">
+  const sortOptions = [
+    { value: 'default', label: t('products.sortOptions.default') },
+    { value: 'price-asc', label: t('products.sortOptions.priceAsc') },
+    { value: 'price-desc', label: t('products.sortOptions.priceDesc') },
+    { value: 'rating-desc', label: t('products.sortOptions.ratingDesc') },
+    { value: 'rating-asc', label: t('products.sortOptions.ratingAsc') },
+    { value: 'reviews-desc', label: t('products.sortOptions.reviewsDesc') },
+    { value: 'name-asc', label: t('products.sortOptions.nameAsc') },
+    { value: 'name-desc', label: t('products.sortOptions.nameDesc') },
+  ];
 
-          <div className="flex items-center gap-2">
+  return (
+    <div className="min-h-screen bg-white pt-50">
+      <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 py-6">
+        {/* Filters and Controls */}
+        <div className={`flex items-center justify-between gap-3 flex-wrap ${currentDir === 'rtl' ? 'flex-row-reverse' : ''}`}>
+          {/* Sort Dropdown */}
+          <div className="relative">
             <button
               type="button"
-              className="rounded-md border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50"
+              onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
+              className="flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50"
             >
-              ترتيب حسب
+              {t("products.sortBy")}
+              <ChevronDown className={`h-4 w-4 transition ${sortDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
+            
+            {sortDropdownOpen && (
+              <div className={`absolute ${currentDir === 'rtl' ? 'right-0' : 'left-0'} top-full mt-1 z-10 w-56 rounded-md border border-slate-200 bg-white shadow-lg`}>
+                <div className="py-1">
+                  {sortOptions.map((option) => (
+                    <button
+                      key={option.value}
+                      type="button"
+                      onClick={() => {
+                        updateFilter('sort', option.value);
+                        setSortDropdownOpen(false);
+                      }}
+                      className={`w-full text-right px-4 py-2 text-sm hover:bg-slate-50 ${
+                        filters.sort === option.value ? 'bg-blue-50 text-blue-900 font-semibold' : 'text-slate-700'
+                      }`}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
+
+          {/* Active Filters Badge */}
+          {activeFilterCount > 0 && (
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-slate-600">
+                {t("products.activeFilters")}: {activeFilterCount}
+              </span>
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="text-sm text-blue-600 hover:text-blue-800 underline"
+              >
+                {t("products.clearFilters")}
+              </button>
+            </div>
+          )}
 
           <div className="flex items-center gap-2">
             <button
@@ -115,8 +183,31 @@ export default function ProductsListComponent() {
           </div>
         </div>
 
+        {/* Results Count */}
+        {filteredItems.length > 0 && (
+          <div className={`mt-4 text-sm text-slate-600 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
+            {t("products.resultsCount", { count: filteredItems.length })}
+          </div>
+        )}
+
+        {/* No Results */}
+        {filteredItems.length === 0 && (
+          <div className="mt-8 rounded-md border border-slate-200 bg-slate-50 p-8 text-center">
+            <p className="text-sm text-slate-600">{t("products.noResults")}</p>
+            {activeFilterCount > 0 && (
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="mt-4 text-sm text-blue-600 hover:text-blue-800 underline"
+              >
+                {t("products.clearFilters")}
+              </button>
+            )}
+          </div>
+        )}
+
         <div className="mt-6 space-y-8">
-          {products.map((p) => {
+          {filteredItems.map((p) => {
             const activeImg = selectedImages[p.id] || p.mainImg;
             const isLiked = liked[p.id];
 
@@ -126,7 +217,7 @@ export default function ProductsListComponent() {
                 className="rounded-md bg-white  p-4 sm:p-6"
               >
                 <div className="grid grid-cols-1 md:grid-cols-[1fr_260px] gap-6">
-                  <div dir="rtl" className="flex flex-col justify-between gap-4">
+                  <div dir={currentDir} className="flex flex-col justify-between gap-4">
                     <div>
                       <div className="flex items-start justify-between gap-4">
                         <div>
@@ -134,7 +225,7 @@ export default function ProductsListComponent() {
                             {p.title}
                           </div>
                           <div className="text-xs text-slate-500 py-5">
-                          البائع:{" "}
+                          {t("products.seller")}{" "}
                           <span className="font-semibold text-slate-700">
                             {p.seller}
                           </span>
@@ -170,12 +261,12 @@ export default function ProductsListComponent() {
                         />
                       </button>
 
-                      <button
-                        type="button"
-                        className="flex-1 rounded-md border border-blue-900 bg-white px-4 py-2.5 text-sm font-semibold text-blue-900 hover:bg-blue-50"
+                      <Link
+                        to={getProductDetailsUrl(p.id)}
+                        className="flex-1 rounded-md border border-blue-900 bg-white px-4 py-2.5 text-sm font-semibold text-blue-900 hover:bg-blue-50 text-center"
                       >
-                        عرض التفاصيل
-                      </button>
+                        {t("products.viewDetails")}
+                      </Link>
                     </div>
                   </div>
 

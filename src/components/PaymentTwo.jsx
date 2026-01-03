@@ -1,6 +1,9 @@
 import React, { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../routes";
 
 export default function PaymentTwo() {
+  const navigate = useNavigate();
   const [method, setMethod] = useState("card"); // card | transfer
   const [receipt, setReceipt] = useState(null);
 
@@ -191,6 +194,13 @@ export default function PaymentTwo() {
 
               <button
                 type="button"
+                onClick={() => {
+                  if (method === "transfer" && !receipt) {
+                    alert("يرجى رفع صورة الإيصال");
+                    return;
+                  }
+                  navigate(ROUTES.REQUEST_SENT);
+                }}
                 className="mt-10 w-full max-w-xs rounded-md bg-amber-500 px-4 py-3 text-sm font-bold text-blue-900 hover:bg-amber-600"
               >
                 دفع

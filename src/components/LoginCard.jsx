@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import logo from "../assets/imgs/Group20.png";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../routes";
 export default function LoginCard() {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -89,7 +90,7 @@ export default function LoginCard() {
 
                 {/* Links */}
                 <div className="pt-2 text-center text-sm">
-                    <Link to="/signup">
+                    <Link to={ROUTES.SIGNUP}>
                      <span className="text-slate-500">ليس لديك حساب؟</span>
                  
                   <button type="button" className="font-semibold text-amber-600 hover:text-amber-700">
@@ -97,7 +98,7 @@ export default function LoginCard() {
                   </button>
                    </Link>
                 </div>
-                <Link to="/">
+                <Link to={ROUTES.HOME}>
                 <div className="text-center">
                   <button type="button" className="text-sm font-semibold text-amber-600 hover:text-amber-700">
                         الدخول كزائر

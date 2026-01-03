@@ -1,41 +1,46 @@
+import { useTranslation } from "react-i18next";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, Navigation, Keyboard } from "swiper/modules";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 export default function NewArrivalsBannerWithSwiper() {
+  const { t, i18n } = useTranslation();
+  const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+
   const slides = [
     {
       id: 1,
-      badge: "منتجات جديدة مع توصيل سريع!",
-      title1: "اكتشف أحدث",
-      title2: "مجموعاتنا من اليوم!",
-      primary: "تسوق الآن",
-      secondary: "توصيل سريع",
+      badge: t("newArrivals.newProducts"),
+      title1: t("newArrivals.discoverLatest"),
+      title2: t("newArrivals.collectionsToday"),
+      primary: t("newArrivals.shopNow"),
+      secondary: t("newArrivals.fastDelivery"),
       image:
         "https://images.unsplash.com/photo-1607082349566-1870e3fdc793?w=1200&q=80&auto=format&fit=crop",
-      // ألوان خلفية (اختياري)
       gradient: "from-[#6D2AA8] via-[#5B2A9F] to-[#3E1F86]",
     },
     {
       id: 2,
-      badge: "عروض قوية لفترة محدودة!",
-      title1: "وفر أكثر",
-      title2: "على منتجات العناية",
-      primary: "شاهد العروض",
-      secondary: "توصيل سريع",
+      badge: t("newArrivals.strongOffers"),
+      title1: t("newArrivals.saveMore"),
+      title2: t("newArrivals.careProducts"),
+      primary: t("newArrivals.viewOffers"),
+      secondary: t("newArrivals.fastDelivery"),
       image:
         "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=1200&q=80&auto=format&fit=crop",
       gradient: "from-[#2A63A8] via-[#245AA0] to-[#183A7A]",
     },
     {
       id: 3,
-      badge: "وصل حديثًا",
-      title1: "منتجات مختارة",
-      title2: "بعناية لك!",
-      primary: "تسوق الآن",
-      secondary: "الدفع عند الاستلام",
+      badge: t("newArrivals.justArrived"),
+      title1: t("newArrivals.selectedProducts"),
+      title2: t("newArrivals.carefullyForYou"),
+      primary: t("newArrivals.shopNow"),
+      secondary: t("newArrivals.cashOnDelivery"),
       image:
         "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=1200&q=80&auto=format&fit=crop",
       gradient: "from-[#A82A6B] via-[#9F2A5B] to-[#861F3E]",
@@ -43,69 +48,78 @@ export default function NewArrivalsBannerWithSwiper() {
   ];
 
   return (
-    <section dir="rtl" className="w-full px-4">
-      <Swiper
-        modules={[Autoplay, Pagination]}
-        loop
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        }}
-        speed={900}
-        pagination={{ clickable: true }}
-        className="w-full"
-      >
-        {slides.map((s) => (
-          <SwiperSlide key={s.id}>
-            <BannerSlide slide={s} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <section dir={currentDir} className="w-full py-6 sm:py-8 md:py-10">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 relative">
+        <div className={`absolute top-4 ${currentDir === 'rtl' ? 'left-4' : 'right-4'} z-10`}>
+          <LanguageSwitcher className="h-9 sm:h-10 px-3 sm:px-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg" />
+        </div>
+        <Swiper
+          modules={[Autoplay, Pagination, Navigation, Keyboard]}
+          loop
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
+          speed={900}
+          pagination={{ 
+            clickable: true,
+            dynamicBullets: true,
+          }}
+          navigation={true}
+          keyboard={{ enabled: true }}
+          grabCursor={true}
+          className="w-full"
+        >
+          {slides.map((s) => (
+            <SwiperSlide key={s.id}>
+              <BannerSlide slide={s} currentDir={currentDir} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </section>
   );
 }
 
-function BannerSlide({ slide }) {
+function BannerSlide({ slide, currentDir }) {
   return (
     <div
-      className={`relative overflow-hidden rounded-3xl bg-linear-to-r ${slide.gradient}`}
+      className={`relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-r ${slide.gradient} min-h-[280px] sm:min-h-[320px] md:min-h-[380px] lg:min-h-[420px]`}
     >
-      {/* ديكور */}
-      <div className="relative flex flex-row-reverse items-center justify-between gap-6 p-6 md:flex-row-reverse md:p-10">
-        {/* يسار: صورة */}
-        <div className=" w-full  md:w-[48%]">
+      <div className={`relative flex flex-col ${currentDir === 'rtl' ? 'md:flex-row-reverse' : 'md:flex-row'} items-center justify-between gap-4 sm:gap-6 p-4 sm:p-6 md:p-8 lg:p-10 h-full`}>
+        <div className="w-full md:w-[48%] flex-shrink-0">
           <img
             src={slide.image}
             alt="banner"
-            className="h-45 w-full rounded-2xl object-cover md:h-60"
+            className="h-40 sm:h-48 md:h-60 lg:h-72 w-full rounded-xl sm:rounded-2xl object-cover"
             draggable="false"
+            loading="lazy"
           />
         </div>
 
-        {/* يمين: نصوص + أزرار */}
-        <div className=" w-full text-right text-white  md:w-[52%]">
-          <div className="inline-flex items-center rounded-lg bg-[#2B135F]/70 px-4 py-2 text-sm font-semibold">
+        <div className={`w-full md:w-[52%] ${currentDir === 'rtl' ? 'text-right' : 'text-left'} text-white flex flex-col justify-center`}>
+          <div className="inline-flex items-center rounded-lg bg-[#2B135F]/70 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold">
             {slide.badge}
           </div>
 
-          <h2 className="mt-4 text-3xl font-extrabold leading-tight md:text-4xl">
+          <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight">
             {slide.title1} <br />
             {slide.title2}
           </h2>
 
-          <div className="mt-6 flex flex-wrap items-center justify- gap-3">
+          <div className="mt-4 sm:mt-6 flex flex-wrap items-center gap-2 sm:gap-3">
             <button
               type="button"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#0F2D3A]/80 px-4 py-3 text-sm font-bold hover:bg-[#0F2D3A] transition"
+              className="inline-flex items-center gap-2 rounded-lg sm:rounded-xl bg-[#0F2D3A]/80 px-3 py-2 sm:px-4 sm:py-3 text-xs sm:text-sm font-bold hover:bg-[#0F2D3A] transition"
             >
-              <span className="grid h-8 w-8 place-items-center rounded-lg bg-orange-500">
+              <span className="grid h-6 w-6 sm:h-8 sm:w-8 place-items-center rounded-lg bg-orange-500 flex-shrink-0">
                 <svg
-                  width="18"
-                  height="18"
+                  width="14"
+                  height="14"
                   viewBox="0 0 24 24"
                   fill="none"
-                  className="text-white"
+                  className="text-white sm:w-[18px] sm:h-[18px]"
                 >
                   <path
                     d="M12 6v6l4 2"
@@ -126,7 +140,7 @@ function BannerSlide({ slide }) {
 
             <button
               type="button"
-              className="rounded-xl bg-orange-500 px-7 py-3 text-sm font-extrabold text-white hover:bg-orange-600 transition"
+              className="rounded-lg sm:rounded-xl bg-orange-500 px-5 py-2 sm:px-7 sm:py-3 text-xs sm:text-sm font-extrabold text-white hover:bg-orange-600 transition"
             >
               {slide.primary}
             </button>

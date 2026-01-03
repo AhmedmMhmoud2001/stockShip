@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   ChevronLeft,
   Facebook,
@@ -7,6 +8,7 @@ import {
   Linkedin,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../routes";
 
 import logo from "../assets/imgs/Group25.png";
 import paymentMethod from "../assets/imgs/payment-method.png";
@@ -33,69 +35,76 @@ function FooterLinks({ title, links }) {
 
 export default function FooterArabic({
   brandName = "STOCKSHIP",
-  description = `منصة للشركات والتجار تعمل على بناء الثقة بين المصانع والتجار، حيث يمكنك عرض بضائعك بالجملة، للتفاوض مباشرةً مع المشترين. ونضمن الصفقات بأمان وسهولة، مع ضمان متابعة الشحن وحماية المدفوعات في كل خطوة.`,
-  contact = {
-    address: `العنوان: 502 شارع التصميم الجديد، ميلووكي، سان فرانسيسكو، CA 94110 الولايات المتحدة`,
-    phone: `الهاتف: (+01) 123-456-789`,
-    email: `البريد الإلكتروني: contact@ecom-market.com`,
-    hours: `ساعات العمل: من 8:00 صباحاً إلى 5:00 مساءً\nمن الاثنين إلى السبت`,
-  },
-  columns = {
+  description,
+  contact,
+  columns,
+  year = new Date().getFullYear(),
+}) {
+  const { t, i18n } = useTranslation();
+  const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  
+  const defaultDescription = t("footer.description");
+  const defaultContact = {
+    address: t("footer.contactInfo.address"),
+    phone: t("footer.contactInfo.phone"),
+    email: t("footer.contactInfo.email"),
+    hours: t("footer.contactInfo.hours"),
+  };
+  const defaultColumns = {
     account: {
-      title: "حسابي",
+      title: t("footer.account.title"),
       links: [
-        { label: "حسابي", href: "/" },
-        { label: "مركز الإرجاع", href: "/" },
-        { label: "مركز الشحن", href: "/" },
-        { label: "تذاكر الدعم", href: "/" },
-        { label: "تتبع الطلب", href: "/" },
-        { label: "مركز الدعم", href: "/" },
-        { label: "طريقة الدفع", href: "/" },
+        { label: t("footer.account.myAccount"), href: ROUTES.HOME },
+        { label: t("footer.account.returnCenter"), href: ROUTES.HOME },
+        { label: t("footer.account.shippingCenter"), href: ROUTES.HOME },
+        { label: t("footer.account.supportTickets"), href: ROUTES.HOME },
+        { label: t("footer.account.trackOrder"), href: ROUTES.ORDERS },
+        { label: t("footer.account.supportCenter"), href: ROUTES.HOME },
+        { label: t("footer.account.paymentMethod"), href: ROUTES.PAYMENT_ONE },
       ],
     },
     categories: {
-      title: "الفئات",
+      title: t("footer.categories.title"),
       links: [
-        { label: "عنا", href: "#" },
-        { label: "معلومات التوصيل", href: "/" },
-        { label: "سياسة الخصوصية", href: "/" },
-        { label: "الشروط والأحكام", href: "/TermsAndPolicies" },
-        { label: "اتصل بنا", href: "/" },
-        { label: "مركز الدعم", href: "/" },
-        { label: "الوظائف", href: "/" },
+        { label: t("footer.categories.about"), href: ROUTES.COMPANY_PROFILE },
+        { label: t("footer.categories.deliveryInfo"), href: ROUTES.HOME },
+        { label: t("footer.categories.privacy"), href: ROUTES.TERMS_AND_POLICIES },
+        { label: t("footer.categories.terms"), href: ROUTES.TERMS_AND_POLICIES },
+        { label: t("footer.categories.contact"), href: ROUTES.HOME },
+        { label: t("footer.categories.support"), href: ROUTES.HOME },
+        { label: t("footer.categories.jobs"), href: ROUTES.HOME },
       ],
     },
     company: {
-      title: "الشركة",
+      title: t("footer.company.title"),
       links: [
-        { label: "عنا", href: "#" },
-        { label: "معلومات التوصيل", href: "#" },
-        { label: "سياسة الخصوصية", href: "#" },
-        { label: "الشروط والأحكام", href: "#" },
-        { label: "اتصل بنا", href: "#" },
-        { label: "مركز الدعم", href: "#" },
-        { label: "الوظائف", href: "#" },
+        { label: t("footer.company.about"), href: ROUTES.COMPANY_PROFILE },
+        { label: t("footer.company.deliveryInfo"), href: ROUTES.HOME },
+        { label: t("footer.company.privacy"), href: ROUTES.TERMS_AND_POLICIES },
+        { label: t("footer.company.terms"), href: ROUTES.TERMS_AND_POLICIES },
+        { label: t("footer.company.contact"), href: ROUTES.HOME },
+        { label: t("footer.company.support"), href: ROUTES.HOME },
+        { label: t("footer.company.jobs"), href: ROUTES.HOME },
       ],
     },
-  },
-  year = new Date().getFullYear(),
-}) {
+  };
+  
   return (
-    <footer dir="rtl" className="w-full bg-[#EEF4FF] ">
+    <footer dir={currentDir} className="w-full bg-[#EEF4FF] ">
       <div className="mx-2 sm:mx-6 md:mx-10 lg:mx-16 xl:mx-24 2xl:mx-25  px-4 py-12 md:py-14">
         {/* ✅ Responsive grid: 1 / 2 / 4 columns */}
         <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full">
           {/* Brand (عمود) */}
-          <div className="text-right">
+          <div className={currentDir === 'rtl' ? 'text-right' : 'text-left'}>
             <img src={logo} alt="logo" className="inline-block h-10 w-auto" />
 
             <p className="mt-4 text-sm leading-relaxed text-slate-600">
-              {description}
+              {description || defaultDescription}
             </p>
 
             <div className="mt-6">
               <div className="text-sm font-semibold text-slate-900">
-                بيانات الدفع الآمنة
+                {t("footer.securePayment")}
               </div>
               <div className="mt-3 flex justify-start">
                 <img
@@ -109,59 +118,67 @@ export default function FooterArabic({
 
           {/* Account (عمود) */}
           <div>
-            <FooterLinks {...columns.account} />
+            <FooterLinks {...(columns?.account || defaultColumns.account)} />
           </div>
 
           {/* Categories (عمود) */}
           <div>
-            <FooterLinks {...columns.categories} />
+            <FooterLinks {...(columns?.categories || defaultColumns.categories)} />
           </div>
 
           {/* Contact (عمود) */}
-          <div className="text-right">
+          <div className={currentDir === 'rtl' ? 'text-right' : 'text-left'}>
             <h4 className="mb-4 text-lg font-semibold text-slate-900">
-              اتصل بنا
+              {t("footer.contact")}
             </h4>
 
             <ul className="space-y-4 text-sm text-slate-600">
-              <li className="flex items-start justify-start gap-3">
-                <span className="leading-relaxed">{contact.address}</span>
+              <li className={`flex items-start ${currentDir === 'rtl' ? 'justify-start' : 'justify-end'} gap-3`}>
+                <span className="leading-relaxed">{(contact || defaultContact).address}</span>
               </li>
-              <li className="flex items-start justify-start gap-3">
-                <span>{contact.phone}</span>
+              <li className={`flex items-start ${currentDir === 'rtl' ? 'justify-start' : 'justify-end'} gap-3`}>
+                <span>{(contact || defaultContact).phone}</span>
               </li>
-              <li className="flex items-start justify-start gap-3">
-                <span>{contact.email}</span>
+              <li className={`flex items-start ${currentDir === 'rtl' ? 'justify-start' : 'justify-end'} gap-3`}>
+                <span>{(contact || defaultContact).email}</span>
               </li>
-              <li className="flex items-start justify-start gap-3 whitespace-pre-line">
-                <span>{contact.hours}</span>
+              <li className={`flex items-start ${currentDir === 'rtl' ? 'justify-start' : 'justify-end'} gap-3 whitespace-pre-line`}>
+                <span>{(contact || defaultContact).hours}</span>
               </li>
             </ul>
 
             <div className="mt-6 flex justify-start gap-3">
               <a
-                href="#"
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Facebook"
                 className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-sm ring-1 ring-slate-200 hover:text-slate-900"
               >
                 <Facebook className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-sm ring-1 ring-slate-200 hover:text-slate-900"
               >
                 <Instagram className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Twitter"
                 className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-sm ring-1 ring-slate-200 hover:text-slate-900"
               >
                 <Twitter className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-sm ring-1 ring-slate-200 hover:text-slate-900"
               >
@@ -174,7 +191,7 @@ export default function FooterArabic({
         <div className="mt-12 h-px w-full bg-blue-400/60" />
 
         <div className="py-6 text-center text-sm text-blue-500">
-          حقوق الطبع والنشر © {brandName} {year} جميع الحقوق محفوظة.
+          © {year} {brandName}. {t("footer.rights")}
         </div>
       </div>
     </footer>

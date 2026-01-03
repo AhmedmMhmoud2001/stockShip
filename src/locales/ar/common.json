@@ -1,0 +1,270 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "beSeller": "كن بائعاً",
+    "login": "تسجيل دخول",
+    "language": "اللغة",
+    "notifications": "الإشعارات",
+    "orders": "طلباتي",
+    "menu": "القائمة",
+    "search": "بحث"
+  },
+  "hero": {
+    "title": "تجارة ناجحة من أول مرة!",
+    "description": "لوريم ايبسوم دولار سيت أميت كومودو دولار أد إكزيرسيتيشن كونسيكتيتور دولار أليكويب إي سيت أديبيسشينج دونك، تيت كويرات. ميو فوليتيات. ماغنيت، بيريتيتيس. نيسيوت كويرات مينيم إنكيديديونت نيسيوت أليكا كونسيفيكات كويرات. كلارينتي كونسيكتيتور إنتيرديكتوم ماجنا فينيام، كومودو فينيام، سيت أد نيسي لابورام لامبور أوت ماجنا سيد سيت. توب دولار تيمبور أليكويب",
+    "completePurchase": "إتمام الشراء"
+  },
+  "common": {
+    "arabic": "العربية",
+    "english": "English",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "view": "عرض",
+    "details": "التفاصيل",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "close": "إغلاق",
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ",
+    "success": "تم بنجاح",
+    "of": "من"
+  },
+  "auth": {
+    "welcomeBack": "مرحباً بعودتك!",
+    "name": "الاسم",
+    "namePlaceholder": "أدخل الاسم",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "phone": "رقم الهاتف",
+    "signup": "إنشاء حساب",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟",
+    "noAccount": "ليس لديك حساب؟"
+  },
+  "orders": {
+    "title": "طلباتي",
+    "orderDetails": "تفاصيل الطلب",
+    "trackOrder": "تتبع الطلب",
+    "itemsCount": "عدد البضائع المطلوبة",
+    "orderTotal": "توتال الطلب",
+    "tabs": {
+      "all": "الكل",
+      "waiting": "في انتظار رد الشركة",
+      "shipping": "قيد التوصيل",
+      "done": "منتهية"
+    },
+    "noOrders": "لا توجد طلبات",
+    "status": {
+      "waiting": "قيد الانتظار",
+      "processing": "قيد المعالجة",
+      "shipped": "تم الشحن",
+      "delivered": "تم التسليم",
+      "cancelled": "ملغى"
+    },
+    "statusBadges": {
+      "waiting": "في انتظار رد الشركة",
+      "shipping": "قيد التوصيل",
+      "done": "منتهية"
+    }
+  },
+  "checkout": {
+    "title": "إتمام الشراء",
+    "summary": "ملخص الطلب",
+    "total": "الإجمالي",
+    "subtotal": "المجموع الفرعي",
+    "tax": "الضريبة",
+    "shipping": "الشحن",
+    "completePurchase": "إتمام الشراء"
+  },
+  "payment": {
+    "title": "الدفع",
+    "cardNumber": "رقم البطاقة",
+    "expiry": "تاريخ الانتهاء",
+    "cvc": "CVC",
+    "address": "العنوان",
+    "country": "الدولة",
+    "postal": "الرمز البريدي",
+    "pay": "دفع",
+    "amount": "اسم المبلغ",
+    "currency": "جنيه مصري"
+  },
+  "categories": {
+    "furniture": "مفروشات",
+    "bedrooms": "غرف نوم",
+    "kidsFurniture": "مفروشات أطفال",
+    "decor": "ديكورات",
+    "lighting": "إضاءة",
+    "paintings": "لوحات",
+    "electronics": "إلكترونيات",
+    "mobiles": "موبايلات",
+    "headphones": "سماعات",
+    "accessories": "إكسسوارات",
+    "shoes": "أحذية",
+    "menShoes": "رجالي",
+    "womenShoes": "نسائي",
+    "clothes": "ملابس",
+    "menClothes": "رجالي",
+    "womenClothes": "نسائي",
+    "allCategories": "جميع الفئات",
+    "all": "الكل",
+    "latest": "الأحدث",
+    "bestseller": "الأكثر مبيعاً",
+    "shortcuts": "اختصارات",
+    "sections": "الأقسام",
+    "smartphones": "الهواتف الذكيه",
+    "clothing": "الملابس"
+  },
+  "product": {
+    "viewDetails": "عرض التفاصيل",
+    "favorite": "مفضلة",
+    "rating": "التقييم",
+    "reviews": "مراجعات"
+  },
+  "cta": {
+    "title": "هل أنت تاجر أو مصنع؟ انضم لسوقك الآن!",
+    "description": "ابدأ بيع بضائعك بالجملة ووصل إلى شبكة واسعة من التجار بسهولة وأمان. مع سوقك، تقدر تتفاوض مباشرة مع المشترين ونضمن لك حماية كاملة لكل صفقة.",
+    "joinUs": "انضم لنا"
+  },
+  "footer": {
+    "about": "من نحن",
+    "contact": "اتصل بنا",
+    "terms": "الشروط والأحكام",
+    "privacy": "سياسة الخصوصية",
+    "rights": "جميع الحقوق محفوظة",
+    "description": "منصة للشركات والتجار تعمل على بناء الثقة بين المصانع والتجار، حيث يمكنك عرض بضائعك بالجملة، للتفاوض مباشرةً مع المشترين. ونضمن الصفقات بأمان وسهولة، مع ضمان متابعة الشحن وحماية المدفوعات في كل خطوة.",
+    "securePayment": "بيانات الدفع الآمنة",
+    "followUs": "تابعنا",
+    "account": {
+      "title": "حسابي",
+      "myAccount": "حسابي",
+      "returnCenter": "مركز الإرجاع",
+      "shippingCenter": "مركز الشحن",
+      "supportTickets": "تذاكر الدعم",
+      "trackOrder": "تتبع الطلب",
+      "supportCenter": "مركز الدعم",
+      "paymentMethod": "طريقة الدفع"
+    },
+    "categories": {
+      "title": "الفئات",
+      "about": "عنا",
+      "deliveryInfo": "معلومات التوصيل",
+      "privacy": "سياسة الخصوصية",
+      "terms": "الشروط والأحكام",
+      "contact": "اتصل بنا",
+      "support": "مركز الدعم",
+      "jobs": "الوظائف"
+    },
+    "company": {
+      "title": "الشركة",
+      "about": "عنا",
+      "deliveryInfo": "معلومات التوصيل",
+      "privacy": "سياسة الخصوصية",
+      "terms": "الشروط والأحكام",
+      "contact": "اتصل بنا",
+      "support": "مركز الدعم",
+      "jobs": "الوظائف"
+    },
+    "contactInfo": {
+      "address": "العنوان: 502 شارع التصميم الجديد، ميلووكي، سان فرانسيسكو، CA 94110 الولايات المتحدة",
+      "phone": "الهاتف: (+01) 123-456-789",
+      "email": "البريد الإلكتروني: contact@ecom-market.com",
+      "hours": "ساعات العمل: من 8:00 صباحاً إلى 5:00 مساءً\nمن الاثنين إلى السبت"
+    }
+  },
+  "popular": {
+    "title": "البضائع الشائعة",
+    "items": {
+      "homeFurniture": "أثاث المنزلية",
+      "schoolSupplies": "المدرسة و لوازم الطلبة",
+      "carParts": "قطع غيار السيارات و قطع الغيار",
+      "computerCards": "بطاقات الكمبيوتر",
+      "machineryEquipment": "الألات و المعدات",
+      "appliances": "أجهزة",
+      "homeSupplies": "لوازم المنزلية",
+      "transportShipping": "المواد النقل و الشحن",
+      "warehouseCards": "بطاقات المستودعات",
+      "electricalTools": "أدوات كهربائية"
+    }
+  },
+  "featured": {
+    "topRated": "أعلى مرتبة بضائع",
+    "bestSellers": "أفضل البائعيين",
+    "browse": "تصفح",
+    "communication": "التواصل",
+    "communicationDesc": "سرعة التواصل ومراقبة المفاوضات",
+    "commercialServices": "خدماتنا التجارية",
+    "commercialServicesDesc": "عرض مختلف البضائع في جميع الفئات",
+    "security": "الأمان",
+    "securityDesc": "التأكد من هوية المورد والمستخدم",
+    "homeOfficeFurniture": "أثاث منزلي ومكتبي",
+    "homeOfficeFurnitureDesc": "نوفر لك تصميم وطلب أثاث منزلي ومكتبي بأفضل جودة وبأسعار مناسبة للجميع.",
+    "homeAppliances": "أجهزة منزلية",
+    "homeAppliancesDesc": "لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم دولار سيت أميت نت أميت نوو",
+    "smartphones": "هواتف ذكية",
+    "smartphonesDesc": "لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم دولارت أميت نو سيت أميت نو لوريم ايبسوم دولار سيت أميت نو",
+    "electronicScreens": "شاشات إلكترونية",
+    "electronicScreensDesc": "لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم دولارت أميت نو سيت أميت نو لوريم ايبسوم دولار سيت أميت نو",
+    "bagsWomenProducts": "حقائب و كل المنتجات النسائية",
+    "bagsWomenProductsDesc": "لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم دولار سيت أميت نو لوريم ايبسوم"
+  },
+  "newArrivals": {
+    "newProducts": "منتجات جديدة مع توصيل سريع!",
+    "discoverLatest": "اكتشف أحدث",
+    "collectionsToday": "مجموعاتنا من اليوم!",
+    "shopNow": "تسوق الآن",
+    "fastDelivery": "توصيل سريع",
+    "strongOffers": "عروض قوية لفترة محدودة!",
+    "saveMore": "وفر أكثر",
+    "careProducts": "على منتجات العناية",
+    "viewOffers": "شاهد العروض",
+    "justArrived": "وصل حديثاً",
+    "selectedProducts": "منتجات مختارة",
+    "carefullyForYou": "بعناية لك!",
+    "cashOnDelivery": "الدفع عند الاستلام"
+  },
+  "recommended": {
+    "title": "منتجات موصى بها",
+    "shortDescription": "وصف مختصر"
+  },
+  "seller": {
+    "title": "كن بائعاً",
+    "publishAd": "نشر إعلان",
+    "createAd": "إنشاء إعلان",
+    "viewProducts": "عرض قائمة البضائع",
+    "sendNegotiation": "ارسال طلب تفاوض",
+    "allSellerProducts": "جميع بضائع البائع",
+    "close": "إغلاق"
+  },
+  "products": {
+    "title": "المنتجات",
+    "viewDetails": "عرض التفاصيل",
+    "addToCart": "أضف إلى السلة",
+    "price": "السعر",
+    "quantity": "الكمية",
+    "category": "الفئة",
+    "sortBy": "ترتيب حسب",
+    "sortOptions": {
+      "default": "الافتراضي",
+      "priceAsc": "السعر: من الأقل للأعلى",
+      "priceDesc": "السعر: من الأعلى للأقل",
+      "ratingDesc": "الأعلى تقييماً",
+      "ratingAsc": "الأقل تقييماً",
+      "reviewsDesc": "الأكثر مراجعات",
+      "nameAsc": "الاسم: أ-ي",
+      "nameDesc": "الاسم: ي-أ"
+    },
+    "filter": "تصفية",
+    "clearFilters": "مسح التصفية",
+    "activeFilters": "التصفيات النشطة",
+    "noResults": "لا توجد نتائج",
+    "resultsCount": "{{count}} نتيجة",
+    "seller": "البائع:"
+  }
+}
+

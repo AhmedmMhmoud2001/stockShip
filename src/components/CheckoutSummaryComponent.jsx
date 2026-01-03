@@ -1,4 +1,6 @@
 import React, { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../routes";
 
 export default function CheckoutSummaryComponent() {
   const [rows, setRows] = useState([
@@ -208,12 +210,12 @@ export default function CheckoutSummaryComponent() {
             <div className="text-left">${total}</div>
           </div>
 
-          <button
-            type="button"
-            className="mt-6 w-full rounded-md bg-amber-500 px-4 py-4 text-sm font-bold text-blue-900 hover:bg-amber-600"
+          <Link
+            to={ROUTES.PAYMENT_ONE}
+            className="block mt-6 w-full rounded-md bg-amber-500 px-4 py-4 text-sm font-bold text-blue-900 hover:bg-amber-600 text-center"
           >
             إتمام الشراء
-          </button>
+          </Link>
         </section>
       </div>
     </div>

@@ -1,13 +1,17 @@
+import { useTranslation } from "react-i18next";
 import bannerImg from "../assets/imgs/Banner.jpg";
 import Group18 from "../assets/imgs/Group18.png";
 
 export default function Banner() {
+  const { t, i18n } = useTranslation();
+  const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
   return (
     <section className="w-full">
-      <div
-        className="
-          relative isolate w-full overflow-hidden inline-block
-          h-105 sm:h-120 md:h-160 lg:h-180
+      <div className="mx-auto max-w-[1440px]">
+        <div
+          className="
+            relative isolate w-full overflow-hidden inline-block
+                h-80 sm:h-96 md:h-112 lg:h-128 xl:h-144 2xl:h-160
 
           after:content-[''] after:absolute after:inset-y-0 after:left-0 after:w-[30%]
           after:bg-blue-900/40 after:blur-2xl after:pointer-events-none after:z-10
@@ -29,7 +33,7 @@ export default function Banner() {
         <div
           className="
             absolute inset-0 z-20
-            bg-[var(--nav-bg)]
+                  bg-(--nav-bg)
             [clip-path:polygon(90%_0,100%_0,100%_100%,20%_100%)]
             flex items-end justify-end
           "
@@ -46,33 +50,31 @@ export default function Banner() {
 
         {/* Text Content */}
         <div
-          dir="rtl"
-          className="
+          dir={currentDir}
+          className={`
             absolute inset-0 z-40
-            flex items-end justify-end
+            flex items-end ${currentDir === 'rtl' ? 'justify-end' : 'justify-start'}
             px-4 sm:px-8 lg:px-16
             pb-6 sm:pb-10 md:pb-14
-          "
+          `}
         >
           <div
-            className="
-              ml-auto w-full
+            className={`
+              ${currentDir === 'rtl' ? 'ml-auto' : 'mr-auto'} w-full
               max-w-[520px] md:max-w-[600px]
-              text-white text-right
-              flex flex-col items-end
-            "
+              text-white ${currentDir === 'rtl' ? 'text-right' : 'text-left'}
+              flex flex-col ${currentDir === 'rtl' ? 'items-end' : 'items-start'}
+            `}
           >
-            <h1 className="font-['Almarai'] font-bold text-[20px] sm:text-[25px] md:text-[30px] leading-tight text-right w-full">
-              تجارة ناجحة من أول مرة!
+            <h1 className="font-['Almarai'] font-bold text-[20px] sm:text-[25px] md:text-[30px] leading-tight w-full">
+              {t("hero.title")}
             </h1>
 
-            <p className="mt-4 font-['Almarai'] text-[16px] sm:text-[18px] md:text-[20px] leading-[1.9] text-white/90">
-              لوريم ايبسوم دولار سيت أميت كومودو دولار أد إكزيرسيتيشن كونسيكتيتور دولار أليكويب إي سيت أديبيسشينج دونك،
-              تيت كويرات. ميو فوليتيات. ماغنيت، بيريتيتيس. نيسيوت كويرات مينيم إنكيديديونت نيسيوت أليكا كونسيفيكات كويرات.
-              كلارينتي كونسيكتيتور إنتيرديكتوم ماجنا فينيام، كومودو فينيام، سيت أد نيسي لابورام لامبور أوت ماجنا سيد سيت.
-              توب دولار تيمبور أليكويب
+            <p className="mt-4 font-['Almarai'] text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-white/90 max-w-full">
+              {t("hero.description")}
             </p>
           </div>
+        </div>
         </div>
       </div>
     </section>

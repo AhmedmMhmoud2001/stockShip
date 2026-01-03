@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { getProductDetailsUrl } from "../routes";
+
 export default function ProductCard({
+  id,
   category = "هواتف ذكية",
   title = "هاتف iPhone",
   image,
@@ -8,19 +12,20 @@ export default function ProductCard({
   reviews = 65,
   subtitle = "لوريم إيبسوم دولور سيت أم",
 }) {
+  const { t } = useTranslation();
   const [isFavorite, setIsFavorite] = useState(false);
 
   return (
-    <div className="w-full max-w-sm overflow-hidden rounded-2xl border-0 p-3 py-5 bg-[#F0F2F5] shadow-sm">
+    <div className="w-full h-full overflow-hidden rounded-xl sm:rounded-2xl border-0 p-2 sm:p-3 py-4 sm:py-5 bg-[#F0F2F5] shadow-sm flex flex-col">
       {/* Image */}
-      <div className="relative">
+      <div className="relative flex-shrink-0">
         <img
           src={
             image ??
             "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=1200&q=80&auto=format&fit=crop"
           }
           alt={title}
-          className="h-56 w-full rounded-2xl object-cover "
+          className="h-48 sm:h-56 w-full rounded-xl sm:rounded-2xl object-cover aspect-[4/3]"
           loading="lazy"
         />
 
@@ -33,25 +38,25 @@ export default function ProductCard({
       </div>
 
       {/* Content */}
-      <div className="p-4 text-right">
-        <div className="text-sm text-slate-500">{category}</div>
+      <div className="p-3 sm:p-4 text-right flex-1 flex flex-col">
+        <div className="text-xs sm:text-sm text-slate-500">{category}</div>
 
-        <div className="mt-1 text-lg font-bold text-slate-900">{title}</div>
+        <div className="mt-1 text-base sm:text-lg font-bold text-slate-900 line-clamp-2">{title}</div>
 
         {/* Rating */}
-        <div className="mt-2 flex items-center  gap-2">
+        <div className="mt-2 flex items-center gap-2">
           <Stars value={rating} />
-          <span className="text-sm text-slate-500">({reviews})</span>
+          <span className="text-xs sm:text-sm text-slate-500">({reviews})</span>
         </div>
 
-        <div className="mt-2 text-sm text-slate-600 line-clamp-1">
+        <div className="mt-2 text-xs sm:text-sm text-slate-600 line-clamp-1">
           {subtitle}
         </div>
         {/* Buttons */}
-        <div className="mt-6 flex items-center justify-between gap-2">
-          <Link to={`/ProductDetails/:id`} className="w-full">
-            <div className=" w-[80%] rounded-xl border border-slate-300 bg-white py-2.5 text-center text-sm font-semibold text-slate-800 hover:bg-slate-50">       
-              عرض التفاصيل
+        <div className="mt-4 sm:mt-6 flex items-center justify-between gap-2 flex-shrink-0">
+          <Link to={getProductDetailsUrl(id || 1)} className="flex-1">
+            <div className="rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2 sm:py-2.5 text-center text-xs sm:text-sm font-semibold text-slate-800 hover:bg-slate-50 transition-colors">       
+              {t("product.viewDetails")}
             </div>
           </Link>
 
@@ -59,9 +64,9 @@ export default function ProductCard({
           <button
             type="button"
             onClick={() => setIsFavorite((v) => !v)}
-            className=" grid h-10 w-10  place-items-center rounded-full bg-white/90 shadow hover:bg-white"
-            aria-label="مفضلة"
-            title="مفضلة"
+            className="grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-full bg-white/90 shadow hover:bg-white transition-colors flex-shrink-0"
+            aria-label={t("product.favorite")}
+            title={t("product.favorite")}
           >
             <HeartIcon filled={isFavorite} />
           </button>
@@ -72,10 +77,11 @@ export default function ProductCard({
 }
 
 function Stars({ value = 0, max = 5 }) {
+  const { t } = useTranslation();
   return (
     <div
       className="flex items-center gap-1"
-      aria-label={`التقييم ${value} من ${max}`}
+      aria-label={`${t("product.rating")} ${value} ${t("common.of") || "of"} ${max}`}
     >
       {Array.from({ length: max }).map((_, i) => (
         <StarIcon key={i} filled={i < value} />

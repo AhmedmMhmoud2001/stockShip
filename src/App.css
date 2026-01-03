@@ -11,8 +11,9 @@
         /* خلفيات */
 }
 
+/* Fonts are handled globally in index.css based on lang attribute */
 body {
-  font-family: 'Almarai', sans-serif;
+  /* Font will be set by global CSS rules in index.css */
 }
 
 

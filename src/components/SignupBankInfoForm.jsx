@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ROUTES } from "../routes";
 
 const Field = ({ label, required, value, onChange, placeholder = "..." }) => {
   return (
@@ -18,6 +20,7 @@ const Field = ({ label, required, value, onChange, placeholder = "..." }) => {
 };
 
 export default function SignupBankInfoForm() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     fullName: "",
     phone: "",
@@ -171,13 +174,19 @@ export default function SignupBankInfoForm() {
               />
             </label>
 
-            <div className="mt-6">
+            <div className="mt-6 flex flex-col sm:flex-row gap-4">
               <button
                 type="submit"
-                className="w-52 rounded-md bg-amber-500 px-6 py-3 text-sm font-bold text-blue-900 hover:bg-amber-600"
+                className="w-full sm:w-52 rounded-md bg-amber-500 px-6 py-3 text-sm font-bold text-blue-900 hover:bg-amber-600"
               >
                 تم
               </button>
+              <Link
+                to={ROUTES.PUBLISH_AD}
+                className="w-full sm:w-auto inline-block text-center rounded-md bg-blue-900 px-6 py-3 text-sm font-bold text-white hover:bg-blue-800"
+              >
+                إنشاء إعلان
+              </Link>
             </div>
           </div>
         </form>

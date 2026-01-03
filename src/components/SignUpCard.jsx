@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Eye, EyeOff, ChevronDown } from "lucide-react";
 import logo from "../assets/imgs/Group20.png";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../routes";
 export default function SignUpCard() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -155,7 +156,7 @@ export default function SignUpCard() {
                 </button>
 
                 {/* Links */}
-                <Link to="/login">
+                <Link to={ROUTES.LOGIN}>
                     <div className="pt-2 text-center text-sm">
                         
                     <span className="text-slate-500">هل لديك حساب بالفعل؟</span>{" "}
@@ -164,7 +165,7 @@ export default function SignUpCard() {
                     </button>
                     </div>
                 </Link>
-                 <Link to="/">
+                 <Link to={ROUTES.HOME}>
                 <div className="text-center">
                   <button type="button" className="text-sm font-semibold text-amber-600 hover:text-amber-700">
         الدخول كزائر
