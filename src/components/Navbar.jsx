@@ -1,10 +1,168 @@
 // Navbar.jsx
-import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/imgs/Group20.png";
 import camera from "../assets/imgs/camera.png";
+import { useEffect, useMemo, useRef, useState } from "react";
+
+import translate from "../assets/imgs/translate.png";
+import hugeicons from "../assets/imgs/hugeicons_notification-01.png";
+import lucide_box from "../assets/imgs/lucide_box.png";
+
+import Vector from "../assets/imgs/Vector.png";
+import lamp from "../assets/imgs/lamp.png";
+import smartphone from "../assets/imgs/smart-phone-01.png";
+import shoes from "../assets/imgs/running-shoes.png";
+import shirt from "../assets/imgs/shirt-01.png";
+import textalign from "../assets/imgs/textalign-left.png";
+import dropdown from "../assets/imgs/arrow-down.png";
 
 export default function Navbar() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+    // openDropdown: { key, rect, items }
+    const [openDropdown, setOpenDropdown] = useState(null);
+  
+    const rootRef = useRef(null);
+    const dropdownRef = useRef(null);
+  
+    const menuItems = useMemo(
+      () => [
+        {
+          key: "lang",
+          label: "اللغة",
+          icon: translate,
+          arrow: dropdown,
+          children: [
+            { label: "العربية", to: "/" },
+            { label: "English", to: "/" },
+          ],
+        },
+        { key: "noti", label: "الإشعارات", icon: hugeicons, to: "/Notification" },
+        { key: "orders", label: "طلباتي", icon: lucide_box, to: "/OrdersPage" },
+      ],
+      []
+    );
+  
+    const categories = useMemo(
+      () => [
+        {
+          key: "beds",
+          label: "مفروشات",
+          icon: Vector,
+          arrow: dropdown,
+          children: [
+            { label: "غرف نوم", to: "/ProductsListPage" },
+            { label: "مفروشات أطفال", to: "/ProductsListPage" },
+          ],
+        },
+        {
+          key: "decor",
+          label: "ديكورات",
+          icon: lamp,
+          arrow: dropdown,
+          children: [
+            { label: "إضاءة", to: "/ProductsListPage" },
+            { label: "لوحات", to: "/ProductsListPage" },
+          ],
+        },
+        {
+          key: "electronics",
+          label: "إلكترونيات",
+          icon: smartphone,
+          arrow: dropdown,
+          children: [
+            { label: "موبايلات", to: "/ProductsListPage" },
+            { label: "سماعات", to: "/ProductsListPage" },
+            { label: "إكسسوارات", to: "/ProductsListPage" },
+          ],
+        },
+        {
+          key: "shoes",
+          label: "أحذية",
+          icon: shoes,
+          arrow: dropdown,
+          children: [
+            { label: "رجالي", to: "/ProductsListPage" },
+            { label: "نسائي", to: "/ProductsListPage" },
+          ],
+        },
+        {
+          key: "clothes",
+          label: "ملابس",
+          icon: shirt,
+          arrow: dropdown,
+          children: [
+            { label: "رجالي", to: "/ProductsListPage" },
+            { label: "نسائي", to: "/ProductsListPage" },
+          ],
+        },
+        {
+          key: "all",
+          label: "جميع الفئات",
+          icon: textalign,
+          arrow: dropdown,
+          children: [
+            { label: "الكل", to: "/ProductsListPage" },
+            { label: "الأحدث", to: "/ProductsListPage" },
+            { label: "الأكثر مبيعاً", to: "/ProductsListPage" },
+          ],
+        },
+      ],
+      []
+    );
+  
+    useEffect(() => {
+      const onDown = (e) => {
+        const inRoot = rootRef.current?.contains(e.target);
+        const inDrop = dropdownRef.current?.contains(e.target);
+        if (!inRoot && !inDrop) setOpenDropdown(null);
+      };
+  
+      const onEsc = (e) => {
+        if (e.key === "Escape") setOpenDropdown(null);
+      };
+  
+      window.addEventListener("mousedown", onDown);
+      window.addEventListener("keydown", onEsc);
+  
+      return () => {
+        window.removeEventListener("mousedown", onDown);
+        window.removeEventListener("keydown", onEsc);
+      };
+    }, []);
+  
+    useEffect(() => {
+      const onResizeOrScroll = () => {
+        if (!openDropdown?.rect || !openDropdown?.key) return;
+        // close on scroll/resize to avoid wrong position
+        setOpenDropdown(null);
+      };
+  
+      window.addEventListener("resize", onResizeOrScroll);
+      window.addEventListener("scroll", onResizeOrScroll, true);
+  
+      return () => {
+        window.removeEventListener("resize", onResizeOrScroll);
+        window.removeEventListener("scroll", onResizeOrScroll, true);
+      };
+    }, [openDropdown]);
+  
+    useEffect(() => {
+      document.body.style.overflow = isSidebarOpen ? "hidden" : "";
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }, [isSidebarOpen]);
+  
+    const openPortalDropdown = (e, item) => {
+      if (!item.children) return;
+      const rect = e.currentTarget.getBoundingClientRect();
+      setOpenDropdown((prev) => {
+        if (prev?.key === item.key) return null;
+        return { key: item.key, rect, items: item.children };
+      });
+    };
+
   return (
     <header dir="rtl" className="w-full">
       <nav
@@ -29,37 +187,138 @@ export default function Navbar() {
           />
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-          <button
-            className="h-10 sm:h-11 md:h-13 px-3 sm:px-5 md:px-6 rounded-[5px] bg-(--accent) flex items-center justify-center"
-          >
+        <div className="hidden md:flex items-center gap-2 sm:gap-3 shrink-0">
+          <button className="h-10 sm:h-11 md:h-13 px-3 sm:px-5 md:px-6 rounded-[5px] bg-(--accent) flex items-center justify-center">
             <span className="text-(--primary) font-bold text-[12px] sm:text-[13px] md:text-[14px] leading-[150%]">
               كن بائعاً
             </span>
           </button>
 
           <Link to="/login">
-            <button
-              className="h-10 sm:h-11 md:h-13 px-3 sm:px-5 md:px-6 rounded-[5px] bg-(--white) border border-(--primary) flex items-center justify-center"
-            >
+            <button className="h-10 sm:h-11 md:h-13 px-3 sm:px-5 md:px-6 rounded-[5px] bg-(--white) border border-(--primary) flex items-center justify-center">
               <span className="text-(--primary) font-bold text-[12px] sm:text-[13px] md:text-[14px] leading-[150%]">
                 تسجيل دخول
               </span>
             </button>
           </Link>
         </div>
+
+        <button
+          type="button"
+          onClick={() => setIsSidebarOpen(true)}
+          className="
+            md:hidden
+            inline-flex h-10 w-10 items-center justify-center
+            rounded-md border border-white/30
+            bg-black/20 backdrop-blur-md text-white
+          "
+          aria-label="Open menu"
+        >
+          <span className="text-xl leading-none">☰</span>
+        </button>
       </nav>
 
-      <div className="md:hidden bg-(--nav-bg) px-3 sm:px-4 pb-3">
-        <div className="w-full h-11 flex items-center justify-between gap-3 bg-(--white) rounded-[5px] px-3">
-          <img src={camera} alt="camera" className="h-5 w-5 shrink-0" />
-          <input
-            type="text"
-            placeholder="بحث"
-            className="w-full h-8 direction-rtl text-right outline-none border-0 bg-transparent"
+      {isSidebarOpen && (
+        <div className="fixed inset-0 z-50">
+          <div
+            className="absolute inset-0 bg-black/40"
+            onClick={() => setIsSidebarOpen(false)}
           />
+          <aside className="absolute top-0 right-0  w-[85%] max-w-sm bg-white shadow-2xl">
+            <div className="flex items-center justify-between px-4 py-4 border-b">
+              <div className="font-['Almarai'] font-bold text-lg">القائمة</div>
+               
+              <button
+                onClick={() => setIsSidebarOpen(false)}
+                className="w-10 h-10 rounded-full grid place-items-center hover:bg-black/5"
+                aria-label="Close sidebar"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="p-4 space-y-6">
+                      <div className="space-y-2">
+                        <div className="font-['Almarai'] font-bold text-sm opacity-70">اختصارات</div>
+            
+                        <div className="grid gap-2">
+                          {menuItems.map((item) => (
+                            <div key={item.key} className="w-full">
+                              {item.children ? (
+                                <button
+                                  type="button"
+                                  onClick={(e) => openPortalDropdown(e, item)}
+                                  className="w-full flex items-center justify-between gap-3 p-3 rounded-xl hover:bg-black/5"
+                                >
+                                  <div className="flex items-center gap-3">
+                                    <img src={item.icon} alt={item.label} className="w-6 h-6 object-contain" />
+                                    <span className="font-['Almarai'] font-bold">{item.label}</span>
+                                  </div>
+                                  <img src={dropdown} alt="arrow" className="w-5 h-5 object-contain opacity-70" />
+                                </button>
+                              ) : (
+                                <Link to={item.to || "#"} className="block" onClick={() => setIsSidebarOpen(false)}>
+                                  <div className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-black/5">
+                                    <img src={item.icon} alt={item.label} className="w-6 h-6 object-contain" />
+                                    <span className="font-['Almarai'] font-bold">{item.label}</span>
+                                  </div>
+                                </Link>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+            
+                      <div className="space-y-2">
+                        <div className="font-['Almarai'] font-bold text-sm opacity-70">الأقسام</div>
+            
+                        <div className="grid gap-2">
+                          {categories.map((item) => (
+                            <button
+                              key={item.key}
+                              type="button"
+                              onClick={(e) => openPortalDropdown(e, item)}
+                              className="w-full flex items-center justify-between gap-3 p-3 rounded-xl hover:bg-black/5"
+                            >
+                              <div className="flex items-center gap-3">
+                                <img src={item.icon} alt={item.label} className="w-6 h-6 object-contain" />
+                                <span className="font-['Almarai'] font-bold">{item.label}</span>
+                              </div>
+                              <img src={dropdown} alt="arrow" className="w-5 h-5 object-contain opacity-70" />
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+            </div>
+
+            <div className="p-4 space-y-3">
+              <Link
+                to="/seller"
+                onClick={() => setIsSidebarOpen(false)}
+                className="w-full rounded-xl bg-(--accent) px-4 py-3 text-center font-['Almarai'] font-bold text-(--primary) block"
+              >
+                كن بائعاً
+              </Link>
+
+              <Link
+                to="/login"
+                onClick={() => setIsSidebarOpen(false)}
+                className="w-full rounded-xl border border-(--primary) bg-white px-4 py-3 text-center font-['Almarai'] font-bold text-(--primary) block"
+              >
+                تسجيل دخول
+              </Link>
+
+              <div className="mt-3 w-full h-11 flex items-center justify-between gap-3 bg-(--white) rounded-[5px] px-3 ring-1 ring-slate-200">
+                <img src={camera} alt="camera" className="h-5 w-5 shrink-0" />
+                <input
+                  type="text"
+                  placeholder="بحث"
+                  className="w-full h-8 direction-rtl text-right outline-none border-0 bg-transparent"
+                />
+              </div>
+            </div>
+          </aside>
         </div>
-      </div>
+      )}
     </header>
   );
 }

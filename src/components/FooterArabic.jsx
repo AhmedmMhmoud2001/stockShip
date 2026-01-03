@@ -82,9 +82,9 @@ export default function FooterArabic({
 }) {
   return (
     <footer dir="rtl" className="w-full bg-[#EEF4FF] ">
-      <div className="mx-2 sm:mx-6 md:mx-10 lg:mx-16 xl:mx-24 2xl:mx-25 max-w-7xl px-4 py-12 md:py-14">
+      <div className="mx-2 sm:mx-6 md:mx-10 lg:mx-16 xl:mx-24 2xl:mx-25  px-4 py-12 md:py-14">
         {/* ✅ Responsive grid: 1 / 2 / 4 columns */}
-        <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full">
           {/* Brand (عمود) */}
           <div className="text-right">
             <img src={logo} alt="logo" className="inline-block h-10 w-auto" />

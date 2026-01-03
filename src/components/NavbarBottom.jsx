@@ -1,3 +1,4 @@
+// NavbarBottom.jsx
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
@@ -19,8 +20,6 @@ function DesktopDropdownPortal({ open, rect, items, onClose, dropdownRef }) {
 
   const gap = 8;
   const top = Math.round(rect.bottom + gap);
-
-  // RTL: align dropdown with the button's right edge
   const right = Math.max(8, Math.round(window.innerWidth - rect.right));
   const width = Math.max(220, Math.round(rect.width));
 
@@ -28,7 +27,6 @@ function DesktopDropdownPortal({ open, rect, items, onClose, dropdownRef }) {
     <div
       className="fixed inset-0 z-[9999]"
       onMouseDown={(e) => {
-        // click outside closes
         if (e.target === e.currentTarget) onClose();
       }}
     >
@@ -57,8 +55,6 @@ function DesktopDropdownPortal({ open, rect, items, onClose, dropdownRef }) {
 
 export default function NavbarBottom() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  // openDropdown: { key, rect, items }
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const rootRef = useRef(null);
@@ -173,7 +169,6 @@ export default function NavbarBottom() {
   useEffect(() => {
     const onResizeOrScroll = () => {
       if (!openDropdown?.rect || !openDropdown?.key) return;
-      // close on scroll/resize to avoid wrong position
       setOpenDropdown(null);
     };
 
@@ -202,17 +197,17 @@ export default function NavbarBottom() {
     });
   };
 
+  const closeSidebar = () => setIsSidebarOpen(false);
+
   return (
     <div ref={rootRef} className="w-full">
-      {/* Sidebar overlay */}
       <div
         className={`fixed inset-0 z-40 bg-black/40 transition-opacity ${
           isSidebarOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
-        onClick={() => setIsSidebarOpen(false)}
+        onClick={closeSidebar}
       />
 
-      {/* Sidebar */}
       <aside
         className={`fixed top-0 right-0 z-50 h-full w-[85%] max-w-sm bg-white shadow-2xl transition-transform duration-300 ${
           isSidebarOpen ? "translate-x-0" : "translate-x-full"
@@ -223,7 +218,7 @@ export default function NavbarBottom() {
         <div className="flex items-center justify-between px-4 py-4 border-b">
           <div className="font-['Almarai'] font-bold text-lg">القائمة</div>
           <button
-            onClick={() => setIsSidebarOpen(false)}
+            onClick={closeSidebar}
             className="w-10 h-10 rounded-full grid place-items-center hover:bg-black/5"
             aria-label="Close sidebar"
           >
@@ -232,6 +227,24 @@ export default function NavbarBottom() {
         </div>
 
         <div className="p-4 space-y-6">
+          <div className="grid gap-2">
+            <Link
+              to="/seller"
+              onClick={closeSidebar}
+              className="w-full rounded-xl bg-(--accent) px-4 py-3 text-center font-['Almarai'] font-bold text-(--primary)"
+            >
+              كن بائعاً
+            </Link>
+
+            <Link
+              to="/login"
+              onClick={closeSidebar}
+              className="w-full rounded-xl border border-(--primary) bg-white px-4 py-3 text-center font-['Almarai'] font-bold text-(--primary)"
+            >
+              تسجيل دخول
+            </Link>
+          </div>
+
           <div className="space-y-2">
             <div className="font-['Almarai'] font-bold text-sm opacity-70">اختصارات</div>
 
@@ -251,7 +264,7 @@ export default function NavbarBottom() {
                       <img src={dropdown} alt="arrow" className="w-5 h-5 object-contain opacity-70" />
                     </button>
                   ) : (
-                    <Link to={item.to || "#"} className="block" onClick={() => setIsSidebarOpen(false)}>
+                    <Link to={item.to || "#"} className="block" onClick={closeSidebar}>
                       <div className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-black/5">
                         <img src={item.icon} alt={item.label} className="w-6 h-6 object-contain" />
                         <span className="font-['Almarai'] font-bold">{item.label}</span>
@@ -286,20 +299,9 @@ export default function NavbarBottom() {
         </div>
       </aside>
 
-      {/* Bottom bar */}
-      <div className="w-full rounded-b-[50px] shadow-[0_-8px_24px_rgba(0,0,0,0.10)] bg-(--bottom-bg)">
+      <div className="hidden lg:block w-full rounded-b-[50px] shadow-[0_-8px_24px_rgba(0,0,0,0.10)] bg-(--bottom-bg)">
         <div className="px-3 sm:px-6 lg:px-20 py-3 lg:py-4">
-          <div className="flex items-center justify-between gap-4">
-            {/* Mobile menu */}
-            <button
-              onClick={() => setIsSidebarOpen(true)}
-              className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/30 bg-white/10 text-white"
-              aria-label="Open menu"
-            >
-              <span className="text-xl leading-none">☰</span>
-            </button>
-
-            {/* Desktop left items */}
+          <div className="flex items-center justify-start gap-4">
             <div className="hidden lg:flex items-center gap-6 shrink-0">
               {menuItems.map((item) => (
                 <div key={item.key} className="shrink-0">
@@ -330,7 +332,6 @@ export default function NavbarBottom() {
               ))}
             </div>
 
-            {/* Desktop categories */}
             <div className="hidden lg:flex items-center gap-6 flex-1 justify-end overflow-x-auto">
               {categories.map((item) => (
                 <button
@@ -353,7 +354,6 @@ export default function NavbarBottom() {
         </div>
       </div>
 
-      {/* Portal dropdown (outside header / not clipped) */}
       <DesktopDropdownPortal
         open={!!openDropdown}
         rect={openDropdown?.rect}
