@@ -222,14 +222,14 @@ export default function NavbarBottom() {
       <div className="w-full rounded-b-[50px] shadow-[0_-8px_24px_rgba(0,0,0,0.10)] bg-(--bottom-bg)">
         <div className="px-2 sm:px-4 md:px-6 lg:px-10 py-2 sm:py-3 lg:py-4">
           {/* Desktop Layout */}
-          <div className="hidden lg:flex items-center justify-between gap-6">
-            <div className="flex items-center gap-2 shrink-0">
+          <div className="hidden lg:flex items-center justify-between gap-2">
+            <div className="flex items-center gap-1 shrink-0">
             {categories.map((item) => (
                 <button
                   key={item.key}
                   type="button"
                   onClick={(e) => openPortalDropdown(e, item)}
-                  className="shrink-0 flex items-center gap-3 h-12 border-r-[0.5px] border-(--bottom-divider) pe-4 ps-4"
+                  className="shrink-0 flex items-center gap-2 h-12 border-r-[0.5px] border-(--bottom-divider) pe-2 ps-2"
                 >
                   <img
                     src={dropdown}
@@ -254,7 +254,7 @@ export default function NavbarBottom() {
                     <button
                       type="button"
                       onClick={(e) => openPortalDropdown(e, item)}
-                      className="flex items-center gap-0 h-12 border-r-[0.5px] border-(--bottom-divider) pe-4 ps-4"
+                      className="flex items-center gap-1 h-12 border-r-[0.5px] border-(--bottom-divider) pe-2 ps-2"
                     >
                       <img
                         src={dropdown}
@@ -274,7 +274,7 @@ export default function NavbarBottom() {
                   ) : (
                     <Link
                       to={item.to || "#"}
-                      className="flex items-center gap-2 h-12 border-r-[0.5px] border-(--bottom-divider) pe-4 ps-4"
+                      className="flex items-center gap-1 h-12 border-r-[0.5px] border-(--bottom-divider) pe-2 ps-2"
                     >
                       <span className="font-['Tajawal'] font-bold text-[12px] sm:text-[12px] md:text-[12px] lg:text-[14px] xl:text-[16px] whitespace-nowrap hidden xl:inline">
                         {item.label}
@@ -289,14 +289,14 @@ export default function NavbarBottom() {
           </div>
 
           {/* Mobile/Tablet Layout */}
-          <div className="lg:hidden flex items-center justify-between gap-2 overflow-x-auto">
-            <div className="flex items-center gap-1 shrink-0">
+          <div className="lg:hidden flex items-center justify-between gap-1 overflow-x-auto">
+            <div className="flex items-center gap-0.5 shrink-0">
               {categories.slice(0, 3).map((item) => (
                 <button
                   key={item.key}
                   type="button"
                   onClick={(e) => openPortalDropdown(e, item)}
-                  className="shrink-0 flex items-center gap-1.5 h-10 px-2 sm:px-3 border-r-[0.5px] border-(--bottom-divider)"
+                  className="shrink-0 flex items-center gap-1 h-10 px-1.5 sm:px-2 border-r-[0.5px] border-(--bottom-divider)"
                 >
                   <img src={item.icon} alt={item.label} className="w-4 h-4 object-contain" />
                   <span className="font-['Tajawal'] font-bold text-[10px] sm:text-[11px] whitespace-nowrap hidden sm:inline">
@@ -306,14 +306,14 @@ export default function NavbarBottom() {
               ))}
             </div>
 
-            <div className="flex items-center gap-1 shrink-0">
+            <div className="flex items-center gap-0.5 shrink-0">
               {menuItems.map((item) => (
                 <div key={item.key} className="shrink-0">
                   {(item.children || item.isLanguage) ? (
                     <button
                       type="button"
                       onClick={(e) => openPortalDropdown(e, item)}
-                      className="flex items-center gap-1.5 h-10 px-2 sm:px-3 border-r-[0.5px] border-(--bottom-divider)"
+                      className="flex items-center gap-1 h-10 px-1.5 sm:px-2 border-r-[0.5px] border-(--bottom-divider)"
                     >
                       <img src={item.icon} alt={item.label} className="w-4 h-4 object-contain" />
                       <span className="font-['Tajawal'] font-bold text-[10px] sm:text-[11px] whitespace-nowrap hidden sm:inline">
@@ -323,7 +323,7 @@ export default function NavbarBottom() {
                   ) : (
                     <Link
                       to={item.to || "#"}
-                      className="flex items-center gap-1.5 h-10 px-2 sm:px-3 border-r-[0.5px] border-(--bottom-divider)"
+                      className="flex items-center gap-1 h-10 px-1.5 sm:px-2 border-r-[0.5px] border-(--bottom-divider)"
                     >
                       <img src={item.icon} alt={item.label} className="w-4 h-4 object-contain" />
                       <span className="font-['Tajawal'] font-bold text-[10px] sm:text-[11px] whitespace-nowrap hidden sm:inline">
