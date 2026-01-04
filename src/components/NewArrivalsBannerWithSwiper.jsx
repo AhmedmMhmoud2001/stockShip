@@ -50,9 +50,7 @@ export default function NewArrivalsBannerWithSwiper() {
   return (
     <section dir={currentDir} className="w-full py-6 sm:py-8 md:py-10">
       <div className="relative">
-        <div className={`absolute top-4 ${currentDir === 'rtl' ? 'left-4' : 'right-4'} z-10`}>
-          <LanguageSwitcher className="h-9 sm:h-10 px-3 sm:px-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg" />
-        </div>
+       
         <Swiper
           modules={[Autoplay, Pagination,  Keyboard]}
           loop

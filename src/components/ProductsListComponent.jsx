@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Star, Heart, LayoutGrid, List, ChevronDown, X } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -79,6 +79,24 @@ export default function ProductsListComponent() {
     Object.fromEntries(products.map((p) => [p.id, p.mainImg]))
   );
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
+  const sortDropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sortDropdownRef.current && !sortDropdownRef.current.contains(event.target)) {
+        setSortDropdownOpen(false);
+      }
+    };
+
+    if (sortDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [sortDropdownOpen]);
 
   const toggleLike = (id) =>
     setLiked((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -105,18 +123,20 @@ export default function ProductsListComponent() {
         {/* Filters and Controls */}
         <div className={`flex items-center justify-between gap-3 flex-wrap ${currentDir === 'rtl' ? 'flex-row-reverse' : ''}`}>
           {/* Sort Dropdown */}
-          <div className="relative">
+          <div className="relative" ref={sortDropdownRef}>
             <button
               type="button"
               onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-              className="flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50"
+              className={`flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer ${currentDir === 'rtl' ? 'flex-row-reverse' : ''}`}
+              aria-label={t("products.sortBy")}
+              aria-expanded={sortDropdownOpen}
             >
               {t("products.sortBy")}
-              <ChevronDown className={`h-4 w-4 transition ${sortDropdownOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`h-4 w-4 transition-transform ${sortDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
             
             {sortDropdownOpen && (
-              <div className={`absolute ${currentDir === 'rtl' ? 'right-0' : 'left-0'} top-full mt-1 z-10 w-56 rounded-md border border-slate-200 bg-white shadow-lg`}>
+              <div className={`absolute ${currentDir === 'rtl' ? 'right-0' : 'left-0'} top-full mt-1 z-50 w-56 rounded-md border border-slate-200 bg-white shadow-lg`}>
                 <div className="py-1">
                   {sortOptions.map((option) => (
                     <button
@@ -126,9 +146,9 @@ export default function ProductsListComponent() {
                         updateFilter('sort', option.value);
                         setSortDropdownOpen(false);
                       }}
-                      className={`w-full text-right px-4 py-2 text-sm hover:bg-slate-50 ${
+                      className={`w-full px-4 py-2 text-sm hover:bg-slate-50 transition-colors cursor-pointer ${
                         filters.sort === option.value ? 'bg-blue-50 text-blue-900 font-semibold' : 'text-slate-700'
-                      }`}
+                      } ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}
                     >
                       {option.label}
                     </button>
@@ -163,7 +183,8 @@ export default function ProductsListComponent() {
                   ? "border-blue-900 bg-blue-50 text-blue-900"
                   : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
               }`}
-              aria-label="List view"
+              aria-label={t("productsList.listView")}
+              title={t("productsList.listView")}
             >
               <List className="h-4 w-4" />
             </button>
@@ -176,7 +197,8 @@ export default function ProductsListComponent() {
                   ? "border-blue-900 bg-blue-50 text-blue-900"
                   : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
               }`}
-              aria-label="Grid view"
+              aria-label={t("productsList.gridView")}
+              title={t("productsList.gridView")}
             >
               <LayoutGrid className="h-4 w-4" />
             </button>
@@ -206,120 +228,192 @@ export default function ProductsListComponent() {
           </div>
         )}
 
-        <div className="mt-6 space-y-8">
-          {filteredItems.map((p) => {
-            const activeImg = selectedImages[p.id] || p.mainImg;
-            const isLiked = liked[p.id];
+        {view === "grid" ? (
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            {filteredItems.map((p) => {
+              const activeImg = selectedImages[p.id] || p.mainImg;
+              const isLiked = liked[p.id];
 
-            return (
-              <div
-                key={p.id}
-                className="rounded-md bg-white  p-4 sm:p-6"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-[1fr_260px] gap-6">
-                  <div dir={currentDir} className="flex flex-col justify-between gap-4">
-                    <div>
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <div className="text-lg font-bold text-slate-900">
-                            {p.title}
-                          </div>
-                          <div className="text-xs text-slate-500 py-5">
-                          {t("products.seller")}{" "}
-                          <span className="font-semibold text-slate-700">
-                            {p.seller}
-                          </span>
-                        </div>
-
-                          <div className="mt-1 flex items-center gap-2">
-                            <StarRating value={p.rating} />
-                            <span className="text-xs text-slate-500">
-                              ({p.reviews})
-                            </span>
-                          </div>
-                        </div>
-
-                        
-                      </div>
-
-                      <p className="mt-3 text-sm leading-7 text-slate-600">
-                        {p.desc}
-                      </p>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <button
-                        type="button"
-                        onClick={() => toggleLike(p.id)}
-                        className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-                        aria-label="Like"
-                      >
-                        <Heart
-                          className={`h-5 w-5 ${
-                            isLiked ? "fill-current text-blue-900" : ""
-                          }`}
-                        />
-                      </button>
-
-                      <Link
-                        to={getProductDetailsUrl(p.id)}
-                        className="flex-1 rounded-md border border-blue-900 bg-white px-4 py-2.5 text-sm font-semibold text-blue-900 hover:bg-blue-50 text-center"
-                      >
-                        {t("products.viewDetails")}
-                      </Link>
-                    </div>
+              return (
+                <div
+                  key={p.id}
+                  className="rounded-md bg-white border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div className="relative">
+                    <img
+                      src={activeImg}
+                      alt={p.title}
+                      className="h-48 sm:h-56 w-full object-cover"
+                    />
+                    <span className={`absolute top-2 rounded bg-red-600 px-2 py-0.5 text-[10px] font-bold text-white ${currentDir === 'rtl' ? 'left-2' : 'right-2'}`}>
+                      {t("products.sale")}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => toggleLike(p.id)}
+                      className={`absolute ${currentDir === 'rtl' ? 'left-2' : 'right-2'} top-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/90 backdrop-blur-sm text-slate-700 hover:bg-white transition-colors cursor-pointer shadow-sm`}
+                      aria-label={isLiked ? t("products.removeFromFavorites") : t("products.addToFavorites")}
+                      title={isLiked ? t("products.removeFromFavorites") : t("products.addToFavorites")}
+                    >
+                      <Heart
+                        className={`h-4 w-4 transition-colors ${
+                          isLiked ? "fill-current text-red-600" : "text-slate-600"
+                        }`}
+                      />
+                    </button>
                   </div>
 
-                  <div>
-                    <div className="relative overflow-hidden rounded-md  bg-slate-50">
-                      <img
-                        src={activeImg}
-                        alt={p.title}
-                        className="h-44 sm:h-52 w-full object-cover"
-                      />
-                      <span className="absolute top-2 right-2 rounded bg-red-600 px-2 py-0.5 text-[10px] font-bold text-white">
-                        SALE
+                  <div dir={currentDir} className="p-4">
+                    <div className="text-sm text-slate-500 mb-1">{p.category}</div>
+                    <div className="text-base font-bold text-slate-900 line-clamp-2 mb-2">
+                      {p.title}
+                    </div>
+                    <div className="text-xs text-slate-500 mb-2">
+                      {t("products.seller")}{" "}
+                      <span className="font-semibold text-slate-700">
+                        {p.seller}
                       </span>
                     </div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <StarRating value={p.rating} />
+                      <span className="text-xs text-slate-500">
+                        ({p.reviews})
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-600 line-clamp-2 mb-4">
+                      {p.desc}
+                    </p>
+                    <Link
+                      to={getProductDetailsUrl(p.id)}
+                      className="block w-full rounded-md border border-blue-900 bg-white px-4 py-2 text-sm font-semibold text-blue-900 hover:bg-blue-50 text-center transition-colors"
+                    >
+                      {t("products.viewDetails")}
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="mt-6 space-y-8">
+            {filteredItems.map((p) => {
+              const activeImg = selectedImages[p.id] || p.mainImg;
+              const isLiked = liked[p.id];
 
-                    <div className="mt-2 grid grid-cols-5 gap-1">
-                      {p.thumbs.slice(0, 4).map((t, i) => {
-                        const active = activeImg === t;
-                        return (
-                          <button
-                            key={i}
-                            type="button"
-                            onClick={() => setSelectedFor(p.id, t)}
-                            className={`h-10 overflow-hidden rounded border bg-white transition ${
-                              active
-                                ? "border-blue-900 ring-2 ring-blue-200"
-                                : "border-slate-200 hover:border-slate-400"
+              return (
+                <div
+                  key={p.id}
+                  className="rounded-md bg-white  p-4 sm:p-6"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-[1fr_260px] gap-6">
+                    <div dir={currentDir} className="flex flex-col justify-between gap-4">
+                      <div>
+                        <div className="flex items-start justify-between gap-4">
+                          <div>
+                            <div className="text-lg font-bold text-slate-900">
+                              {p.title}
+                            </div>
+                            <div className="text-xs text-slate-500 py-5">
+                            {t("products.seller")}{" "}
+                            <span className="font-semibold text-slate-700">
+                              {p.seller}
+                            </span>
+                          </div>
+
+                            <div className="mt-1 flex items-center gap-2">
+                              <StarRating value={p.rating} />
+                              <span className="text-xs text-slate-500">
+                                ({p.reviews})
+                              </span>
+                            </div>
+                          </div>
+
+                          
+                        </div>
+
+                        <p className="mt-3 text-sm leading-7 text-slate-600">
+                          {p.desc}
+                        </p>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <button
+                          type="button"
+                          onClick={() => toggleLike(p.id)}
+                          className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
+                          aria-label={isLiked ? t("products.removeFromFavorites") : t("products.addToFavorites")}
+                          title={isLiked ? t("products.removeFromFavorites") : t("products.addToFavorites")}
+                        >
+                          <Heart
+                            className={`h-5 w-5 transition-colors ${
+                              isLiked ? "fill-current text-red-600" : "text-slate-600"
                             }`}
-                          >
-                            <img
-                              src={t}
-                              alt=""
-                              className="h-full w-full object-cover"
-                            />
-                          </button>
-                        );
-                      })}
+                          />
+                        </button>
 
-                      <button
-                        type="button"
-                        onClick={() => setSelectedFor(p.id, p.mainImg)}
-                        className="h-10 rounded border border-slate-200 bg-white text-slate-500 hover:bg-slate-50"
-                        aria-label="reset"
-                      >
-                        ▶
-                      </button>
+                        <Link
+                          to={getProductDetailsUrl(p.id)}
+                          className="flex-1 rounded-md border border-blue-900 bg-white px-4 py-2.5 text-sm font-semibold text-blue-900 hover:bg-blue-50 text-center"
+                        >
+                          {t("products.viewDetails")}
+                        </Link>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="relative overflow-hidden rounded-md  bg-slate-50">
+                        <img
+                          src={activeImg}
+                          alt={p.title}
+                          className="h-44 sm:h-52 w-full object-cover"
+                        />
+                        <span className={`absolute top-2 rounded bg-red-600 px-2 py-0.5 text-[10px] font-bold text-white ${currentDir === 'rtl' ? 'left-2' : 'right-2'}`}>
+                          {t("products.sale")}
+                        </span>
+                      </div>
+
+                      <div className="mt-2 grid grid-cols-5 gap-1">
+                        {p.thumbs.slice(0, 4).map((thumb, i) => {
+                          const active = activeImg === thumb;
+                          return (
+                            <button
+                              key={i}
+                              type="button"
+                              onClick={() => setSelectedFor(p.id, thumb)}
+                              className={`h-10 overflow-hidden rounded border bg-white transition cursor-pointer ${
+                                active
+                                  ? "border-blue-900 ring-2 ring-blue-200"
+                                  : "border-slate-200 hover:border-slate-400"
+                              }`}
+                              aria-label={t("products.viewImage")}
+                              title={t("products.viewImage")}
+                            >
+                              <img
+                                src={thumb}
+                                alt=""
+                                className="h-full w-full object-cover"
+                              />
+                            </button>
+                          );
+                        })}
+
+                        <button
+                          type="button"
+                          onClick={() => setSelectedFor(p.id, p.mainImg)}
+                          className="h-10 rounded border border-slate-200 bg-white text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer"
+                          aria-label={t("products.resetImage")}
+                          title={t("products.resetImage")}
+                        >
+                          <span className={currentDir === 'rtl' ? 'transform rotate-180' : ''}>▶</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

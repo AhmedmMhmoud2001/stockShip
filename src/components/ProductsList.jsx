@@ -42,10 +42,10 @@ export default function ProductsCarousel({title}) {
         }}
         loop={true}
         speed={700}
-        pagination={{ 
-          clickable: true,
-          dynamicBullets: true,
-        }}
+        // pagination={{ 
+        //   clickable: true,
+        //   dynamicBullets: true,
+        // }}
         navigation={{
           enabled: true,
           prevEl: '.swiper-button-prev',

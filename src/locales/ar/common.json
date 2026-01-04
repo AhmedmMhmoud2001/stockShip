@@ -45,7 +45,15 @@
     "phone": "رقم الهاتف",
     "signup": "إنشاء حساب",
     "alreadyHaveAccount": "لديك حساب بالفعل؟",
-    "noAccount": "ليس لديك حساب؟"
+    "noAccount": "ليس لديك حساب؟",
+    "rememberMe": "تذكرني",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "login": "تسجيل الدخول",
+    "signUpNow": "سجل الآن",
+    "guestLogin": "الدخول كزائر",
+    "showPassword": "إظهار كلمة المرور",
+    "hidePassword": "إخفاء كلمة المرور",
+    "allRightsReserved": "جميع الحقوق محفوظة"
   },
   "orders": {
     "title": "طلباتي",
@@ -174,7 +182,12 @@
   "product": {
     "viewDetails": "عرض التفاصيل",
     "favorite": "مفضلة",
+    "addToFavorites": "إضافة للمفضلة",
+    "removeFromFavorites": "إزالة من المفضلة",
+    "like": "إعجاب",
     "rating": "التقييم",
+    "sale": "خصم",
+    "resetImage": "إعادة تعيين الصورة",
     "reviews": "مراجعات"
   },
   "cta": {
@@ -319,7 +332,12 @@
     "relatedProducts": "بضائع ذات صلة",
     "mostPurchased": "الاكثر شراءا",
     "available": "متوفرة",
-    "company": "شركة"
+    "company": "شركة",
+    "addToFavorites": "إضافة للمفضلة",
+    "removeFromFavorites": "إزالة من المفضلة",
+    "sale": "خصم",
+    "resetImage": "إعادة تعيين الصورة",
+    "viewImage": "عرض الصورة"
   },
   "productDetails": {
     "home": "الرئيسية",
@@ -373,6 +391,66 @@
     "done": "تم",
     "backToHome": "العودة للصفحة الرئيسية",
     "viewMyOrders": "عرض طلباتي"
+  },
+  "notFound": {
+    "title": "الصفحة غير موجودة",
+    "description": "عذراً، الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+    "backToHome": "العودة إلى الصفحة الرئيسية"
+  },
+  "seller": {
+    "title": "كن بائعاً",
+    "subtitle": "انضم إلى منصة Stockship وابدأ بيع منتجاتك بالجملة",
+    "whyTitle": "لماذا Stockship؟",
+    "benefit1": "وصل إلى شبكة واسعة من التجار والمشترين",
+    "benefit2": "تفاوض مباشر مع المشترين",
+    "benefit3": "حماية كاملة لكل صفقة",
+    "benefit4": "متابعة الشحن وحماية المدفوعات",
+    "publishAd": "نشر إعلان",
+    "signUpNow": "سجل الآن",
+    "backToHome": "العودة للصفحة الرئيسية"
+  },
+  "notifications": {
+    "requestAccepted": "تم قبول طلبك يمكنك الانتقال للدفع",
+    "clickHere": "اضغط هنا",
+    "notificationText": "لوريم إيبسوم دولار سيت أميت، كونسيكتيتور أديبيسينج إليت. سِد دو إيوسمد..."
+  },
+  "productsList": {
+    "resultsCount": "{{count}} نتيجة",
+    "listView": "عرض القائمة",
+    "gridView": "عرض الشبكة"
+  },
+  "signupBankInfo": {
+    "title": "أدخل بياناتك للانضمام ل stockship",
+    "subtitle": "أكمل بياناتك الخاصة لإتمام عملية الشراء",
+    "fullName": "الاسم الكامل/الاسم التجاري",
+    "fullNamePlaceholder": "أدخل الاسم الكامل أو الاسم التجاري",
+    "phone": "رقم الهاتف",
+    "phonePlaceholder": "أدخل رقم الهاتف",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل البريد الإلكتروني",
+    "city": "المدينة",
+    "cityPlaceholder": "أدخل المدينة",
+    "country": "الدولة",
+    "countryPlaceholder": "أدخل الدولة",
+    "bankAccountName": "اسم الحساب البنكي",
+    "bankAccountNamePlaceholder": "أدخل اسم الحساب البنكي",
+    "bankAccountNumber": "رقم الحساب البنكي",
+    "bankAccountNumberPlaceholder": "أدخل رقم الحساب البنكي",
+    "bankName": "البنك",
+    "bankNamePlaceholder": "أدخل اسم البنك",
+    "bankAddress": "عنوان البنك",
+    "bankAddressPlaceholder": "أدخل عنوان البنك",
+    "bankCode": "رمز البنك",
+    "bankCodePlaceholder": "أدخل رمز البنك",
+    "swift": "SWIFT",
+    "swiftPlaceholder": "أدخل رمز SWIFT",
+    "region": "الدولة/المنطقة",
+    "regionPlaceholder": "أدخل الدولة أو المنطقة",
+    "companyAddress": "عنوان الشركة",
+    "companyAddressPlaceholder": "أدخل عنوان الشركة",
+    "agreeTerms": "موافقة علي الشروط و الاحكام",
+    "done": "تم",
+    "createAd": "إنشاء إعلان"
   }
 }
 

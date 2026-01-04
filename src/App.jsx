@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import './App.css'
 import { ROUTES } from './routes'
 
@@ -22,7 +23,13 @@ import PublishAdPage from "./pages/PublishAdPage";
 import RequestSent from "./pages/RequestSent";
 import NotFound from "./pages/NotFound";
 
-function App() {
+function AppContent() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <Routes>
       <Route path={ROUTES.HOME} element={<Home />} />
@@ -47,7 +54,11 @@ function App() {
       <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
-  )
+  );
+}
+
+function App() {
+  return <AppContent />;
 }
 
 export default App

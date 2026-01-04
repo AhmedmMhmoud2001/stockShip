@@ -45,7 +45,15 @@
     "phone": "Phone Number",
     "signup": "Sign Up",
     "alreadyHaveAccount": "Already have an account?",
-    "noAccount": "Don't have an account?"
+    "noAccount": "Don't have an account?",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "login": "Login",
+    "signUpNow": "Sign Up Now",
+    "guestLogin": "Continue as Guest",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "allRightsReserved": "All rights reserved"
   },
   "orders": {
     "title": "My Orders",
@@ -87,6 +95,12 @@
     "viewDetails": "View Details",
     "addToCart": "Add to Cart",
     "price": "Price",
+    "favorite": "Favorite",
+    "addToFavorites": "Add to Favorites",
+    "removeFromFavorites": "Remove from Favorites",
+    "like": "Like",
+    "sale": "SALE",
+    "resetImage": "Reset Image",
     "quantity": "Quantity",
     "category": "Category",
     "sortBy": "Sort By",
@@ -109,7 +123,8 @@
     "relatedProducts": "Related Products",
     "mostPurchased": "Most Purchased",
     "available": "Available",
-    "company": "Company"
+    "company": "Company",
+    "viewImage": "View Image"
   },
   "checkout": {
     "title": "Checkout",
@@ -380,6 +395,66 @@
     "done": "Done",
     "backToHome": "Back to Home Page",
     "viewMyOrders": "View My Orders"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, the page you are looking for does not exist or has been moved.",
+    "backToHome": "Back to Home Page"
+  },
+  "seller": {
+    "title": "Become a Seller",
+    "subtitle": "Join Stockship platform and start selling your products wholesale",
+    "whyTitle": "Why Stockship?",
+    "benefit1": "Connect to a wide network of traders and buyers",
+    "benefit2": "Direct negotiation with buyers",
+    "benefit3": "Complete protection for every deal",
+    "benefit4": "Shipping tracking and payment protection",
+    "publishAd": "Publish Ad",
+    "signUpNow": "Sign Up Now",
+    "backToHome": "Back to Home Page"
+  },
+  "notifications": {
+    "requestAccepted": "Your request has been accepted. You can proceed to payment",
+    "clickHere": "Click here",
+    "notificationText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod..."
+  },
+  "productsList": {
+    "resultsCount": "{{count}} results",
+    "listView": "List view",
+    "gridView": "Grid view"
+  },
+  "signupBankInfo": {
+    "title": "Enter your information to join Stockship",
+    "subtitle": "Complete your information to complete the purchase process",
+    "fullName": "Full Name / Trade Name",
+    "fullNamePlaceholder": "Enter full name or trade name",
+    "phone": "Phone Number",
+    "phonePlaceholder": "Enter phone number",
+    "email": "Email",
+    "emailPlaceholder": "Enter email address",
+    "city": "City",
+    "cityPlaceholder": "Enter city",
+    "country": "Country",
+    "countryPlaceholder": "Enter country",
+    "bankAccountName": "Bank Account Name",
+    "bankAccountNamePlaceholder": "Enter bank account name",
+    "bankAccountNumber": "Bank Account Number",
+    "bankAccountNumberPlaceholder": "Enter bank account number",
+    "bankName": "Bank",
+    "bankNamePlaceholder": "Enter bank name",
+    "bankAddress": "Bank Address",
+    "bankAddressPlaceholder": "Enter bank address",
+    "bankCode": "Bank Code",
+    "bankCodePlaceholder": "Enter bank code",
+    "swift": "SWIFT",
+    "swiftPlaceholder": "Enter SWIFT code",
+    "region": "Country/Region",
+    "regionPlaceholder": "Enter country or region",
+    "companyAddress": "Company Address",
+    "companyAddressPlaceholder": "Enter company address",
+    "agreeTerms": "I agree to the terms and conditions",
+    "done": "Done",
+    "createAd": "Create Ad"
   }
 }
 

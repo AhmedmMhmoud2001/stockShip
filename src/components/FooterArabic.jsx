@@ -13,17 +13,20 @@ import { ROUTES } from "../routes";
 import logo from "../assets/imgs/Group25.png";
 import paymentMethod from "../assets/imgs/payment-method.png";
 
-function FooterLinks({ title, links }) {
+function FooterLinks({ title, links, currentDir }) {
+  const { i18n } = useTranslation();
+  const dir = currentDir || (i18n.language === 'ar' ? 'rtl' : 'ltr');
+  
   return (
-    <div className="text-right">
+    <div className={dir === 'rtl' ? 'text-right' : 'text-left'}>
       <h4 className="mb-4 text-lg font-semibold text-slate-900">{title}</h4>
       <ul className="space-y-3 text-sm text-slate-600">
         {links.map((l, i) => (
           <li key={i}>
             <Link to={l.href}
-              className="inline-flex items-center gap-2 transition hover:text-slate-900"
+              className={`inline-flex items-center gap-2 transition hover:text-slate-900 ${dir === 'rtl' ? 'flex-row-reverse' : ''}`}
             >
-              <ChevronLeft className="h-4 w-4 text-slate-400" />
+              <ChevronLeft className={`h-4 w-4 text-slate-400 ${dir === 'rtl' ? 'rotate-180' : ''}`} />
               <span>{l.label}</span>
             </Link>
           </li>
@@ -118,12 +121,12 @@ export default function FooterArabic({
 
           {/* Account (عمود) */}
           <div>
-            <FooterLinks {...(columns?.account || defaultColumns.account)} />
+            <FooterLinks {...(columns?.account || defaultColumns.account)} currentDir={currentDir} />
           </div>
 
           {/* Categories (عمود) */}
           <div>
-            <FooterLinks {...(columns?.categories || defaultColumns.categories)} />
+            <FooterLinks {...(columns?.categories || defaultColumns.categories)} currentDir={currentDir} />
           </div>
 
           {/* Contact (عمود) */}

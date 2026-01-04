@@ -19,6 +19,8 @@ export default function RecommendedProducts() {
     { id: 8, category: t("categories.screens"), title: "Monitor 27\"", rating: 5, reviews: 18, subtitle: t("recommended.shortDescription"), badgeText: "RECOMMENDED", image: "https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?w=1200&q=80&auto=format&fit=crop" },
     { id: 9, category: t("categories.headphones"), title: "Headset Gaming", rating: 4, reviews: 76, subtitle: t("recommended.shortDescription"), badgeText: "RECOMMENDED", image: "https://images.unsplash.com/photo-1599669454699-248893623440?w=1200&q=80&auto=format&fit=crop" },
     { id: 10, category: t("categories.accessories"), title: "Keyboard", rating: 5, reviews: 44, subtitle: t("recommended.shortDescription"), badgeText: "RECOMMENDED", image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=1200&q=80&auto=format&fit=crop" },
+    { id: 11, category: t("categories.smartphones"), title: "iPhone 14 Pro", rating: 5, reviews: 65, subtitle: t("recommended.shortDescription"), badgeText: "RECOMMENDED", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=1200&q=80&auto=format&fit=crop" },
+    { id: 12, category: t("categories.smartphones"), title: "Samsung S24", rating: 4, reviews: 40, subtitle: t("recommended.shortDescription"), badgeText: "RECOMMENDED", image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200&q=80&auto=format&fit=crop" },
   ];
 
   return (
@@ -32,7 +34,7 @@ export default function RecommendedProducts() {
         </div>
 
         {/* Grid: 5 فوق + 5 تحت على الشاشات الكبيرة */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5">
         {products.map((p) => (
           <ProductCard
             key={p.id}

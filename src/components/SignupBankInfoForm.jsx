@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "../routes";
 
-const Field = ({ label, required, value, onChange, placeholder = "..." }) => {
+const Field = ({ label, required, value, onChange, placeholder = "...", currentDir = 'rtl' }) => {
   return (
     <div className="w-full">
-      <label className="block text-sm font-semibold text-slate-800 text-right">
+      <label className={`block text-sm font-semibold text-slate-800 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
         {label}
         {required && <span className="text-red-500 ms-1">*</span>}
       </label>
@@ -21,6 +21,8 @@ const Field = ({ label, required, value, onChange, placeholder = "..." }) => {
 };
 
 export default function SignupBankInfoForm() {
+  const { t, i18n } = useTranslation();
+  const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
   const navigate = useNavigate();
   const [form, setForm] = useState({
     fullName: "",
@@ -46,10 +48,12 @@ export default function SignupBankInfoForm() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    // Navigate to Seller page after form submission
+    navigate(ROUTES.SELLER);
   };
 
   return (
-    <div dir={currentDir} className="min-h-screen bg-white mt-40">
+    <div dir={currentDir} className="min-h-screen bg-white pt-20 sm:pt-32 md:pt-40 pb-20">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-8 py-10">
         <form
           onSubmit={onSubmit}
@@ -58,45 +62,55 @@ export default function SignupBankInfoForm() {
           {/* Section 1 */}
           <div>
             <div className="text-center text-lg font-bold text-slate-900">
-              أدخل بياناتك للانضمام ل stockship
+              {t("signupBankInfo.title")}
             </div>
 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
               <Field
-                label="الاسم الكامل/الاسم التجاري"
+                label={t("signupBankInfo.fullName")}
                 required
                 value={form.fullName}
                 onChange={set("fullName")}
+                placeholder={t("signupBankInfo.fullNamePlaceholder")}
+                currentDir={currentDir}
               />
               <Field
-                label="رقم الهاتف"
+                label={t("signupBankInfo.phone")}
                 required
                 value={form.phone}
                 onChange={set("phone")}
+                placeholder={t("signupBankInfo.phonePlaceholder")}
+                currentDir={currentDir}
               />
             </div>
 
             <div className="mt-6">
               <Field
-                label="البريد الإلكتروني"
+                label={t("signupBankInfo.email")}
                 required
                 value={form.email}
                 onChange={set("email")}
+                placeholder={t("signupBankInfo.emailPlaceholder")}
+                currentDir={currentDir}
               />
             </div>
 
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
               <Field
-                label="المدينة"
+                label={t("signupBankInfo.city")}
                 required
                 value={form.city}
                 onChange={set("city")}
+                placeholder={t("signupBankInfo.cityPlaceholder")}
+                currentDir={currentDir}
               />
               <Field
-                label="الدولة"
+                label={t("signupBankInfo.country")}
                 required
                 value={form.country}
                 onChange={set("country")}
+                placeholder={t("signupBankInfo.countryPlaceholder")}
+                currentDir={currentDir}
               />
             </div>
           </div>
@@ -104,69 +118,85 @@ export default function SignupBankInfoForm() {
           {/* Section 2 */}
           <div>
             <div className="text-center text-lg font-bold text-slate-900">
-              أكمل بياناتك الخاصة لإتمام عملية الشراء
+              {t("signupBankInfo.subtitle")}
             </div>
 
             <div className="mt-8 space-y-6">
               <Field
-                label="اسم الحساب البنكي"
+                label={t("signupBankInfo.bankAccountName")}
                 required
                 value={form.bankAccountName}
                 onChange={set("bankAccountName")}
+                placeholder={t("signupBankInfo.bankAccountNamePlaceholder")}
+                currentDir={currentDir}
               />
 
               <Field
-                label="رقم الحساب البنكي"
+                label={t("signupBankInfo.bankAccountNumber")}
                 required
                 value={form.bankAccountNumber}
                 onChange={set("bankAccountNumber")}
+                placeholder={t("signupBankInfo.bankAccountNumberPlaceholder")}
+                currentDir={currentDir}
               />
 
               <Field
-                label="البنك"
+                label={t("signupBankInfo.bankName")}
                 required
                 value={form.bankName}
                 onChange={set("bankName")}
+                placeholder={t("signupBankInfo.bankNamePlaceholder")}
+                currentDir={currentDir}
               />
 
               <Field
-                label="عنوان البنك"
+                label={t("signupBankInfo.bankAddress")}
                 required
                 value={form.bankAddress}
                 onChange={set("bankAddress")}
+                placeholder={t("signupBankInfo.bankAddressPlaceholder")}
+                currentDir={currentDir}
               />
 
               <Field
-                label="رمز البنك"
+                label={t("signupBankInfo.bankCode")}
                 required
                 value={form.bankCode}
                 onChange={set("bankCode")}
+                placeholder={t("signupBankInfo.bankCodePlaceholder")}
+                currentDir={currentDir}
               />
 
               <Field
-                label="swift"
+                label={t("signupBankInfo.swift")}
                 required
                 value={form.swift}
                 onChange={set("swift")}
+                placeholder={t("signupBankInfo.swiftPlaceholder")}
+                currentDir={currentDir}
               />
 
               <Field
-                label="الدولة/المنطقة"
+                label={t("signupBankInfo.region")}
                 required
                 value={form.region}
                 onChange={set("region")}
+                placeholder={t("signupBankInfo.regionPlaceholder")}
+                currentDir={currentDir}
               />
 
               <Field
-                label="عنوان الشركة"
+                label={t("signupBankInfo.companyAddress")}
                 required
                 value={form.companyAddress}
                 onChange={set("companyAddress")}
+                placeholder={t("signupBankInfo.companyAddressPlaceholder")}
+                currentDir={currentDir}
               />
             </div>
 
-            <label className="mt-8 flex items-center justify-between gap-3 rounded-md bg-rose-100/70 px-4 py-3 text-sm font-semibold text-slate-800">
-              <span>موافقة علي الشروط و الاحكام</span>
+            <label className={`mt-8 flex items-center gap-3 rounded-md bg-rose-100/70 px-4 py-3 text-sm font-semibold text-slate-800 ${currentDir === 'rtl' ? 'flex-row-reverse justify-between' : 'justify-between'}`}>
+              <span>{t("signupBankInfo.agreeTerms")}</span>
               <input
                 type="checkbox"
                 checked={form.agree}
@@ -175,18 +205,18 @@ export default function SignupBankInfoForm() {
               />
             </label>
 
-            <div className="mt-6 flex flex-col sm:flex-row gap-4">
+            <div className={`mt-6 flex flex-col sm:flex-row gap-4 ${currentDir === 'rtl' ? 'flex-row-reverse' : ''}`}>
               <button
                 type="submit"
-                className="w-full sm:w-52 rounded-md bg-amber-500 px-6 py-3 text-sm font-bold text-blue-900 hover:bg-amber-600"
+                className="w-full sm:w-52 rounded-md bg-amber-500 px-6 py-3 text-sm font-bold text-blue-900 hover:bg-amber-600 transition-colors"
               >
-                تم
+                {t("signupBankInfo.done")}
               </button>
               <Link
                 to={ROUTES.PUBLISH_AD}
-                className="w-full sm:w-auto inline-block text-center rounded-md bg-blue-900 px-6 py-3 text-sm font-bold text-white hover:bg-blue-800"
+                className="w-full sm:w-auto inline-block text-center rounded-md bg-blue-900 px-6 py-3 text-sm font-bold text-white hover:bg-blue-800 transition-colors"
               >
-                إنشاء إعلان
+                {t("signupBankInfo.createAd")}
               </Link>
             </div>
           </div>
