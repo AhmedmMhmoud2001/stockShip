@@ -180,14 +180,14 @@ export default function Navbar() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t("nav.search")}
-            className="w-full h-7 direction-rtl text-right outline-none border-0 bg-transparent text-xs sm:text-sm"
+            className="w-full h-7 direction-rtl text-right outline-none border-0 bg-transparent text-lg sm:text-sm"
           />
         </form>
 
         <div className="hidden lg:flex items-center gap-2 sm:gap-3 shrink-0">
           <Link to={ROUTES.SIGNUP_BANK_INFO}>
             <button className="h-8 sm:h-9 md:h-10 lg:h-11 px-2 sm:px-3 md:px-4 lg:px-5 rounded-[5px] bg-(--accent) flex items-center justify-center">
-              <span className="text-(--primary) font-bold text-[9px] sm:text-[10px] md:text-[11px] lg:text-[12px] leading-[150%] whitespace-nowrap">
+              <span className="text-(--primary) font-bold text-[12px] sm:text-[12px] md:text-[14px] lg:text-[16px] leading-[150%] whitespace-nowrap">
                 {t("nav.beSeller")}
               </span>
             </button>
@@ -195,7 +195,7 @@ export default function Navbar() {
 
           <Link to={ROUTES.LOGIN}>
             <button className="h-8 sm:h-9 md:h-10 lg:h-11 px-2 sm:px-3 md:px-4 lg:px-5 rounded-[5px] bg-(--white) border border-(--primary) flex items-center justify-center">
-              <span className="text-(--primary) font-bold text-[9px] sm:text-[10px] md:text-[11px] lg:text-[12px] leading-[150%] whitespace-nowrap">
+              <span className="text-(--primary) font-bold text-[12px] sm:text-[12px] md:text-[14px] lg:text-[16px] leading-[150%] whitespace-nowrap">
                 {t("nav.login")}
               </span>
             </button>

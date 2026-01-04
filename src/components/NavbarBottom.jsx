@@ -265,7 +265,7 @@ export default function NavbarBottom() {
                   onClick={(e) => openPortalDropdown(e, item)}
                   className={`shrink-0 flex items-center gap-2 h-12 border-r-[0.5px] border-(--bottom-divider) pe-2 ps-2 transition-colors ${
                     isActive 
-                      ? "bg-(--primary) text-white" 
+                      ? " text-(--primary)" 
                       : "bg-transparent text-(--bottom-text) hover:bg-blue-50"
                   }`}
                 >
@@ -273,7 +273,7 @@ export default function NavbarBottom() {
                     src={dropdown}
                     alt="arrow"
                     className={`w-5 h-5 object-contain opacity-70 transition ${
-                      isActive ? "rotate-180" : ""
+                      isActive ? "rotate-180 text-(--primary)" : ""
                     }`}
                   />
                   <span className="font-['Tajawal'] font-bold text-[12px] sm:text-[12px] md:text-[12px] lg:text-[14px] xl:text-[16px] whitespace-nowrap hidden xl:inline">
@@ -282,7 +282,7 @@ export default function NavbarBottom() {
                   <img 
                     src={item.icon} 
                     alt={item.label} 
-                    className={`w-5 h-5 object-contain ${isActive ? "brightness-0 invert" : ""}`}
+                    className={`w-5 h-5 object-contain ${isActive ? "brightness-0 invert " : ""}`}
                   />
                 </button>
               );
