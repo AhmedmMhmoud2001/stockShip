@@ -1,7 +1,10 @@
 import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { RefreshCw } from "lucide-react";
 
 export default function OrderTrackingCard() {
+  const { i18n } = useTranslation();
+  const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
   const data = useMemo(
     () => ({
       statusLabel: "في انتظار الشحن",
@@ -20,7 +23,7 @@ export default function OrderTrackingCard() {
   );
 
   return (
-    <div dir="rtl" className="min-h-screen bg-white flex items-start justify-center p-4 sm:p-8 mt-40">
+    <div dir={currentDir} className="min-h-screen bg-white flex items-start justify-center p-4 sm:p-8 mt-40">
       <div className="w-full max-w-md rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 p-5">
         <div className="flex items-center justify-between">
           <div className="inline-flex items-center gap-2">

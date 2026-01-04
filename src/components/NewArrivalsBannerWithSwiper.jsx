@@ -49,12 +49,12 @@ export default function NewArrivalsBannerWithSwiper() {
 
   return (
     <section dir={currentDir} className="w-full py-6 sm:py-8 md:py-10">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 relative">
+      <div className="relative">
         <div className={`absolute top-4 ${currentDir === 'rtl' ? 'left-4' : 'right-4'} z-10`}>
           <LanguageSwitcher className="h-9 sm:h-10 px-3 sm:px-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg" />
         </div>
         <Swiper
-          modules={[Autoplay, Pagination, Navigation, Keyboard]}
+          modules={[Autoplay, Pagination,  Keyboard]}
           loop
           autoplay={{
             delay: 3000,
@@ -66,7 +66,7 @@ export default function NewArrivalsBannerWithSwiper() {
             clickable: true,
             dynamicBullets: true,
           }}
-          navigation={true}
+          
           keyboard={{ enabled: true }}
           grabCursor={true}
           className="w-full"
@@ -88,7 +88,7 @@ function BannerSlide({ slide, currentDir }) {
       className={`relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-r ${slide.gradient} min-h-[280px] sm:min-h-[320px] md:min-h-[380px] lg:min-h-[420px]`}
     >
       <div className={`relative flex flex-col ${currentDir === 'rtl' ? 'md:flex-row-reverse' : 'md:flex-row'} items-center justify-between gap-4 sm:gap-6 p-4 sm:p-6 md:p-8 lg:p-10 h-full`}>
-        <div className="w-full md:w-[48%] flex-shrink-0">
+        <div className="w-full md:w-[48%] shrink-0">
           <img
             src={slide.image}
             alt="banner"
@@ -113,7 +113,7 @@ function BannerSlide({ slide, currentDir }) {
               type="button"
               className="inline-flex items-center gap-2 rounded-lg sm:rounded-xl bg-[#0F2D3A]/80 px-3 py-2 sm:px-4 sm:py-3 text-xs sm:text-sm font-bold hover:bg-[#0F2D3A] transition"
             >
-              <span className="grid h-6 w-6 sm:h-8 sm:w-8 place-items-center rounded-lg bg-orange-500 flex-shrink-0">
+              <span className="grid h-6 w-6 sm:h-8 sm:w-8 place-items-center rounded-lg bg-orange-500 shrink-0">
                 <svg
                   width="14"
                   height="14"

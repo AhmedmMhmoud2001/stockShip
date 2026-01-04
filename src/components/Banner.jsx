@@ -7,7 +7,7 @@ export default function Banner() {
   const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
   return (
     <section className="w-full">
-      <div className="mx-auto max-w-[1440px]">
+      <div className="mx-auto ">
         <div
           className="
             relative isolate w-full overflow-hidden inline-block

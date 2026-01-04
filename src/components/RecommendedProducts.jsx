@@ -23,7 +23,7 @@ export default function RecommendedProducts() {
 
   return (
     <section className="mt-10 mb-10" dir={currentDir}>
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
+      <div className="mx-auto  px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
         {/* Title */}
         <div className="mb-4">
           <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Eye, EyeOff, ChevronDown } from "lucide-react";
 import logo from "../assets/imgs/Group20.png";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../routes";
 export default function SignUpCard() {
+  const { i18n } = useTranslation();
+  const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -17,7 +20,7 @@ export default function SignUpCard() {
       <div className="w-full max-w-5xl overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-slate-200">
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Left: Form */}
-          <div dir="rtl" className="p-6 sm:p-10">
+          <div dir={currentDir} className="p-6 sm:p-10">
             <div className="w-full">
               <h1 className="text-xl font-bold text-slate-900 text-right w-full">
                 مرحباً بعودتك!

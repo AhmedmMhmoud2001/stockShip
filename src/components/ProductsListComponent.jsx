@@ -101,7 +101,7 @@ export default function ProductsListComponent() {
 
   return (
     <div className="min-h-screen bg-white pt-50">
-      <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 py-6">
+      <div className="mx-auto w-full  px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 py-6">
         {/* Filters and Controls */}
         <div className={`flex items-center justify-between gap-3 flex-wrap ${currentDir === 'rtl' ? 'flex-row-reverse' : ''}`}>
           {/* Sort Dropdown */}

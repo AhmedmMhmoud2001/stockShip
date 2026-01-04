@@ -46,7 +46,7 @@ export default function FeaturedCategories() {
       dir={currentDir}
       className="w-full bg-slate-50 py-8 sm:py-10 md:py-12"
     >
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
+      <div className="mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
         {/* Top features */}
         <div className="w-full flex flex-col md:flex-row justify-around items-start md:items-center gap-6 md:gap-7">
           {features.map((f) => (

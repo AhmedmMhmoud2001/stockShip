@@ -231,7 +231,7 @@ export default function SellerProductsPage() {
                   {product.soldOut && (
                     <div className="absolute inset-0 bg-red-500/20 rounded-lg flex items-center justify-center z-10 pointer-events-none">
                       <div className="bg-red-600 text-white px-8 py-4 rounded-lg text-2xl font-bold">
-                        تم البيع
+                        {t("sellerProducts.soldOut")}
                       </div>
                     </div>
                   )}
@@ -279,23 +279,23 @@ export default function SellerProductsPage() {
                       {/* Product Info Grid */}
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                         <div>
-                          <div className="text-slate-500 mb-1">الكمية</div>
+                          <div className="text-slate-500 mb-1">{t("sellerProducts.quantity")}</div>
                           <div className="font-semibold text-slate-900">
                             {product.quantity.toLocaleString()}
                             <span className="text-xs font-normal text-slate-500">
                               {" "}
-                              ({product.piecesPerCarton} حبات في الكرتوني)
+                              ({product.piecesPerCarton} {t("sellerProducts.piecesInCarton")})
                             </span>
                           </div>
                         </div>
                         <div>
-                          <div className="text-slate-500 mb-1">السعر للحبة</div>
+                          <div className="text-slate-500 mb-1">{t("sellerProducts.pricePerPiece")}</div>
                           <div className="font-semibold text-slate-900">
-                            {product.pricePerPiece.toLocaleString()} ر.س
+                            {product.pricePerPiece.toLocaleString()} {i18n.language === 'ar' ? 'ر.س' : 'SAR'}
                           </div>
                         </div>
                         <div>
-                          <div className="text-slate-500 mb-1">المتر المكعب CBM</div>
+                          <div className="text-slate-500 mb-1">{t("sellerProducts.cbm")}</div>
                           <div className="font-semibold text-slate-900">
                             {product.cbm} CBM
                           </div>
@@ -306,11 +306,11 @@ export default function SellerProductsPage() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-sm text-slate-700 mb-2">
-                            سعر التفاوض
+                            {t("sellerProducts.negotiationPrice")}
                           </label>
                           {product.soldOut ? (
                             <div className="px-4 py-2 bg-slate-50 rounded-md text-slate-900 font-semibold">
-                              {product.negotiationPrice} ر.س
+                              {product.negotiationPrice} {i18n.language === 'ar' ? 'ر.س' : 'SAR'}
                             </div>
                           ) : (
                             <input
@@ -324,13 +324,13 @@ export default function SellerProductsPage() {
                                 )
                               }
                               className="w-full px-4 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                              placeholder="أدخل السعر"
+                              placeholder={t("sellerProducts.enterPrice")}
                             />
                           )}
                         </div>
                         <div>
                           <label className="block text-sm text-slate-700 mb-2">
-                            كمية التفاوض
+                            {t("sellerProducts.negotiationQuantity")}
                           </label>
                           {product.soldOut ? (
                             <div className="px-4 py-2 bg-slate-50 rounded-md text-slate-900 font-semibold">
@@ -348,7 +348,7 @@ export default function SellerProductsPage() {
                                 )
                               }
                               className="w-full px-4 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                              placeholder="أدخل الكمية"
+                              placeholder={t("sellerProducts.enterQuantity")}
                             />
                           )}
                         </div>
@@ -357,21 +357,21 @@ export default function SellerProductsPage() {
                       {/* Summary */}
                       <div className="bg-slate-50 rounded-lg p-4 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                         <div>
-                          <div className="text-slate-500 mb-1">مجموع الكمية</div>
+                          <div className="text-slate-500 mb-1">{t("sellerProducts.totalQuantity")}</div>
                           <div className="font-semibold text-slate-900">
-                            {totalQty.toLocaleString()} حبة
+                            {totalQty.toLocaleString()} {t("sellerProducts.piece")}
                           </div>
                         </div>
                         <div>
-                          <div className="text-slate-500 mb-1">إجمالي المتر مكعب CBM</div>
+                          <div className="text-slate-500 mb-1">{t("sellerProducts.totalCbm")}</div>
                           <div className="font-semibold text-slate-900">
                             {totalCbmForProduct.toFixed(2)} CBM
                           </div>
                         </div>
                         <div>
-                          <div className="text-slate-500 mb-1">إجمالي السعر</div>
+                          <div className="text-slate-500 mb-1">{t("sellerProducts.totalPrice")}</div>
                           <div className="font-semibold text-slate-900">
-                            {totalPriceForProduct.toLocaleString()} ر.س
+                            {totalPriceForProduct.toLocaleString()} {i18n.language === 'ar' ? 'ر.س' : 'SAR'}
                           </div>
                         </div>
                       </div>
@@ -389,24 +389,24 @@ export default function SellerProductsPage() {
 
           {/* Order Summary Table */}
           <div className="bg-white rounded-lg border border-slate-200 p-6 mb-6">
-            <h2 className="text-xl font-bold text-slate-900 mb-4">ملخص الطلب</h2>
+            <h2 className="text-xl font-bold text-slate-900 mb-4">{t("sellerProducts.orderSummary")}</h2>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-slate-200">
-                    <th className="text-right py-3 px-4 text-sm font-semibold text-slate-700">
-                      المسلسل
+                    <th className={`py-3 px-4 text-sm font-semibold text-slate-700 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
+                      {t("sellerProducts.serial")}
                     </th>
-                    <th className="text-right py-3 px-4 text-sm font-semibold text-slate-700">
-                      رقم الصنف
+                    <th className={`py-3 px-4 text-sm font-semibold text-slate-700 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
+                      {t("sellerProducts.itemNumber")}
                     </th>
-                    <th className="text-right py-3 px-4 text-sm font-semibold text-slate-700">
-                      الكمية
+                    <th className={`py-3 px-4 text-sm font-semibold text-slate-700 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
+                      {t("sellerProducts.quantity")}
                     </th>
-                    <th className="text-right py-3 px-4 text-sm font-semibold text-slate-700">
-                      السعر
+                    <th className={`py-3 px-4 text-sm font-semibold text-slate-700 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
+                      {t("sellerProducts.price")}
                     </th>
-                    <th className="text-right py-3 px-4 text-sm font-semibold text-slate-700">
+                    <th className={`py-3 px-4 text-sm font-semibold text-slate-700 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
                       CBM
                     </th>
                   </tr>
@@ -418,7 +418,7 @@ export default function SellerProductsPage() {
                       <td className="py-3 px-4 text-sm text-slate-900">{item.itemNumber}</td>
                       <td className="py-3 px-4 text-sm text-slate-900">{item.quantity}</td>
                       <td className="py-3 px-4 text-sm text-slate-900">
-                        {item.price} ر.س
+                        {item.price} {i18n.language === 'ar' ? 'ر.س' : 'SAR'}
                       </td>
                       <td className="py-3 px-4 text-sm text-slate-900">
                         {item.cbm.toFixed(2)}
@@ -427,13 +427,13 @@ export default function SellerProductsPage() {
                   ))}
                   <tr className="bg-slate-50 font-semibold">
                     <td className="py-3 px-4 text-sm text-slate-900" colSpan={2}>
-                      الإجمالي
+                      {t("sellerProducts.total")}
                     </td>
                     <td className="py-3 px-4 text-sm text-slate-900">
                       {totalQuantity.toLocaleString()}
                     </td>
                     <td className="py-3 px-4 text-sm text-slate-900">
-                      {totalPrice.toLocaleString()} ر.س
+                      {totalPrice.toLocaleString()} {i18n.language === 'ar' ? 'ر.س' : 'SAR'}
                     </td>
                     <td className="py-3 px-4 text-sm text-slate-900">
                       {totalCbm.toFixed(2)}
@@ -443,7 +443,7 @@ export default function SellerProductsPage() {
               </table>
             </div>
             <p className="mt-4 text-sm text-slate-600">
-              نسبة الموقع 4% من الصفقة.
+              {t("sellerProducts.siteFee")}
             </p>
           </div>
 
@@ -451,25 +451,25 @@ export default function SellerProductsPage() {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-2">
-                إضافة ملاحظة
+                {t("sellerProducts.addNote")}
               </label>
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 rows={4}
                 className="w-full px-4 py-3 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-                placeholder="أدخل ملاحظاتك هنا..."
+                placeholder={t("sellerProducts.enterNotes")}
               />
             </div>
             <button
               type="button"
               onClick={() => {
-                alert("تم إرسال طلب التفاوض بنجاح!");
+                alert(i18n.language === 'ar' ? "تم إرسال طلب التفاوض بنجاح!" : "Negotiation request sent successfully!");
                 navigate(ROUTES.ORDER_CHECKOUT);
               }}
               className="w-full bg-[#F5AF00] hover:bg-[#E5A000] text-[#194386] font-bold py-4 px-6 rounded-lg transition-colors text-lg"
             >
-              ارسال طلب تفاوض
+              {t("sellerProducts.sendNegotiationRequest")}
             </button>
           </div>
         </div>

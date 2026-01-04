@@ -21,7 +21,7 @@ function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
 }
 
-function DesktopDropdownPortal({ open, rect, items, onClose, dropdownRef, isLanguage }) {
+function DesktopDropdownPortal({ open, rect, items, onClose, dropdownRef, isLanguage, currentDir }) {
   if (!open || !rect) return null;
 
   const gap = 8;
@@ -47,7 +47,7 @@ function DesktopDropdownPortal({ open, rect, items, onClose, dropdownRef, isLang
     >
       <div
         ref={dropdownRef}
-        dir="rtl"
+        dir={currentDir}
         className="fixed rounded-xl border border-slate-100 bg-white shadow-2xl overflow-hidden"
         style={{ top, right: safeRight, minWidth, maxHeight }}
         onMouseDown={(e) => e.stopPropagation()}
@@ -345,6 +345,7 @@ export default function NavbarBottom() {
         onClose={() => setOpenDropdown(null)}
         dropdownRef={dropdownRef}
         isLanguage={openDropdown?.isLanguage}
+        currentDir={currentDir}
       />
     </div>
   );

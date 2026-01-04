@@ -26,7 +26,6 @@ export const ROUTES = {
   
   // Payment pages
   PAYMENT_ONE: "/PaymentPageOne",
-  PAYMENT_TWO: "/PaymentPageTwo",
   REQUEST_SENT: "/RequestSent",
   
   // Other pages

@@ -1,7 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Search } from "lucide-react";
 import hugeicon from "../assets/imgs/hugeicons_notification-01.png";
 export default function NotificationsList() {
+  const { i18n } = useTranslation();
+  const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
   const items = [
     "لوريم إيبسوم دولار سيت أميت، كونسيكتيتور أديبيسينج إليت. سِد دو إيوسمد...",
     "لوريم إيبسوم دولار سيت أميت، كونسيكتيتور أديبيسينج إليت. سِد دو إيوسمد...",
@@ -12,7 +15,7 @@ export default function NotificationsList() {
   ];
 
   return (
-    <div dir="rtl" className="bg-white my-25">
+    <div dir={currentDir} className="bg-white my-25">
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-8 pt-30">
         {/* Top info bar */}
         <div className="flex items-center justify-start gap-2 rounded-sm bg-blue-200/70 px-4 py-3 text-lg font-bold text-slate-700">

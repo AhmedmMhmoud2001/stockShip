@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../routes";
 
 export default function CheckoutSummaryComponent() {
+  const { t, i18n } = useTranslation();
+  const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
   const [rows, setRows] = useState([
     { serial: 1, itemNo: 1, qty: 1, price: 1, cbm: 1 },
     { serial: 2, itemNo: 2, qty: 2, price: 2, cbm: 2 },
@@ -37,43 +40,43 @@ export default function CheckoutSummaryComponent() {
   const total = 4589;
 
   return (
-    <div dir="rtl" className="w-full bg-white mt-50 mb-10">
+    <div dir={currentDir} className="w-full bg-white mt-50 mb-10">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-8 py-6 space-y-8">
         
 
         {/* Shipping address */}
         <section className="w-full">
-          <div className="text-right text-lg font-bold text-slate-900 mb-3">
-            عنوان شحن البضائع
+          <div className={`text-lg font-bold text-slate-900 mb-3 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
+            {t("checkout.shippingAddress")}
           </div>
 
           <div className="space-y-3 text-sm text-slate-700">
-            <label className="flex items-start gap-2">
+            <label className={`flex items-start gap-2 ${currentDir === 'rtl' ? '' : 'flex-row-reverse'}`}>
               <input
                 type="checkbox"
                 checked={useSiteShipper}
                 onChange={(e) => setUseSiteShipper(e.target.checked)}
                 className="mt-1 h-4 w-4 rounded border-slate-300"
               />
-              <span>ارغب باستخدام وسطاء الشحن الموفوقين من الموقع.</span>
+              <span>{t("checkout.useSiteShippers")}</span>
             </label>
 
-            <label className="flex items-start gap-2">
+            <label className={`flex items-start gap-2 ${currentDir === 'rtl' ? '' : 'flex-row-reverse'}`}>
               <input
                 type="checkbox"
                 checked={useMyShipper}
                 onChange={(e) => setUseMyShipper(e.target.checked)}
                 className="mt-1 h-4 w-4 rounded border-slate-300"
               />
-              <span>لا ارغب باستخدام وسطاء الشحن ( يوجد لدي وسيط شحن ).</span>
+              <span>{t("checkout.useMyShipper")}</span>
             </label>
           </div>
          <div>
-            <div className="mt-5 text-xl"> العنوان</div>
+            <div className={`mt-5 text-xl ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>{t("checkout.address")}</div>
              <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="text-right">
+            <div className={currentDir === 'rtl' ? 'text-right' : 'text-left'}>
               <div className="mt-7 md:mt-0 text-sm font-semibold text-slate-700">
-                الدولة<span className="text-red-500">*</span>
+                {t("checkout.country")}<span className="text-red-500">{t("checkout.required")}</span>
               </div>
               <input
                 value={country}
@@ -82,9 +85,9 @@ export default function CheckoutSummaryComponent() {
                 className="mt-2 w-full rounded-md border border-slate-200 bg-white px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-200"
               />
             </div>
-            <div className="text-right">
+            <div className={currentDir === 'rtl' ? 'text-right' : 'text-left'}>
               <div className="mt-7 md:mt-0 text-sm font-semibold text-slate-700">
-                المدينة<span className="text-red-500">*</span>
+                {t("checkout.city")}<span className="text-red-500">{t("checkout.required")}</span>
               </div>
               <input
                 value={city}
@@ -97,8 +100,8 @@ export default function CheckoutSummaryComponent() {
          </div>
           
 
-          <label className="mt-6 flex items-center justify-between gap-3 rounded-md bg-rose-100/60 px-4 py-3 text-sm text-slate-800">
-            <span>توفير التخليص الجمركي تحت مسؤوليتك</span>
+          <label className={`mt-6 flex items-center gap-3 rounded-md bg-rose-100/60 px-4 py-3 text-sm text-slate-800 ${currentDir === 'rtl' ? 'justify-between' : 'flex-row-reverse justify-between'}`}>
+            <span>{t("checkout.customsClearance")}</span>
             <input
               type="checkbox"
               checked={customsClearance}
@@ -110,16 +113,16 @@ export default function CheckoutSummaryComponent() {
 
         {/* Order summary */}
         <section className="w-full">
-          <div className="text-right text-sm font-bold text-blue-900 mb-2">
-            ملخص الطلب
+          <div className={`text-sm font-bold text-blue-900 mb-2 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
+            {t("checkout.orderSummary")}
           </div>
 
           <div className="overflow-hidden rounded-md border border-slate-100">
             <div className="grid grid-cols-5 bg-blue-50 text-sm font-semibold text-slate-800">
-              <div className="px-3 py-3 text-center">المسلسل</div>
-              <div className="px-3 py-3 text-center">رقم الصنف</div>
-              <div className="px-3 py-3 text-center">الكمية</div>
-              <div className="px-3 py-3 text-center">السعر</div>
+              <div className="px-3 py-3 text-center">{t("checkout.serial")}</div>
+              <div className="px-3 py-3 text-center">{t("checkout.itemNumber")}</div>
+              <div className="px-3 py-3 text-center">{t("checkout.quantity")}</div>
+              <div className="px-3 py-3 text-center">{t("checkout.price")}</div>
               <div className="px-3 py-3 text-center">CBM</div>
             </div>
 
@@ -161,25 +164,25 @@ export default function CheckoutSummaryComponent() {
             </div>
 
             <div className="grid grid-cols-5 bg-blue-900 text-white text-sm font-semibold">
-              <div className="px-3 py-3 text-center">الإجمالي</div>
+              <div className="px-3 py-3 text-center">{t("checkout.total")}</div>
               <div className="px-3 py-3 text-center">........</div>
               <div className="px-3 py-3 text-center">{totals.sumQty}</div>
               <div className="px-3 py-3 text-center">
-                {totals.sumPrice} ر.س
+                {totals.sumPrice} {i18n.language === 'ar' ? 'ر.س' : 'SAR'}
               </div>
               <div className="px-3 py-3 text-center">2222</div>
             </div>
           </div>
 
-          <div className="mt-2 text-right text-sm font-semibold text-blue-900">
-            نسبة الموقع %4 من الصفقة.
+          <div className={`mt-2 text-sm font-semibold text-blue-900 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
+            {t("checkout.siteFee")}
           </div>
         </section>
 
         {/* Cart summary */}
         <section className="w-full">
-          <div className="text-right text-lg font-bold text-slate-900 mb-3">
-            السلة
+          <div className={`text-lg font-bold text-slate-900 mb-3 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
+            {t("checkout.cart")}
           </div>
 
           <div className="w-full rounded-md border border-slate-200 overflow-hidden">
@@ -187,34 +190,34 @@ export default function CheckoutSummaryComponent() {
               <input
                 value={coupon}
                 onChange={(e) => setCoupon(e.target.value)}
-                placeholder="ادخل كود الخصم"
+                placeholder={t("checkout.enterCouponCode")}
                 className="flex-1 px-4 py-3 text-sm outline-none"
               />
               <button
                 type="button"
-                className="w-20 border-r border-slate-200 text-sm text-blue-700 hover:bg-slate-50"
+                className={`w-20 border-slate-200 text-sm text-blue-700 hover:bg-slate-50 ${currentDir === 'rtl' ? 'border-r' : 'border-l'}`}
               >
-                حفظ
+                {t("checkout.save")}
               </button>
             </div>
           </div>
 
           <div className="mt-4 grid grid-cols-2 gap-y-3 text-sm text-slate-700">
-            <div className="text-right font-semibold">الإجمالي الفرعي</div>
-            <div className="text-left">${subtotal}</div>
+            <div className={currentDir === 'rtl' ? 'text-right' : 'text-left'}>{t("checkout.subtotal")}</div>
+            <div className={currentDir === 'rtl' ? 'text-left' : 'text-right'}>{i18n.language === 'ar' ? 'ر.س' : '$'}{subtotal}</div>
 
-            <div className="text-right font-semibold">التوصيل</div>
-            <div className="text-left">${shipping.toFixed(2)}</div>
+            <div className={currentDir === 'rtl' ? 'text-right' : 'text-left'}>{t("checkout.shipping")}</div>
+            <div className={currentDir === 'rtl' ? 'text-left' : 'text-right'}>{i18n.language === 'ar' ? 'ر.س' : '$'}{shipping.toFixed(2)}</div>
 
-            <div className="text-right font-semibold">الإجمالي الفرعي</div>
-            <div className="text-left">${total}</div>
+            <div className={currentDir === 'rtl' ? 'text-right' : 'text-left'}>{t("checkout.total")}</div>
+            <div className={currentDir === 'rtl' ? 'text-left' : 'text-right'}>{i18n.language === 'ar' ? 'ر.س' : '$'}{total}</div>
           </div>
 
           <Link
             to={ROUTES.PAYMENT_ONE}
             className="block mt-6 w-full rounded-md bg-amber-500 px-4 py-4 text-sm font-bold text-blue-900 hover:bg-amber-600 text-center"
           >
-            إتمام الشراء
+            {t("checkout.completePurchase")}
           </Link>
         </section>
       </div>

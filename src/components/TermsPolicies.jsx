@@ -1,6 +1,10 @@
 import React from 'react'
+import { useTranslation } from "react-i18next";
 
 export default function TermsPolicies() {
+  const { i18n } = useTranslation();
+  const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  
   const termsText = `
 لوريم إيبسوم دولار سيت أميت، كونسيكتيتور أديبيسينج إليت. سِد دو إيوسمد
 تمبور إنكيديدنت يو لابوري إت دولوري ماجنا أليكا. يوت إنيم أد مينيم
@@ -10,7 +14,7 @@ export default function TermsPolicies() {
 `;
 
   return (
-    <div dir="rtl" className=" bg-white my-25">
+    <div dir={currentDir} className=" bg-white my-25">
       <div className="w-full px-4 sm:px-8 md:px-12 lg:px-24 pt-30">
        
 

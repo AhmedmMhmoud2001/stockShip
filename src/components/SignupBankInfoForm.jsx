@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "../routes";
 
@@ -48,7 +49,7 @@ export default function SignupBankInfoForm() {
   };
 
   return (
-    <div dir="rtl" className="min-h-screen bg-white mt-40">
+    <div dir={currentDir} className="min-h-screen bg-white mt-40">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-8 py-10">
         <form
           onSubmit={onSubmit}

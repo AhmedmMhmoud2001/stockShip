@@ -14,7 +14,6 @@ import OrdersPage from "./pages/OrdersPage";
 import ProductsListPage from "./pages/ProductsListPage";
 import OrderCheckoutPageTwo from "./pages/OrderCheckoutPageTwo";
 import PaymentPageOne from "./pages/PaymentPageOne";
-import PaymentPageTwo from "./pages/PaymentPageTwo";
 import OrderTrackingCardPage from "./pages/OrderTrackingCardPage";
 import SignupBankInfoFormPage from "./pages/SignupBankInfoFormPage";
 import Seller from "./pages/Seller";
@@ -39,7 +38,6 @@ function App() {
       <Route path={ROUTES.PRODUCTS_LIST} element={<ProductsListPage />} />
       <Route path={ROUTES.ORDER_CHECKOUT_TWO} element={<OrderCheckoutPageTwo />} />
       <Route path={ROUTES.PAYMENT_ONE} element={<PaymentPageOne />} />
-      <Route path={ROUTES.PAYMENT_TWO} element={<PaymentPageTwo />} />
       <Route path={`${ROUTES.ORDER_TRACKING}/:id`} element={<OrderTrackingCardPage />} />
       <Route path={ROUTES.SIGNUP_BANK_INFO} element={<SignupBankInfoFormPage />} />
       <Route path={ROUTES.SELLER} element={<Seller />} />

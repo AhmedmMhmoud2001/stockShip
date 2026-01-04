@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation, Keyboard } from "swiper/modules";
 
@@ -9,6 +10,9 @@ import "swiper/css/pagination";
 import ProductCard from "./ProductCard";
 
 export default function ProductsCarousel({title}) {
+  const { i18n } = useTranslation();
+  const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  
   const products = [
     { id: 1, category: "هواتف ذكية", title: "iPhone 14 Pro", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=1200&q=80&auto=format&fit=crop", rating: 5, reviews: 65, subtitle: "لوريم إيبسوم دولور سيت أم", badgeText: "FOR SALE" },
     { id: 2, category: "هواتف ذكية", title: "iPhone 14 Pro", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=1200&q=80&auto=format&fit=crop", rating: 5, reviews: 65, subtitle: "لوريم إيبسوم دولور سيت أم", badgeText: "FOR SALE" },
@@ -19,8 +23,8 @@ export default function ProductsCarousel({title}) {
   ];
 
   return (
-    <section className="my-10" dir="rtl">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
+    <section className="my-10" dir={currentDir}>
+      <div className="mx-auto  px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
         {/* Title */}
         <div className="mb-4 flex items-center justify-between">
           <div>
@@ -48,11 +52,11 @@ export default function ProductsCarousel({title}) {
           nextEl: '.swiper-button-next',
         }}
         spaceBetween={12}
-        slidesPerView={1.2}
+        slidesPerView={1}
         breakpoints={{
-          375: { slidesPerView: 1.3, spaceBetween: 12 },
+          375: { slidesPerView: 1, spaceBetween: 12 },
           640: { slidesPerView: 2, spaceBetween: 16 },
-          768: { slidesPerView: 2.5, spaceBetween: 16 },
+          768: { slidesPerView: 2, spaceBetween: 16 },
           1024: { slidesPerView: 3, spaceBetween: 20 },
           1280: { slidesPerView: 4, spaceBetween: 24 },
           1536: { slidesPerView: 4, spaceBetween: 24 },

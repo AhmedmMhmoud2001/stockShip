@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../routes";
 
 export default function OrderCheckoutComponent() {
+  const { t, i18n } = useTranslation();
+  const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
   const products = useMemo(
     () => [
       {
@@ -84,33 +87,33 @@ const [coupon, setCoupon] = useState("");
   const total = 4589;
 
   return (
-    <div dir="rtl" className="min-h-screen bg-white mt-40 w-full">
+    <div dir={currentDir} className="min-h-screen bg-white mt-40 w-full">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-25">
         
         {/* Navigation Links */}
-        <div className="mb-6 flex flex-wrap items-center gap-4 text-sm">
+        <div className={`mb-6 flex flex-wrap items-center gap-4 text-sm ${currentDir === 'rtl' ? '' : 'flex-row-reverse'}`}>
           <Link
             to={ROUTES.HOME}
             className="text-blue-900 hover:text-blue-700 hover:underline"
           >
-            الصفحة الرئيسية
+            {t("checkout.homePage")}
           </Link>
           <span className="text-slate-400">/</span>
           <Link
             to={ROUTES.PRODUCTS_LIST}
             className="text-blue-900 hover:text-blue-700 hover:underline"
           >
-            المنتجات
+            {t("checkout.products")}
           </Link>
           <span className="text-slate-400">/</span>
           <Link
             to={ROUTES.ORDERS}
             className="text-blue-900 hover:text-blue-700 hover:underline"
           >
-            طلباتي
+            {t("checkout.myOrders")}
           </Link>
           <span className="text-slate-400">/</span>
-          <span className="text-slate-600 font-semibold">إتمام الشراء</span>
+          <span className="text-slate-600 font-semibold">{t("checkout.title")}</span>
         </div>
         
         <div className="space-y-6">
@@ -125,45 +128,43 @@ const [coupon, setCoupon] = useState("");
                 
                 <div
                   className="grid grid-cols-1 md:grid-cols-[1fr_190px] gap-4 p-4 sm:p-6"
-                  dir="ltr"
+                  dir={currentDir}
                 >
                   {/* LEFT: text + summary */}
-                  <div dir="rtl">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <h3 className="text-lg sm:text-xl font-bold text-slate-900">
+                  <div dir={currentDir}>
+                    <div className={`flex items-start gap-3 ${currentDir === 'rtl' ? 'justify-between' : 'justify-between'}`}>
+                      <div className="flex-1">
+                        <h3 className={`text-lg sm:text-xl font-bold text-slate-900 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
                           {p.title}
                         </h3>
-                        <div className="mt-1 text-xs text-slate-500">
+                        <div className={`mt-1 text-xs text-slate-500 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
                           #{p.sku}
                         </div>
                       </div>
-
-                      
                     </div>
 
-                    <p className="mt-3 text-sm leading-7 text-slate-600">
+                    <p className={`mt-3 text-sm leading-7 text-slate-600 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
                       {p.desc}
                     </p>
 
                     {/* Summary rows */}
-                    <div className="mt-4 overflow-hidden rounded-md  border-slate-200" dir="ltr">
+                    <div className="mt-4 overflow-hidden rounded-md border border-slate-200" dir={currentDir}>
                       {[
-                        { label: "مجموع الكمية", value: `${p.qtyTotal} حبه` },
-                        { label: "اجمالي المتر مكعب CBM", value: `${p.cbmTotal} CBM` },
-                        { label: "اجمالي السعر", value: `${p.totalPrice} ${p.currency}` },
+                        { label: t("checkout.totalQuantity"), value: `${p.qtyTotal} ${t("checkout.piece")}` },
+                        { label: t("checkout.totalCbm"), value: `${p.cbmTotal} CBM` },
+                        { label: t("checkout.totalPrice"), value: `${p.totalPrice} ${i18n.language === 'ar' ? 'ر.س' : 'SAR'}` },
                       ].map((row, idx) => (
                         <div
                           key={row.label}
                           className={`grid grid-cols-2 ${idx !== 0 ? "border-t border-slate-200" : ""}`}
                         >
-                          <div className="px-4 py-2 text-sm text-slate-700 text-left" dir="rtl">
+                          <div className={`px-4 py-2.5 text-sm text-slate-700 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`} dir={currentDir}>
                             {row.value}
                           </div>
 
                           <div
-                            className="px-4 py-2 text-sm font-semibold text-blue-800 text-right bg-slate-50 border-l border-slate-200"
-                            dir="rtl"
+                            className={`px-4 py-2.5 text-sm font-semibold text-blue-800 bg-slate-50 border-slate-200 ${currentDir === 'rtl' ? 'text-right border-l' : 'text-left border-r'}`}
+                            dir={currentDir}
                           >
                             {row.label}
                           </div>
@@ -173,7 +174,7 @@ const [coupon, setCoupon] = useState("");
                   </div>
 
                   {/* RIGHT: image + thumbs */}
-                  <div className="flex flex-col items-end">
+                  <div className={`flex flex-col ${currentDir === 'rtl' ? 'items-end' : 'items-start'}`}>
                     <div className="relative w-full overflow-hidden rounded-md border border-slate-200 bg-slate-50">
                       
                       <img
@@ -181,26 +182,26 @@ const [coupon, setCoupon] = useState("");
                         alt={p.title}
                         className="h-36 sm:h-40 w-full object-cover"
                       />
-                      <span className="absolute top-2 left-2 rounded bg-red-600 px-2 py-0.5 text-[10px] font-bold text-white">
+                      <span className={`absolute top-2 rounded bg-red-600 px-2 py-0.5 text-[10px] font-bold text-white ${currentDir === 'rtl' ? 'left-2' : 'right-2'}`}>
                         SALE
                       </span>
                     </div>
 
                     {/* ✅ thumbnails clickable */}
                     <div className="mt-2 grid grid-cols-5 gap-1 w-full">
-                      {p.thumbs.slice(0, 4).map((t, i) => {
-                        const isActive = activeImg === t;
+                      {p.thumbs.slice(0, 4).map((thumb, i) => {
+                        const isActive = activeImg === thumb;
                         return (
                           <button
                             key={i}
                             type="button"
-                            onClick={() => setSelectedFor(p.id, t)}
+                            onClick={() => setSelectedFor(p.id, thumb)}
                             className={`h-10 overflow-hidden rounded border bg-slate-50 transition
                               ${isActive ? "border-blue-700 ring-2 ring-blue-200" : "border-slate-200 hover:border-slate-400"}`}
-                            aria-label="عرض الصورة"
+                            aria-label={t("checkout.viewImage")}
                           >
                             <img
-                              src={t}
+                              src={thumb}
                               alt=""
                               className="h-full w-full object-cover"
                             />
@@ -213,7 +214,7 @@ const [coupon, setCoupon] = useState("");
                         type="button"
                         onClick={() => setSelectedFor(p.id, p.mainImg)}
                         className="h-10 rounded border border-slate-200 bg-white text-slate-500 hover:bg-slate-50"
-                        aria-label="الرجوع للصورة الأساسية"
+                        aria-label={t("checkout.backToMainImage")}
                       >
                         ▶
                       </button>
@@ -226,51 +227,53 @@ const [coupon, setCoupon] = useState("");
         </div>
 
         {/* Order summary */}
-        <section className="w-full">
-          <div className="text-right text-sm font-bold text-blue-900 mb-2">
-            ملخص الطلب
+        <section className="w-full mt-8">
+          <div className={`text-lg font-bold text-slate-900 mb-4 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
+            {t("checkout.orderSummary")}
           </div>
 
-          <div className="overflow-hidden rounded-md border border-slate-100">
+          <div className="overflow-hidden rounded-md border border-slate-200" dir={currentDir}>
             <div className="grid grid-cols-5 bg-blue-50 text-sm font-semibold text-slate-800">
-              <div className="px-3 py-3 text-center">المسلسل</div>
-              <div className="px-3 py-3 text-center">رقم الصنف</div>
-              <div className="px-3 py-3 text-center">الكمية</div>
-              <div className="px-3 py-3 text-center">السعر</div>
-              <div className="px-3 py-3 text-center">CBM</div>
+              <div className={`px-3 py-3 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>{t("checkout.serial")}</div>
+              <div className={`px-3 py-3 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>{t("checkout.itemNumber")}</div>
+              <div className={`px-3 py-3 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>{t("checkout.quantity")}</div>
+              <div className={`px-3 py-3 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>{t("checkout.price")}</div>
+              <div className={`px-3 py-3 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>CBM</div>
             </div>
 
             <div className="bg-white">
               {rows.map((r, idx) => (
                 <div
                   key={idx}
-                  className="grid grid-cols-5 items-center border-t border-slate-100 min-h-[74px]"
+                  className={`grid grid-cols-5 items-center border-t border-slate-200 min-h-[74px] ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}`}
                 >
-                  <div className="text-center text-sm text-slate-700">
+                  <div className={`px-3 py-3 text-sm text-slate-700 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
                     <input
                       value={r.serial}
                       onChange={(e) => updateRow(idx, "serial", e.target.value)}
-                      className="mx-auto w-4/5 rounded-md bg-blue-50 px-2 py-2 text-center text-sm outline-none focus:ring-2 focus:ring-blue-200"
+                      className={`w-full rounded-md bg-white border border-slate-200 px-2 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-200 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}
+                      dir={currentDir}
                     />
                   </div>
 
-                  <div className="text-center text-sm text-slate-700">
+                  <div className={`px-3 py-3 text-sm text-slate-700 ${currentDir === 'rtl' ? 'text-right border-r' : 'text-left border-l'} border-slate-200`}>
                     <input
                       value={r.itemNo}
                       onChange={(e) => updateRow(idx, "itemNo", e.target.value)}
-                      className="mx-auto w-4/5 rounded-md bg-blue-50 px-2 py-2 text-center text-sm outline-none focus:ring-2 focus:ring-blue-200"
+                      className={`w-full rounded-md bg-white border border-slate-200 px-2 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-200 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}
+                      dir={currentDir}
                     />
                   </div>
 
-                  <div className="text-center text-sm text-slate-700 border-l border-slate-200">
+                  <div className={`px-3 py-3 text-sm text-slate-700 ${currentDir === 'rtl' ? 'text-right border-r' : 'text-left border-l'} border-slate-200`}>
                     {r.qty}
                   </div>
 
-                  <div className="text-center text-sm text-slate-700 border-l border-slate-200">
-                    {r.price}
+                  <div className={`px-3 py-3 text-sm text-slate-700 ${currentDir === 'rtl' ? 'text-right border-r' : 'text-left border-l'} border-slate-200`}>
+                    {r.price} {i18n.language === 'ar' ? 'ر.س' : 'SAR'}
                   </div>
 
-                  <div className="text-center text-sm text-slate-700 border-l border-slate-200">
+                  <div className={`px-3 py-3 text-sm text-slate-700 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
                     {r.cbm}
                   </div>
                 </div>
@@ -278,62 +281,71 @@ const [coupon, setCoupon] = useState("");
             </div>
 
             <div className="grid grid-cols-5 bg-blue-900 text-white text-sm font-semibold">
-              <div className="px-3 py-3 text-center">الإجمالي</div>
-              <div className="px-3 py-3 text-center">........</div>
-              <div className="px-3 py-3 text-center">{totals.sumQty}</div>
-              <div className="px-3 py-3 text-center">
-                {totals.sumPrice} ر.س
+              <div className={`px-3 py-3 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>{t("checkout.total")}</div>
+              <div className={`px-3 py-3 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>........</div>
+              <div className={`px-3 py-3 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>{totals.sumQty}</div>
+              <div className={`px-3 py-3 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
+                {totals.sumPrice} {i18n.language === 'ar' ? 'ر.س' : 'SAR'}
               </div>
-              <div className="px-3 py-3 text-center">2222</div>
+              <div className={`px-3 py-3 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>2222</div>
             </div>
           </div>
 
-          <div className="mt-2 text-right text-sm font-semibold text-blue-900">
-            نسبة الموقع %4 من الصفقة.
+          <div className={`mt-3 text-sm font-semibold text-blue-900 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
+            {t("checkout.siteFee")}
           </div>
         </section>
         {/* Cart summary */}
-        <section className="w-full">
-          <div className="text-right text-lg font-bold text-slate-900 mb-3">
-            السلة
+        <section className="w-full mt-8">
+          <div className={`text-lg font-bold text-slate-900 mb-4 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}>
+            {t("checkout.cart")}
           </div>
 
-          <div className="w-full rounded-md border border-slate-200 overflow-hidden">
-            <div className="flex items-stretch">
+          <div className="w-full rounded-md border border-slate-200 overflow-hidden" dir={currentDir}>
+            <div className={`flex items-stretch ${currentDir === 'rtl' ? 'flex-row-reverse' : ''}`}>
               <input
                 value={coupon}
                 onChange={(e) => setCoupon(e.target.value)}
-                placeholder="ادخل كود الخصم"
-                className="flex-1 px-4 py-3 text-sm outline-none"
+                placeholder={t("checkout.enterCouponCode")}
+                className={`flex-1 px-4 py-3 text-sm outline-none ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`}
+                dir={currentDir}
               />
               <button
                 type="button"
-                className="w-20 border-r border-slate-200 text-sm text-blue-700 hover:bg-slate-50"
+                className={`w-24 border-slate-200 text-sm font-semibold text-blue-700 hover:bg-slate-50 transition-colors ${currentDir === 'rtl' ? 'border-l' : 'border-r'}`}
               >
-                حفظ
+                {t("checkout.save")}
               </button>
             </div>
           </div>
 
-          <div className="mt-4 grid grid-cols-2 gap-y-3 text-sm text-slate-700">
-            <div className="text-right font-semibold">الإجمالي الفرعي</div>
-            <div className="text-left">${subtotal}</div>
+          <div className={`mt-6 rounded-md border border-slate-200 bg-slate-50 p-4 ${currentDir === 'rtl' ? 'text-right' : 'text-left'}`} dir={currentDir}>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-slate-700">{t("checkout.subtotal")}</span>
+                <span className="text-sm font-semibold text-slate-900">{i18n.language === 'ar' ? 'ر.س' : '$'}{subtotal}</span>
+              </div>
 
-            <div className="text-right font-semibold">التوصيل</div>
-            <div className="text-left">${shipping.toFixed(2)}</div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-slate-700">{t("checkout.shipping")}</span>
+                <span className="text-sm font-semibold text-slate-900">{i18n.language === 'ar' ? 'ر.س' : '$'}{shipping.toFixed(2)}</span>
+              </div>
 
-            <div className="text-right font-semibold">الإجمالي الفرعي</div>
-            <div className="text-left">${total}</div>
+              <div className="border-t border-slate-300 pt-3 flex items-center justify-between">
+                <span className="text-base font-bold text-slate-900">{t("checkout.total")}</span>
+                <span className="text-base font-bold text-blue-900">{i18n.language === 'ar' ? 'ر.س' : '$'}{total}</span>
+              </div>
+            </div>
           </div>
+          
           <Link to={ROUTES.ORDER_CHECKOUT_TWO}>
             <button
-            type="button"
-            className="mt-6 w-full rounded-md bg-amber-500 px-4 py-4 text-sm font-bold text-blue-900 hover:bg-amber-600"
-          >
-            إتمام الشراء
-          </button>
+              type="button"
+              className="mt-6 w-full rounded-md bg-amber-500 px-4 py-4 text-base font-bold text-blue-900 hover:bg-amber-600 transition-colors"
+            >
+              {t("checkout.completePurchase")}
+            </button>
           </Link>
-          
         </section>
 
         {/* Additional Navigation Links */}
@@ -342,19 +354,19 @@ const [coupon, setCoupon] = useState("");
             to={ROUTES.HOME}
             className="px-6 py-2 text-sm font-semibold text-blue-900 border border-blue-900 rounded-md hover:bg-blue-50 transition-colors"
           >
-            العودة للصفحة الرئيسية
+            {t("checkout.backToHome")}
           </Link>
           <Link
             to={ROUTES.PRODUCTS_LIST}
             className="px-6 py-2 text-sm font-semibold text-blue-900 border border-blue-900 rounded-md hover:bg-blue-50 transition-colors"
           >
-            تصفح المزيد من المنتجات
+            {t("checkout.browseMoreProducts")}
           </Link>
           <Link
             to={ROUTES.ORDERS}
             className="px-6 py-2 text-sm font-semibold text-blue-900 border border-blue-900 rounded-md hover:bg-blue-50 transition-colors"
           >
-            عرض طلباتي
+            {t("checkout.viewMyOrders")}
           </Link>
         </div>
 
