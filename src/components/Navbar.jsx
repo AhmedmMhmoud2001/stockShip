@@ -203,9 +203,9 @@ export default function Navbar() {
         </div>
 
         {/* Language switcher for mobile/tablet */}
-        <div className="md:hidden">
+        {/* <div className="md:hidden">
           <LanguageSwitcher className="h-8 sm:h-9 px-2 sm:px-3" />
-        </div>
+        </div> */}
 
         <button
           type="button"
@@ -236,11 +236,11 @@ export default function Navbar() {
             `}
           >
             <div className="flex items-center justify-between px-4 py-4 border-b shrink-0 bg-blue-900">
-              <div className="font-['Tajawal'] font-bold text-lg">{t("nav.menu")}</div>
+              <div className="font-['Tajawal'] font-bold text-lg text-white">{t("nav.menu")}</div>
 
               <button
                 onClick={closeSidebar}
-                className="w-10 h-10 rounded-full grid place-items-center hover:bg-black/5"
+                className="w-10 h-10 rounded-full grid place-items-center hover:bg-black/5 text-white font-bold bg-(--accent)"
                 aria-label="Close sidebar"
               >
                 ✕
@@ -248,38 +248,7 @@ export default function Navbar() {
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 space-y-6">
-              <div className="grid gap-2">
-                <Link
-                  to={ROUTES.SIGNUP_BANK_INFO}
-                  onClick={closeSidebar}
-                  className="w-full rounded-xl bg-(--accent) px-4 py-3 text-center font-['Tajawal'] font-bold text-(--primary) block"
-                >
-                  {t("nav.beSeller")}
-                </Link>
-
-                <Link
-                  to={ROUTES.LOGIN}
-                  onClick={closeSidebar}
-                  className="w-full rounded-xl border border-(--primary) bg-white px-4 py-3 text-center font-['Tajawal'] font-bold text-(--primary) block"
-                >
-                  {t("nav.login")}
-                </Link>
-
-                <form
-                  onSubmit={handleSearch}
-                  className="mt-1 w-full h-11 flex items-center justify-between gap-3 bg-(--white) rounded-[5px] px-3 ring-1 ring-slate-200"
-                >
-                  <img src={camera} alt="camera" className="h-5 w-5 shrink-0" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder={t("nav.search")}
-                    className="w-full h-8 direction-rtl text-right outline-none border-0 bg-transparent"
-                  />
-                </form>
-              </div>
-
+              
               <div className="space-y-2">
                 <div className="font-['Tajawal'] font-bold text-sm opacity-70">{t("categories.shortcuts")}</div>
 
@@ -365,6 +334,41 @@ export default function Navbar() {
                     </div>
                   ))}
                 </div>
+              </div>
+
+              <div className="grid gap-2">
+                <div className="flex  gap-3">
+                <Link
+                  to={ROUTES.SIGNUP_BANK_INFO}
+                  onClick={closeSidebar}
+                  className="w-full rounded-xl bg-(--accent) px-4 py-3 text-center font-['Tajawal'] font-bold text-(--primary) block"
+                >
+                  {t("nav.beSeller")}
+                </Link>
+
+                <Link
+                  to={ROUTES.LOGIN}
+                  onClick={closeSidebar}
+                  className="w-full rounded-xl border border-(--primary) text-white px-4 py-3 text-center font-['Tajawal'] font-bold bg-(--primary) block"
+                >
+                  {t("nav.login")}
+                </Link>
+                </div>
+                
+
+                <form
+                  onSubmit={handleSearch}
+                  className="mt-1 w-full h-11 flex items-center justify-between gap-3 bg-(--white) rounded-[5px] px-3 ring-1 ring-slate-200"
+                >
+                  <img src={camera} alt="camera" className="h-5 w-5 shrink-0" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder={t("nav.search")}
+                    className="w-full h-8 direction-rtl text-right outline-none border-0 bg-transparent"
+                  />
+                </form>
               </div>
 
               <div className="h-6" />
