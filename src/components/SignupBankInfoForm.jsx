@@ -212,12 +212,7 @@ export default function SignupBankInfoForm() {
               >
                 {t("signupBankInfo.done")}
               </button>
-              <Link
-                to={ROUTES.PUBLISH_AD}
-                className="w-full sm:w-auto inline-block text-center rounded-md bg-blue-900 px-6 py-3 text-sm font-bold text-white hover:bg-blue-800 transition-colors"
-              >
-                {t("signupBankInfo.createAd")}
-              </Link>
+             
             </div>
           </div>
         </form>
