@@ -1,7 +1,7 @@
 // NavbarBottom.jsx
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ROUTES } from "../routes";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -60,7 +60,7 @@ function DesktopDropdownPortal({ open, rect, items, onClose, dropdownRef, isLang
               <Link
                 key={i}
                 to={c.to}
-                className="block px-4 py-3 text-sm text-slate-700 hover:bg-slate-50"
+                className="block px-4 py-3 text-sm text-slate-700 hover:bg-blue-900 hover:text-white transition-colors"
                 onClick={onClose}
               >
                 {c.label}
@@ -76,6 +76,7 @@ function DesktopDropdownPortal({ open, rect, items, onClose, dropdownRef, isLang
 
 export default function NavbarBottom() {
   const { t } = useTranslation(); // Used in menuItems useMemo
+  const location = useLocation();
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -265,7 +266,7 @@ export default function NavbarBottom() {
                   onClick={(e) => openPortalDropdown(e, item)}
                   className={`shrink-0 flex items-center gap-2 h-12 border-r-[0.5px] border-(--bottom-divider) pe-2 ps-2 transition-colors ${
                     isActive 
-                      ? " text-(--primary)" 
+                      ? " text-(--accent)" 
                       : "bg-transparent text-(--bottom-text) hover:bg-blue-50"
                   }`}
                 >
@@ -273,7 +274,7 @@ export default function NavbarBottom() {
                     src={dropdown}
                     alt="arrow"
                     className={`w-5 h-5 object-contain opacity-70 transition ${
-                      isActive ? "rotate-180 text-(--primary)" : ""
+                      isActive ? "rotate-180 text-(--accent)" : ""
                     }`}
                   />
                   <span className="font-['Tajawal'] font-bold text-[12px] sm:text-[12px] md:text-[12px] lg:text-[14px] xl:text-[16px] whitespace-nowrap hidden xl:inline">
@@ -292,7 +293,10 @@ export default function NavbarBottom() {
             <div className="flex items-center gap-0 flex-1 justify-end overflow-x-auto">
               
               {menuItems.map((item) => {
-                const isActive = openDropdown?.key === item.key;
+                const isDropdownActive = openDropdown?.key === item.key;
+                const isLinkActive = item.to && location.pathname === item.to;
+                const isActive = isDropdownActive || isLinkActive;
+                
                 return (
                   <div key={item.key} className="shrink-0">
                     {(item.children || item.isLanguage) ? (
@@ -301,7 +305,7 @@ export default function NavbarBottom() {
                         onClick={(e) => openPortalDropdown(e, item)}
                         className={`flex items-center gap-1 h-12 border-r-[0.5px] border-(--bottom-divider) pe-2 ps-2 transition-colors ${
                           isActive 
-                            ? "bg-(--primary) text-white" 
+                            ? "bg-(--accent) text-white" 
                             : "bg-transparent text-(--bottom-text) hover:bg-blue-50"
                         }`}
                       >
@@ -309,7 +313,7 @@ export default function NavbarBottom() {
                           src={dropdown}
                           alt="arrow"
                           className={`w-5 h-5 object-contain opacity-70 transition ${
-                            isActive ? "rotate-180" : ""
+                            isDropdownActive ? "rotate-180" : ""
                           }`}
                         />
                        
@@ -327,12 +331,20 @@ export default function NavbarBottom() {
                   ) : (
                     <Link
                       to={item.to || "#"}
-                      className="flex items-center gap-1 h-12 border-r-[0.5px] border-(--bottom-divider) pe-2 ps-2"
+                      className={`flex items-center gap-1 h-12 border-r-[0.5px] border-(--bottom-divider) pe-2 ps-2 transition-colors ${
+                        isActive 
+                          ? "text-(--accent)" 
+                          : "bg-transparent text-(--bottom-text) hover:bg-blue-50"
+                      }`}
                     >
                       <span className="font-['Tajawal'] font-bold text-[12px] sm:text-[12px] md:text-[12px] lg:text-[14px] xl:text-[16px] whitespace-nowrap hidden xl:inline">
                         {item.label}
                       </span>
-                      <img src={item.icon} alt={item.label} className="w-5 h-5 object-contain" />
+                      <img 
+                        src={item.icon} 
+                        alt={item.label} 
+                        className={`w-5 h-5 object-contain ${isActive ? "brightness-0 invert" : ""}`}
+                      />
                       
                     </Link>
                   )}
@@ -354,7 +366,7 @@ export default function NavbarBottom() {
                     onClick={(e) => openPortalDropdown(e, item)}
                     className={`shrink-0 flex items-center gap-1 h-10 px-1.5 sm:px-2 border-r-[0.5px] border-(--bottom-divider) transition-colors ${
                       isActive 
-                        ? "bg-(--primary) text-white" 
+                        ? "bg-(--accent) text-white" 
                         : "bg-transparent text-(--bottom-text) hover:bg-blue-50"
                     }`}
                   >
@@ -373,7 +385,10 @@ export default function NavbarBottom() {
 
             <div className="flex items-center gap-0.5 shrink-0">
               {menuItems.map((item) => {
-                const isActive = openDropdown?.key === item.key;
+                const isDropdownActive = openDropdown?.key === item.key;
+                const isLinkActive = item.to && location.pathname === item.to;
+                const isActive = isDropdownActive || isLinkActive;
+                
                 return (
                   <div key={item.key} className="shrink-0">
                     {(item.children || item.isLanguage) ? (
@@ -382,7 +397,7 @@ export default function NavbarBottom() {
                         onClick={(e) => openPortalDropdown(e, item)}
                         className={`flex items-center gap-1 h-10 px-1.5 sm:px-2 border-r-[0.5px] border-(--bottom-divider) transition-colors ${
                           isActive 
-                            ? "bg-(--primary) text-white" 
+                            ? "bg-(--accent) text-white" 
                             : "bg-transparent text-(--bottom-text) hover:bg-blue-50"
                         }`}
                       >
@@ -398,9 +413,17 @@ export default function NavbarBottom() {
                   ) : (
                     <Link
                       to={item.to || "#"}
-                      className="flex items-center gap-1 h-10 px-1.5 sm:px-2 border-r-[0.5px] border-(--bottom-divider)"
+                      className={`flex items-center gap-1 h-10 px-1.5 sm:px-2 border-r-[0.5px] border-(--bottom-divider) transition-colors ${
+                        isActive 
+                          ? "text-(--accent)" 
+                          : "bg-transparent text-(--bottom-text) hover:bg-blue-50"
+                      }`}
                     >
-                      <img src={item.icon} alt={item.label} className="w-4 h-4 object-contain" />
+                      <img 
+                        src={item.icon} 
+                        alt={item.label} 
+                        className={`w-4 h-4 object-contain ${isActive ? "brightness-0 invert" : ""}`}
+                      />
                       <span className="font-['Tajawal'] font-bold text-[10px] sm:text-[11px] whitespace-nowrap hidden sm:inline">
                         {item.label}
                       </span>

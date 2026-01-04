@@ -23,10 +23,11 @@ function FooterLinks({ title, links, currentDir }) {
       <ul className="space-y-3 text-sm text-slate-600">
         {links.map((l, i) => (
           <li key={i}>
-            <Link to={l.href}
-              className={`inline-flex items-center gap-2 transition hover:text-slate-900 ${dir === 'rtl' ? 'flex-row-reverse' : ''}`}
+            <Link 
+              to={l.href || ROUTES.HOME}
+              className={`group inline-flex items-center gap-2 transition-colors hover:text-(--accent) hover:translate-x-1 ${dir === 'rtl' ? 'flex-row-reverse hover:translate-x-[-4px]' : ''}`}
             >
-              <ChevronLeft className={`h-4 w-4 text-slate-400 ${dir === 'rtl' ? 'rotate-180' : ''}`} />
+              <ChevronLeft className={`h-4 w-4 text-slate-400 group-hover:text-(--accent) transition-colors ${dir === 'rtl' ? 'rotate-180' : ''}`} />
               <span>{l.label}</span>
             </Link>
           </li>
@@ -37,11 +38,9 @@ function FooterLinks({ title, links, currentDir }) {
 }
 
 export default function FooterArabic({
-  brandName = "STOCKSHIP",
   description,
   contact,
   columns,
-  year = new Date().getFullYear(),
 }) {
   const { t, i18n } = useTranslation();
   const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
@@ -99,7 +98,9 @@ export default function FooterArabic({
         <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full">
           {/* Brand (عمود) */}
           <div className={currentDir === 'rtl' ? 'text-right' : 'text-left'}>
-            <img src={logo} alt="logo" className="inline-block h-10 w-auto" />
+            <Link to={ROUTES.HOME}>
+              <img src={logo} alt="logo" className="inline-block h-10 w-auto cursor-pointer hover:opacity-80 transition-opacity" />
+            </Link>
 
             <p className="mt-4 text-sm leading-relaxed text-slate-600">
               {description || defaultDescription}
@@ -140,10 +141,20 @@ export default function FooterArabic({
                 <span className="leading-relaxed">{(contact || defaultContact).address}</span>
               </li>
               <li className={`flex items-start ${currentDir === 'rtl' ? 'justify-start' : 'justify-end'} gap-3`}>
-                <span>{(contact || defaultContact).phone}</span>
+                <a 
+                  href={`tel:${(contact || defaultContact).phone}`}
+                  className="hover:text-(--accent) transition-colors"
+                >
+                  {(contact || defaultContact).phone}
+                </a>
               </li>
               <li className={`flex items-start ${currentDir === 'rtl' ? 'justify-start' : 'justify-end'} gap-3`}>
-                <span>{(contact || defaultContact).email}</span>
+                <a 
+                  href={`mailto:${(contact || defaultContact).email}`}
+                  className="hover:text-(--accent) transition-colors"
+                >
+                  {(contact || defaultContact).email}
+                </a>
               </li>
               <li className={`flex items-start ${currentDir === 'rtl' ? 'justify-start' : 'justify-end'} gap-3 whitespace-pre-line`}>
                 <span>{(contact || defaultContact).hours}</span>
@@ -156,7 +167,7 @@ export default function FooterArabic({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-sm ring-1 ring-slate-200 hover:text-slate-900"
+                className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-sm ring-1 ring-slate-200 hover:bg-blue-600 hover:scale-110 transition-all duration-200"
               >
                 <Facebook className="h-5 w-5" />
               </a>
@@ -165,7 +176,7 @@ export default function FooterArabic({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-sm ring-1 ring-slate-200 hover:text-slate-900"
+                className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-sm ring-1 ring-slate-200 hover:bg-blue-600 hover:scale-110 transition-all duration-200"
               >
                 <Instagram className="h-5 w-5" />
               </a>
@@ -174,7 +185,7 @@ export default function FooterArabic({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter"
-                className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-sm ring-1 ring-slate-200 hover:text-slate-900"
+                className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-sm ring-1 ring-slate-200 hover:bg-blue-600 hover:scale-110 transition-all duration-200"
               >
                 <Twitter className="h-5 w-5" />
               </a>
@@ -183,7 +194,7 @@ export default function FooterArabic({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-sm ring-1 ring-slate-200 hover:text-slate-900"
+                className="grid h-10 w-10 place-items-center rounded-full bg-blue-500 text-white shadow-sm ring-1 ring-slate-200 hover:bg-blue-600 hover:scale-110 transition-all duration-200"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
@@ -194,7 +205,15 @@ export default function FooterArabic({
         <div className="mt-12 h-px w-full bg-blue-400/60" />
 
         <div className="py-6 text-center text-sm text-blue-500">
-          © {year} {brandName}. {t("footer.rights")}
+          All Rights Reserved © Designed by{" "}
+          <a 
+            href="https://www.qeematech.net/" 
+            target="_blank" 
+            rel="dofollow noreferrer"
+            className="hover:text-(--accent) hover:underline transition-colors"
+          >
+            Qeematech
+          </a>
         </div>
       </div>
     </footer>
