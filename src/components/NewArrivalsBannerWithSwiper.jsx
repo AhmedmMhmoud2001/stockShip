@@ -60,10 +60,10 @@ export default function NewArrivalsBannerWithSwiper() {
             pauseOnMouseEnter: true,
           }}
           speed={900}
-          pagination={{ 
-            clickable: true,
-            dynamicBullets: true,
-          }}
+          // pagination={{ 
+          //   clickable: true,
+          //   dynamicBullets: true,
+          // }}
           
           keyboard={{ enabled: true }}
           grabCursor={true}

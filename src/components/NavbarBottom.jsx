@@ -77,6 +77,8 @@ function DesktopDropdownPortal({ open, rect, items, onClose, dropdownRef, isLang
 export default function NavbarBottom() {
   const { t } = useTranslation(); // Used in menuItems useMemo
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const rootRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -205,6 +207,30 @@ export default function NavbarBottom() {
     };
   }, [openDropdown]);
 
+  // Handle scroll to hide/show navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Show navbar when scrolling up or at the top
+      if (currentScrollY < lastScrollY || currentScrollY < 10) {
+        setIsVisible(true);
+      } 
+      // Hide navbar when scrolling down
+      else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
+
   const openPortalDropdown = (e, item) => {
     if (!item.children && !item.isLanguage) return;
     const rect = e.currentTarget.getBoundingClientRect();
@@ -218,59 +244,86 @@ export default function NavbarBottom() {
   const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
 
   return (
-    <div ref={rootRef} dir={currentDir} className="hidden lg:block w-full">
+    <div 
+      ref={rootRef} 
+      dir={currentDir} 
+      className={`hidden lg:block w-full relative z-[50] transition-transform duration-300 ease-in-out ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
       <div className="w-full rounded-b-[50px] shadow-[0_-8px_24px_rgba(0,0,0,0.10)] bg-(--bottom-bg)">
         <div className="px-2 sm:px-4 md:px-6 lg:px-10 py-2 sm:py-3 lg:py-4">
           {/* Desktop Layout */}
           <div className="hidden lg:flex items-center justify-between gap-2">
             <div className="flex items-center gap-1 shrink-0">
-            {categories.map((item) => (
+            {categories.map((item) => {
+              const isActive = openDropdown?.key === item.key;
+              return (
                 <button
                   key={item.key}
                   type="button"
                   onClick={(e) => openPortalDropdown(e, item)}
-                  className="shrink-0 flex items-center gap-2 h-12 border-r-[0.5px] border-(--bottom-divider) pe-2 ps-2"
+                  className={`shrink-0 flex items-center gap-2 h-12 border-r-[0.5px] border-(--bottom-divider) pe-2 ps-2 transition-colors ${
+                    isActive 
+                      ? "bg-(--primary) text-white" 
+                      : "bg-transparent text-(--bottom-text) hover:bg-blue-50"
+                  }`}
                 >
                   <img
                     src={dropdown}
                     alt="arrow"
                     className={`w-5 h-5 object-contain opacity-70 transition ${
-                      openDropdown?.key === item.key ? "rotate-180" : ""
+                      isActive ? "rotate-180" : ""
                     }`}
                   />
                   <span className="font-['Tajawal'] font-bold text-[12px] sm:text-[12px] md:text-[12px] lg:text-[14px] xl:text-[16px] whitespace-nowrap hidden xl:inline">
                     {item.label}
                   </span>
-                  <img src={item.icon} alt={item.label} className="w-5 h-5 object-contain" />
+                  <img 
+                    src={item.icon} 
+                    alt={item.label} 
+                    className={`w-5 h-5 object-contain ${isActive ? "brightness-0 invert" : ""}`}
+                  />
                 </button>
-              ))}
+              );
+            })}
             </div>
 
             <div className="flex items-center gap-0 flex-1 justify-end overflow-x-auto">
               
-              {menuItems.map((item) => (
-                <div key={item.key} className="shrink-0">
-                  {(item.children || item.isLanguage) ? (
-                    <button
-                      type="button"
-                      onClick={(e) => openPortalDropdown(e, item)}
-                      className="flex items-center gap-1 h-12 border-r-[0.5px] border-(--bottom-divider) pe-2 ps-2"
-                    >
-                      <img
-                        src={dropdown}
-                        alt="arrow"
-                        className={`w-5 h-5 object-contain opacity-70 transition ${
-                          openDropdown?.key === item.key ? "rotate-180" : ""
+              {menuItems.map((item) => {
+                const isActive = openDropdown?.key === item.key;
+                return (
+                  <div key={item.key} className="shrink-0">
+                    {(item.children || item.isLanguage) ? (
+                      <button
+                        type="button"
+                        onClick={(e) => openPortalDropdown(e, item)}
+                        className={`flex items-center gap-1 h-12 border-r-[0.5px] border-(--bottom-divider) pe-2 ps-2 transition-colors ${
+                          isActive 
+                            ? "bg-(--primary) text-white" 
+                            : "bg-transparent text-(--bottom-text) hover:bg-blue-50"
                         }`}
-                      />
-                     
-                      <span className="font-['Tajawal'] font-bold text-[12px] sm:text-[12px] md:text-[12px] lg:text-[14px] xl:text-[16px] whitespace-nowrap hidden xl:inline">
-                        {item.label}
-                      </span>
+                      >
+                        <img
+                          src={dropdown}
+                          alt="arrow"
+                          className={`w-5 h-5 object-contain opacity-70 transition ${
+                            isActive ? "rotate-180" : ""
+                          }`}
+                        />
+                       
+                        <span className="font-['Tajawal'] font-bold text-[12px] sm:text-[12px] md:text-[12px] lg:text-[14px] xl:text-[16px] whitespace-nowrap hidden xl:inline">
+                          {item.label}
+                        </span>
 
-                       <img src={item.icon} alt={item.label} className="w-5 h-5 object-contain" />
-                      
-                    </button>
+                         <img 
+                           src={item.icon} 
+                           alt={item.label} 
+                           className={`w-5 h-5 object-contain ${isActive ? "brightness-0 invert" : ""}`}
+                         />
+                        
+                      </button>
                   ) : (
                     <Link
                       to={item.to || "#"}
@@ -283,43 +336,65 @@ export default function NavbarBottom() {
                       
                     </Link>
                   )}
-                </div>
-              ))}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
           {/* Mobile/Tablet Layout */}
           <div className="lg:hidden flex items-center justify-between gap-1 overflow-x-auto">
             <div className="flex items-center gap-0.5 shrink-0">
-              {categories.slice(0, 3).map((item) => (
-                <button
-                  key={item.key}
-                  type="button"
-                  onClick={(e) => openPortalDropdown(e, item)}
-                  className="shrink-0 flex items-center gap-1 h-10 px-1.5 sm:px-2 border-r-[0.5px] border-(--bottom-divider)"
-                >
-                  <img src={item.icon} alt={item.label} className="w-4 h-4 object-contain" />
-                  <span className="font-['Tajawal'] font-bold text-[10px] sm:text-[11px] whitespace-nowrap hidden sm:inline">
-                    {item.label}
-                  </span>
-                </button>
-              ))}
+              {categories.slice(0, 3).map((item) => {
+                const isActive = openDropdown?.key === item.key;
+                return (
+                  <button
+                    key={item.key}
+                    type="button"
+                    onClick={(e) => openPortalDropdown(e, item)}
+                    className={`shrink-0 flex items-center gap-1 h-10 px-1.5 sm:px-2 border-r-[0.5px] border-(--bottom-divider) transition-colors ${
+                      isActive 
+                        ? "bg-(--primary) text-white" 
+                        : "bg-transparent text-(--bottom-text) hover:bg-blue-50"
+                    }`}
+                  >
+                    <img 
+                      src={item.icon} 
+                      alt={item.label} 
+                      className={`w-4 h-4 object-contain ${isActive ? "brightness-0 invert" : ""}`}
+                    />
+                    <span className="font-['Tajawal'] font-bold text-[10px] sm:text-[11px] whitespace-nowrap hidden sm:inline">
+                      {item.label}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
             <div className="flex items-center gap-0.5 shrink-0">
-              {menuItems.map((item) => (
-                <div key={item.key} className="shrink-0">
-                  {(item.children || item.isLanguage) ? (
-                    <button
-                      type="button"
-                      onClick={(e) => openPortalDropdown(e, item)}
-                      className="flex items-center gap-1 h-10 px-1.5 sm:px-2 border-r-[0.5px] border-(--bottom-divider)"
-                    >
-                      <img src={item.icon} alt={item.label} className="w-4 h-4 object-contain" />
-                      <span className="font-['Tajawal'] font-bold text-[10px] sm:text-[11px] whitespace-nowrap hidden sm:inline">
-                        {item.label}
-                      </span>
-                    </button>
+              {menuItems.map((item) => {
+                const isActive = openDropdown?.key === item.key;
+                return (
+                  <div key={item.key} className="shrink-0">
+                    {(item.children || item.isLanguage) ? (
+                      <button
+                        type="button"
+                        onClick={(e) => openPortalDropdown(e, item)}
+                        className={`flex items-center gap-1 h-10 px-1.5 sm:px-2 border-r-[0.5px] border-(--bottom-divider) transition-colors ${
+                          isActive 
+                            ? "bg-(--primary) text-white" 
+                            : "bg-transparent text-(--bottom-text) hover:bg-blue-50"
+                        }`}
+                      >
+                        <img 
+                          src={item.icon} 
+                          alt={item.label} 
+                          className={`w-4 h-4 object-contain ${isActive ? "brightness-0 invert" : ""}`}
+                        />
+                        <span className="font-['Tajawal'] font-bold text-[10px] sm:text-[11px] whitespace-nowrap hidden sm:inline">
+                          {item.label}
+                        </span>
+                      </button>
                   ) : (
                     <Link
                       to={item.to || "#"}
@@ -331,8 +406,9 @@ export default function NavbarBottom() {
                       </span>
                     </Link>
                   )}
-                </div>
-              ))}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

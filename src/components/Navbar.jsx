@@ -156,46 +156,46 @@ export default function Navbar() {
   const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
 
   return (
-    <header dir={currentDir} className="w-full" ref={rootRef}>
+    <header dir={currentDir} className="w-full relative z-[60]" ref={rootRef}>
       <nav
         className="
           w-full bg-(--nav-bg)
           flex items-center justify-between
           px-3 sm:px-4 md:px-6 lg:px-10 xl:px-20
-          py-2 sm:py-3 md:py-4
+          py-1.5 sm:py-2 md:py-2.5
           gap-2 sm:gap-3
         "
       >
         <Link to={ROUTES.HOME} className="flex items-center justify-end shrink-0">
-          <img src={logo} alt="logo" className="h-7 sm:h-8 md:h-9 lg:h-10 w-auto" />
+          <img src={logo} alt="logo" className="h-6 sm:h-7 md:h-8 lg:h-9 w-auto" />
         </Link>
 
         <form
           onSubmit={handleSearch}
-          className="hidden lg:flex flex-1 max-w-md lg:max-w-lg xl:max-w-xl mx-2 lg:mx-4 h-10 sm:h-11 md:h-12 lg:h-13 items-center justify-between gap-2 sm:gap-3 bg-(--white) rounded-[5px] px-2 sm:px-3 md:px-4"
+          className="hidden lg:flex flex-1 max-w-md lg:max-w-lg xl:max-w-xl mx-2 lg:mx-4 h-8 sm:h-9 md:h-10 lg:h-11 items-center justify-between gap-2 sm:gap-3 bg-(--white) rounded-[5px] px-2 sm:px-3 md:px-4"
         >
-          <img src={camera} alt="camera" className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 shrink-0" />
+          <img src={camera} alt="camera" className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 shrink-0" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t("nav.search")}
-            className="w-full h-8 direction-rtl text-right outline-none border-0 bg-transparent text-sm sm:text-base"
+            className="w-full h-7 direction-rtl text-right outline-none border-0 bg-transparent text-xs sm:text-sm"
           />
         </form>
 
         <div className="hidden lg:flex items-center gap-2 sm:gap-3 shrink-0">
           <Link to={ROUTES.SIGNUP_BANK_INFO}>
-            <button className="h-9 sm:h-10 md:h-11 lg:h-13 px-2 sm:px-3 md:px-4 lg:px-5 xl:px-6 rounded-[5px] bg-(--accent) flex items-center justify-center">
-              <span className="text-(--primary) font-bold text-[10px] sm:text-[11px] md:text-[12px] lg:text-[13px] xl:text-[14px] leading-[150%] whitespace-nowrap">
+            <button className="h-8 sm:h-9 md:h-10 lg:h-11 px-2 sm:px-3 md:px-4 lg:px-5 rounded-[5px] bg-(--accent) flex items-center justify-center">
+              <span className="text-(--primary) font-bold text-[9px] sm:text-[10px] md:text-[11px] lg:text-[12px] leading-[150%] whitespace-nowrap">
                 {t("nav.beSeller")}
               </span>
             </button>
           </Link>
 
           <Link to={ROUTES.LOGIN}>
-            <button className="h-9 sm:h-10 md:h-11 lg:h-13 px-2 sm:px-3 md:px-4 lg:px-5 xl:px-6 rounded-[5px] bg-(--white) border border-(--primary) flex items-center justify-center">
-              <span className="text-(--primary) font-bold text-[10px] sm:text-[11px] md:text-[12px] lg:text-[13px] xl:text-[14px] leading-[150%] whitespace-nowrap">
+            <button className="h-8 sm:h-9 md:h-10 lg:h-11 px-2 sm:px-3 md:px-4 lg:px-5 rounded-[5px] bg-(--white) border border-(--primary) flex items-center justify-center">
+              <span className="text-(--primary) font-bold text-[9px] sm:text-[10px] md:text-[11px] lg:text-[12px] leading-[150%] whitespace-nowrap">
                 {t("nav.login")}
               </span>
             </button>
